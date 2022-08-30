@@ -7,7 +7,7 @@ int     first_check(char *line, char *str)
     i = -1;
     while(str[++i])
     {
-        if (  line[0] == str[i])
+        if (line[0] == str[i])
             return (unexpected_token(str[i]), 1);
     }
     return (0);
@@ -25,6 +25,9 @@ bool    quote_handler(char *line, int *i, char quote, int *words)
         {
                 (*i)++;
                 (*words)++;
+                printf("i : %d\n", *i);
+                if ((line[*i] == '\'' || line[*i] == '"') && line[*i] != ' ')
+                        quote_handler(line, i, get_quote(line[*i]), words);
                 return (true);
         }
     }

@@ -20,8 +20,8 @@ void    ft_shell(t_data *data, t_env *env)
 		line = readline("Minishell$ ");
 		add_history(line);
 		build_token_list(line, data);
+		print_cmd(data->cmd);
 		identify_builtin(data);
-		//print_cmd(data->cmd);
 		destroy(&data->ptrs);   // it cause sgmentation fault,
 		data->cmd = NULL; 
 	}

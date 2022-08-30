@@ -26,6 +26,7 @@ int get_token_type(char line)
         return (WORD);
 }
 
+
 static bool check_old_type(char *line, int *i, int *words, int *old_type, t_data *data)
 {
     if (*old_type == S_QUOTES || *old_type == D_QUOTES)
@@ -75,6 +76,11 @@ void    get_token(char *line, int *i, int start, t_data  *data)
     old_type = redirection_handler(line[check], line[check + 1], old_type); 
     if (!check_old_type(line, i, &words, &old_type, data))
         return(data->cmd = NULL , (void)0);
+    if (old_type == SPC)
+        {
+            cmd_list(ft_strdup(" "), old_type, data);
+            return ;
+        }
     cmd_list(ft_substr(line, start, words), \
             old_type, data);
 } 
@@ -83,7 +89,7 @@ void    build_token_list(char *line, t_data *data)
 {
     int i;
 
-    if (first_check(line, " )|'""<;"))
+    if (first_check(line, " )|""<;"))
             return((void) 0);
     i = -1;
     while (line[++i])
