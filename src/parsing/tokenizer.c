@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/08/31 13:54:15 by zrabhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/minishell.h"
 
 //------------------ tokanization part is not finished , stilll working on it-----------------------------------
@@ -75,7 +87,7 @@ void    get_token(char *line, int *i, int start, t_data  *data)
     }
     old_type = redirection_handler(line[check], line[check + 1], old_type); 
     if (!check_old_type(line, i, &words, &old_type, data))
-        return(data->cmd = NULL , (void)0);
+        return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
         {
             cmd_list(ft_strdup(" "), old_type, data);
@@ -89,12 +101,9 @@ void    build_token_list(char *line, t_data *data)
 {
     int i;
 
-    if (first_check(line, " )|""<;"))
-            return((void) 0);
     i = -1;
     while (line[++i])
     {
-        ft_space_skip(line, &i);
         get_token(line, &i, i, data);
         i--;
     }

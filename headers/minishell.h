@@ -54,6 +54,7 @@ typedef struct s_cmd
 	char 			*str;
 	t_tokens 		type;
 	struct s_cmd 	*next;
+	struct s_cmd    *prev;
 }   				t_cmd;
 
 typedef	struct	s_env
@@ -86,6 +87,7 @@ void    syntax_error(void);
 void    unexpected_token(char c);
 char   	get_quote(char line);
 bool 	ft_break(int a, int b);
+char	*rmv_quotes(char	*str);
 
 
 //----------------------------------------------------------------------------
@@ -119,6 +121,8 @@ void    print_env(t_env *env);
 int    identify_builtin(t_data *data);
 void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
+t_cmd   *new_node_cmd(char  *str, t_tokens type, t_data *data);
+void    join_unspaced(t_cmd   **node, t_cmd    **node_next, t_data  *data);
 
 //----------------print fucntions------------------------------------------
 void    print_lst(t_cmd **cmd);

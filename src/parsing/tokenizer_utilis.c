@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer_utilis.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/08/31 15:38:57 by zrabhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/minishell.h"
 
 int     first_check(char *line, char *str)
@@ -25,9 +37,9 @@ bool    quote_handler(char *line, int *i, char quote, int *words)
         {
                 (*i)++;
                 (*words)++;
-                printf("i : %d\n", *i);
-                if ((line[*i] == '\'' || line[*i] == '"') && line[*i] != ' ')
-                        quote_handler(line, i, get_quote(line[*i]), words);
+                // printf("i : %d\n", *i);
+                // if ((line[*i] == '\'' || line[*i] == '"') && line[*i] != ' ')
+                //         quote_handler(line, i, get_quote(line[*i]), words);
                 return (true);
         }
     }

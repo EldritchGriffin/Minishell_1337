@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/08/29 10:50:36 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/08/31 12:44:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    ft_echo(t_data  *data)
 {
 	t_cmd   *tmp;
 	char    *prnt;
-	tmp = data->cmd->next;
+	tmp = data->cmd->next->next;
 
 	while(tmp)
 	{
