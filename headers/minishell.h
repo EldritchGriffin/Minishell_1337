@@ -76,8 +76,9 @@ typedef struct s_data
 
 //---------------- test_functions --------------------------------------------
 int redirection_handler(char a , char b, int old_type);
+void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data);
 //--------------------------------lst-functions---------------------------
-
+bool check_one(t_cmd *node, t_cmd *node_next);
 //--------------------------------syntax_error_functions-------------------
 
 t_cmd *get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
@@ -88,6 +89,7 @@ void    unexpected_token(char c);
 char   	get_quote(char line);
 bool 	ft_break(int a, int b);
 char	*rmv_quotes(char	*str);
+int     search_spc_node(t_cmd **cmd);
 
 
 //----------------------------------------------------------------------------
@@ -122,7 +124,7 @@ int    identify_builtin(t_data *data);
 void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
 t_cmd   *new_node_cmd(char  *str, t_tokens type, t_data *data);
-void    join_unspaced(t_cmd   **node, t_cmd    **node_next, t_data  *data);
+// void  join_unspaced(t_cmd   **node, t_cmd    **node_next, t_data  *data);
 
 //----------------print fucntions------------------------------------------
 void    print_lst(t_cmd **cmd);
