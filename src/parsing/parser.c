@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/01 18:29:13 by zakaria          ###   ########.fr       */
+/*   Updated: 2022/09/01 23:15:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char *trim_quote(char *str)
     if(!str)
         return (NULL);
     rtr[0] = get_quote(str[0]);
-    rtr[1] ='\0'; 
+    rtr[1] = '\0'; 
     lstr = ft_strtrim(str, rtr);
     if(!lstr)
        return (NULL);
@@ -61,7 +61,7 @@ void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
     char    *join;
     t_cmd   *new_node;
  
-    if(!*node || !*node_next || (*node_next)->type == SPC || (*node)->type == SPC)
+    if(!*node || !*node_next || (*node_next)->type == SPC)
         return ;
     if (check_one(*node, *node_next))
     {
@@ -75,6 +75,8 @@ void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
         else
         str2 = (*node_next)->str;
     }
+    else 
+        return ;
     join = ft_strjoin(str1, str2);
     new_node = new_node_cmd(join, WORD, *data);
     if((!(*node)->prev && !(*node_next)->next) 
@@ -82,11 +84,12 @@ void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
      {
          if (!(*node)->prev && !(*node_next)->next)
          {
-             // there are only two nodes
+             (*data)->cmd = new_node;
               return ;
          }
          replace_nodes(node, node_next, &new_node);
          printf("first: %s\n", new_node->str);
+       (*data)->cmd = new_node; 
          join_unspaced1(&new_node, &(new_node->next), data);
      }
     else if((*node)->prev && (*node_next)->next)

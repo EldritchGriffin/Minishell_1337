@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/01 05:34:05 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/01 22:39:29 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,13 @@ void    ft_shell(t_data *data, t_env *env)
 		line = readline("Minishell$ ");
 		add_history(line);
 		build_token_list(line, data);
-		// while((*tmp))
-		// { 
-		// 	tmp1 = (*tmp)->next;
-		// 	join_unspaced1(tmp, &tmp1, data);
-		// 	tmp = &(*tmp)->next;
-		// }
-		join_unspaced1(tmp, &((*tmp)->next), &data);
-		// print_cmd(data->cmd);// change the address here
-		//identify_builtin(data);
+		while((*tmp))
+		{ 
+			join_unspaced1(tmp, &((*tmp)->next), &data);
+			tmp = &(*tmp)->next;
+		}
+		print_cmd(data->cmd);// change the address here
+		identify_builtin(data);
 		//destroy(&data->ptrs);   // it cause sgmentation fault,
 		data->cmd = NULL; 
 	}
