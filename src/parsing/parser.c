@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/01 05:33:58 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/01 18:29:13 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ static void replace_nodes(t_cmd **node, t_cmd **node_next, t_cmd **new_node)
     free(tmp2);
 }
 
+
+
+static void    cmd_skip_space(){
+    // fucntion that skips sapce for node;
+}
 void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
 {
      char    *str1;
@@ -86,7 +91,7 @@ void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
      }
     else if((*node)->prev && (*node_next)->next)
     {
-       replace_nodes(node, node_next, &new_node);
+        replace_nodes(node, node_next, &new_node);
         printf("second : %s\n", new_node->str);
         join_unspaced1(&new_node, &(new_node->next), data); 
     }
