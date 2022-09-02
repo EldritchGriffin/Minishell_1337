@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/01 02:52:39 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/02 02:32:16 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void    ft_echo(t_data  *data)
 {
 	t_cmd   *tmp;
 	char    *prnt;
-	tmp = data->cmd->next->next;
+	tmp = data->cmd->next;
 
 	while(tmp)
 	{
+		if(tmp->type == SPC && tmp->next)
+			tmp = tmp->next;
 		if(tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
 			break;
 		prnt = tmp->str;
@@ -38,7 +40,7 @@ void    ft_echo(t_data  *data)
 		tmp = tmp->next;
 		if(tmp)
 		{
-			if(tmp->type == WORD || tmp->type == D_QUOTES || tmp->type == S_QUOTES) //FIXME problem with spaces between nodes that have no spaces between them (example: echo "hello""world");
+			if(tmp->type == SPC)
 				printf(" ");
 		}
 
@@ -77,6 +79,8 @@ void	ft_export(t_data	*data)
 	int		i = 1;
 	
 	tmp = data->cmd->next;
+	if(!tmp)
+		return(print_env(data->env), (void)0);
 	while(tmp)
 	{
 		if(tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
