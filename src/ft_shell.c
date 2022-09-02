@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/01 22:39:29 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/02 20:43:37 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void    ft_shell(t_data *data, t_env *env)
 		line = readline("Minishell$ ");
 		add_history(line);
 		build_token_list(line, data);
-		while((*tmp))
-		{ 
-			join_unspaced1(tmp, &((*tmp)->next), &data);
-			tmp = &(*tmp)->next;
-		}
-		print_cmd(data->cmd);// change the address here
+		// while((*tmp))
+		// { 
+		// 	join_unspaced1(tmp, &((*tmp)->next), &data);
+		// 	tmp = &(*tmp)->next;
+		// }
+		// print_cmd(data->cmd);// change the address here
 		identify_builtin(data);
 		//destroy(&data->ptrs);   // it cause sgmentation fault,
 		data->cmd = NULL; 

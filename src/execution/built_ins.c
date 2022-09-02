@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/02 02:32:16 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/02 20:43:15 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int    identify_builtin(t_data *data)
 	// if(!ft_strcmp(data->cmd->str, "pwd"))
 	//     return(ft_pwd(data), 0);
 	if(!ft_strcmp(data->cmd->str, "export"))
-	    return(ft_export(data), 0);
+	    return(sorted_env(data->env, data), 0);
 	if(!ft_strcmp(data->cmd->str, "unset"))
 	    return(ft_unset(data), 0);
 	if(!ft_strcmp(data->cmd->str, "env"))

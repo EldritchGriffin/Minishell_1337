@@ -2,7 +2,7 @@
 
 // workk not doneee yet-----------------------------------------------------------------
 
-size_t envtab_len(char **env)
+static size_t envtab_len(char **env)
 {
     size_t     i;
 
@@ -12,7 +12,7 @@ size_t envtab_len(char **env)
     return(i);
 }
 
-int    env_len(t_env *env)
+static int    env_len(t_env *env)
 {
     t_env *tmp;
     int i;
@@ -21,46 +21,64 @@ int    env_len(t_env *env)
     tmp = env;
     while(tmp)
     {   
+        i += ft_strlen(tmp->key);
+        i += ft_strlen(tmp->value);
         i++;
         tmp = tmp->next;
     }
-    return(i);
+    return (i);
 }
 
-char    *env_to_str(t_env *env, t_data *data)
+static char    *env_to_str(t_env *env, t_data *data)
 {
     t_env   *tmp;
     char    *str;
     int size;
     int i;
+    int j;
 
     tmp = env;
     i = 0;
+    j = 0;
     size = env_len(env);
-    str = ft_malloc(size, &data->ptrs);
+    str = malloc(size + 1);
     if (!str)
-        rteurn(NULL);
+        return(NULL);
     while(tmp)
     {
-        str[i] = tmp->value;
+        while (tmp->key[j])
+        {
+            str[i] = tmp->key[j];
+            i++;
+            j++;
+        }
+        
+        j = 0;
+        while (1)
+        {
+            str[i] = tmp->value[j];
+            i++;
+            j++;
+            if (!tmp->value[j + 1])
+                str[i] = '\n';
+        }
+        // if (tmp->next != NULL)
+            str[i] = '\n';
+        j = 0;
         tmp = tmp->next;
-        i++;
-        if (tmp->next->next !=NULL);
     }
-
-
-
+    str[i] = '\0';
+    return(str);
 }
-void    sorted_env(t_env *env)
+
+void    sorted_env(t_env *env, t_data *data)
 {
-    char **str;
+    // char **str;
     char  *str_to_env;
-    int    i;
+    // int    i;
 
-
-
-
-
+    str_to_env = env_to_str(env, data);
+    printf("str ==   %s\n", str_to_env);
 }
 
 
