@@ -23,7 +23,7 @@ static int    env_len(t_env *env)
     {   
         i += ft_strlen(tmp->key);
         i += ft_strlen(tmp->value);
-        i++;
+        i+= 2;
         tmp = tmp->next;
     }
     return (i);
@@ -36,51 +36,74 @@ static char    *env_to_str(t_env *env, t_data *data)
     int size;
     int i;
     int j;
+    int k;
 
     tmp = env;
     i = 0;
     j = 0;
+    k = 0;
     size = env_len(env);
-    str = malloc(size + 1);
+    str = malloc(sizeof(char) * (size + 1));
     if (!str)
         return(NULL);
-    while(tmp)
+    while (tmp)
     {
+        j = 0;
+        k = 0;
         while (tmp->key[j])
-        {
-            str[i] = tmp->key[j];
-            i++;
-            j++;
-        }
-        
-        j = 0;
-        while (1)
-        {
-            str[i] = tmp->value[j];
-            i++;
-            j++;
-            if (!tmp->value[j + 1])
-                str[i] = '\n';
-        }
-        // if (tmp->next != NULL)
-            str[i] = '\n';
-        j = 0;
+            str[i++] = tmp->key[j++];
+        str[i++] = '=';
+        while (tmp->value[k])
+            str[i++] = tmp->value[k++];
+        if (tmp->next != NULL)
+            str[i++] = '\n';
         tmp = tmp->next;
     }
     str[i] = '\0';
     return(str);
 }
 
-void    sorted_env(t_env *env, t_data *data)
-{
-    // char **str;
-    char  *str_to_env;
-    // int    i;
 
-    str_to_env = env_to_str(env, data);
-    printf("str ==   %s\n", str_to_env);
+static void    sort_env(char **tab, int tab_len)
+{
+    char *tmp;
+    int i;
+
+    int sort = 0;
+    while(tab && sort ==0)
+    {
+        i = 0;
+        sort = 1;
+        while(i < tab_len - 1)
+        {
+            if(ft_strcmp(tab[i], tab[i + 1]) > 0)
+            {
+                tmp = tab[i];
+                tab[i] = tab[i + 1];
+                tab[i + 1] = tmp;
+                sort = 0;
+            }
+            i++;
+        }
+        tab_len--;
+    }
 }
 
+void    sorted_env(t_env *env, t_data *data)
+{
+    char **str;
+    char  *str_to_env;
+    int    i;
 
-
-
+    i = 0;
+    str_to_env = env_to_str(env, data);
+    str = ft_split(str_to_env, '\n');
+    sort_env(str, envtab_len(str));
+    while (str[i])
+    {
+        ft_putstr_fd("declare -x ", 1);
+        ft_putendl_fd(str[i], 1);
+        i++;
+    }
+    free(str);
+}
