@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 06:25:40 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/03 19:00:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void    ft_shell(t_data *data, t_env *env)
 				join_unspaced(tmp, &((*tmp)->next), &data);
 				tmp = &(*tmp)->next;
 			}
-			print_cmd(data->cmd);// change the address here
+			print_cmd(data->cmd);// change the address her
 			identify_builtin(data);
 			data->cmd = NULL;
 		} 
