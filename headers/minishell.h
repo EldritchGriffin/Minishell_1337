@@ -76,9 +76,10 @@ typedef struct s_data
 
 //---------------- test_functions --------------------------------------------
 int redirection_handler(char a , char b, int old_type);
-void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data);
+void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data);
 //--------------------------------lst-functions---------------------------
 bool check_one(t_cmd *node, t_cmd *node_next);
+void    sorted_env(t_env *env, t_data *data);
 //--------------------------------syntax_error_functions-------------------
 
 t_cmd *get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
@@ -90,6 +91,7 @@ char   	get_quote(char line);
 bool 	ft_break(int a, int b);
 char	*rmv_quotes(char	*str);
 int     search_spc_node(t_cmd **cmd);
+char *trim_quote(char *str);
 
 
 //----------------------------------------------------------------------------
@@ -101,8 +103,8 @@ void    var_handler(char *line, int *i, int *words, t_data *data, int *type);
 bool    quote_handler(char *line, int *i, char quote, int *words);
 int     get_token_type(char line);
 int     check_operators(char f, char s);
-void   ft_space_skip(char *line, int *i);
-bool env_check(char *str, t_data *data);
+void   	ft_space_skip(char **line, int *i);
+bool 	env_check(char *str, t_data *data);
 //--------------------------------------------------------------------------
 int     ft_pipe_check(char *line, t_tokens type);
 bool    ft_check_input(char *input);
@@ -120,7 +122,7 @@ int     first_check(char *line, char *str);
 void    *ft_malloc(int size, t_ptr **ptrs);
 t_env   *env_list(char  **envp);
 void    print_env(t_env *env);
-int    identify_builtin(t_data *data);
+int     identify_builtin(t_data *data);
 void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
 t_cmd   *new_node_cmd(char  *str, t_tokens type, t_data *data);

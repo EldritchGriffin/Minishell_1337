@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/01 02:49:22 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/03 03:15:19 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ int     search_spc_node(t_cmd **cmd)
         i++;
     } 
     return (0);
+}
+
+char *trim_quote(char *str)
+{
+    char *lstr;
+    char rtr[2];
+    
+    if(!str)
+        return (NULL);
+    rtr[0] = get_quote(str[0]);
+    rtr[1] = '\0'; 
+    lstr = ft_strtrim(str, rtr);
+    if(!lstr)
+       return (NULL);
+    return (lstr);
 }
