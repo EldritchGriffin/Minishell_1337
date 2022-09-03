@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 03:16:09 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/03 06:26:00 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static void replace_nodes(t_cmd **node, t_cmd **node_next, t_cmd **new_node)
 static void   recursuin_call(t_cmd **node, t_cmd **node_next, t_cmd *new_node, t_data **data)
 {
     replace_nodes(node, node_next, &new_node);
-    join_unspaced1(&new_node, &(new_node->next), data);
+    join_unspaced(&new_node, &(new_node->next), data);
 }
 
-void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
+void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 {
     char    *str1;
     char    *str2;
@@ -70,7 +70,7 @@ void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data)
          }
          replace_nodes(node, node_next, &new_node);
         (*data)->cmd = new_node; 
-         join_unspaced1(&new_node, &(new_node->next), data);
+         join_unspaced(&new_node, &(new_node->next), data);
      }
     else if((*node)->prev && (*node_next)->next)
         recursuin_call(node, node_next, new_node, data);

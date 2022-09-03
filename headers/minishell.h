@@ -76,7 +76,7 @@ typedef struct s_data
 
 //---------------- test_functions --------------------------------------------
 int redirection_handler(char a , char b, int old_type);
-void       join_unspaced1(t_cmd **node, t_cmd **node_next, t_data **data);
+void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data);
 //--------------------------------lst-functions---------------------------
 bool check_one(t_cmd *node, t_cmd *node_next);
 void    sorted_env(t_env *env, t_data *data);
