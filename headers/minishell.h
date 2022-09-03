@@ -128,7 +128,10 @@ t_env   *new_node_env(char  *key,   char    *value);
 t_cmd   *new_node_cmd(char  *str, t_tokens type, t_data *data);
 // void  join_unspaced(t_cmd   **node, t_cmd    **node_next, t_data  *data);
 
-//----------------print fucntions------------------------------------------
+//----------------print fucntions------------------------------------------/
 void    print_lst(t_cmd **cmd);
-
+//----------------Built-ins------------------------------------------------/
+void	ft_echo(t_data *data);
+void	ft_export(t_data	*data);
+void	ft_unset(t_data		*data);
 #endif
