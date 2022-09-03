@@ -91,6 +91,7 @@ char   	get_quote(char line);
 bool 	ft_break(int a, int b);
 char	*rmv_quotes(char	*str);
 int     search_spc_node(t_cmd **cmd);
+char *trim_quote(char *str);
 
 
 //----------------------------------------------------------------------------
@@ -102,8 +103,8 @@ void    var_handler(char *line, int *i, int *words, t_data *data, int *type);
 bool    quote_handler(char *line, int *i, char quote, int *words);
 int     get_token_type(char line);
 int     check_operators(char f, char s);
-void   ft_space_skip(char *line, int *i);
-bool env_check(char *str, t_data *data);
+void   	ft_space_skip(char **line, int *i);
+bool 	env_check(char *str, t_data *data);
 //--------------------------------------------------------------------------
 int     ft_pipe_check(char *line, t_tokens type);
 bool    ft_check_input(char *input);
@@ -121,7 +122,7 @@ int     first_check(char *line, char *str);
 void    *ft_malloc(int size, t_ptr **ptrs);
 t_env   *env_list(char  **envp);
 void    print_env(t_env *env);
-int    identify_builtin(t_data *data);
+int     identify_builtin(t_data *data);
 void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
 t_cmd   *new_node_cmd(char  *str, t_tokens type, t_data *data);
