@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/03 18:09:14 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/03 18:43:05 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	ft_export(t_data	*data)
 		return(print_env(data->env), (void)0);
 	while(tmp)
 	{
+        if (tmp->next && tmp->type == SPC)
+			tmp = tmp->next;
 		if(tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
 			break;
 		str = tmp->str;
