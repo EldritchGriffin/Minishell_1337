@@ -23,7 +23,7 @@ static int    env_len(t_env *env)
     {   
         i += ft_strlen(tmp->key);
         i += ft_strlen(tmp->value);
-        i+= 2;
+        i+= 4;
         tmp = tmp->next;
     }
     return (i);
@@ -45,7 +45,7 @@ static char    *env_to_str(t_env *env, t_data *data)
     size = env_len(env);
     str = malloc(sizeof(char) * (size + 1));
     if (!str)
-        return(NULL);
+        return (NULL);
     while (tmp)
     {
         j = 0;
@@ -53,8 +53,10 @@ static char    *env_to_str(t_env *env, t_data *data)
         while (tmp->key[j])
             str[i++] = tmp->key[j++];
         str[i++] = '=';
-        while (tmp->value[k])
+        str[i++] = '"';
+        while (tmp->value && tmp->value[k])
             str[i++] = tmp->value[k++];
+        str[i++] = '"';
         if (tmp->next != NULL)
             str[i++] = '\n';
         tmp = tmp->next;

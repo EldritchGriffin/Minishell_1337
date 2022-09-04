@@ -24,7 +24,7 @@ ENV = $(SRC_DIR)/env
 EXEC = $(SRC_DIR)/execution
 PARSING_DIR = $(SRC_DIR)/parsing
 
-SRC = 	$(SRC_DIR)/ft_shell.c $(PARSING)/parser_utilis.c $(PARSING)/tokenizer.c $(PARSING)/parser.c $(TOOLS)/cmd_lst.c $(PARSING)/tokenizer_utilis.c $(PARSING)/tokenizer_utilis2.c $(PARSING)/syntax_errors.c $(ENV)/env_list.c $(EXEC)/env_sort.c $(EXEC)/built_ins.c\
+SRC = 	$(SRC_DIR)/ft_shell.c $(PARSING)/parser_utilis.c $(PARSING)/tokenizer.c $(PARSING)/parser.c $(TOOLS)/cmd_lst.c $(PARSING)/tokenizer_utilis.c $(PARSING)/tokenizer_utilis2.c $(PARSING)/syntax_errors.c $(PARSING)/parcer2.c $(ENV)/env_list.c $(EXEC)/env_sort.c $(EXEC)/built_ins.c\
 		$(EXEC)/ft_echo.c $(EXEC)/ft_export.c $(EXEC)/exec_utils.c $(EXEC)/ft_unset.c
 main = 	$(SRC_DIR)/main.c
 OBJ	= 	$(SRC:.c=.o)

@@ -91,7 +91,8 @@ char   	get_quote(char line);
 bool 	ft_break(int a, int b);
 char	*rmv_quotes(char	*str);
 int     search_spc_node(t_cmd **cmd);
-char *trim_quote(char *str);
+char     *trim_quote(char *str);
+char    **parse_args(t_data *data);
 
 
 //----------------------------------------------------------------------------

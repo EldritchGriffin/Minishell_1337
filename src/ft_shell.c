@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 19:00:17 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/04 04:33:22 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static  void    print_cmd(t_cmd *cmd)
     while(cmd)
     {
         printf("string is [%s] ------ token value is [%d]\n",cmd->str, cmd->type);
-		// if(cmd->prev)
-			//printf("string prev is [%s] ------ token value is [%d]\n",cmd->prev->str, cmd->prev->type);
         cmd = cmd->next;
     }
 }
@@ -28,15 +26,16 @@ static  void    print_cmd(t_cmd *cmd)
 void    ft_shell(t_data *data, t_env *env)
 {
 	char	*line;
-	char    *str;
+	char    *str; // im gonna delete it later
+	char 	**tab;
 	t_cmd	**tmp;
-	t_cmd 	*tmp1;
+	int 	i;
 
 	while (1)
 	{
-	 tmp = &data->cmd;	
+	 	tmp = &data->cmd;	
 		line = readline("Minishell$ ");
-		if(line)
+		if (line)
 		{
 			add_history(line);
 			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC: im gonna change it latterrr
@@ -46,8 +45,16 @@ void    ft_shell(t_data *data, t_env *env)
 				join_unspaced(tmp, &((*tmp)->next), &data);
 				tmp = &(*tmp)->next;
 			}
-			print_cmd(data->cmd);// change the address her
+			tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+			i = 0;
+			while(tab[i])
+			{
+				ft_putstr_fd("line :  ", 1);
+				ft_putendl_fd(tab[i], 1);
+				i++;
+			}
 			identify_builtin(data);
+			print_cmd(data->cmd);// change the address her
 			data->cmd = NULL;
 		} 
 	}

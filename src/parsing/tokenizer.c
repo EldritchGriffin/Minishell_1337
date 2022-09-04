@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 03:25:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/04 04:34:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void    build_token_list(char *line, t_data *data)
     int i;
 
     i = -1;
-    ft_space_skip(&line, &i);
     while (line[++i])
     {
         get_token(line, &i, i, data);

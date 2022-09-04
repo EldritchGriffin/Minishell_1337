@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/03 18:43:05 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/03 19:05:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_export(t_data	*data)
 	
 	tmp = data->cmd->next;
 	if(!tmp)
-		return(print_env(data->env), (void)0);
+		return(sorted_env(data->env, data), (void)0);
 	while(tmp)
 	{
         if (tmp->next && tmp->type == SPC)
