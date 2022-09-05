@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/04 04:41:13 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:09:03 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,115 @@ static int    cmd_str_len(t_data *data)
     return (i);
 }
 
-char    **parse_args(t_data *data)
+static size_t count_pipes(t_data *data)
 {
-    int i;
-    int j;
-    char **tab;
-    char *str;
-    int pipe;
-    t_cmd *tmp;
+    size_t  pipe;
+    t_cmd   *tmp;
 
-    // if (!data->cmd)
-    //     return (NULL);
-    pipe = 0; // to count how many pipes
-    j = 0;
     tmp = data->cmd;
-    str = malloc(sizeof(char) * (cmd_str_len(data) + 1));
-    if (!str)
-        return (NULL);
+    pipe = 1;
     while (tmp)
     {
-        i = 0;
         if (tmp->type == PIPE)
             pipe++;
-        while (tmp->str &&tmp->str[i])
-            str[j++] = tmp->str[i++];
         tmp = tmp->next;
     }
-    str[j] = '\0';
-    printf("pipes ===== %d\n", pipe);
-    tab = ft_split(str, '|');
-    if (!tab)
-        return (NULL);
+    return (pipe);
+}
+
+static size_t count_str(t_data *data)
+{
+    size_t  count;  
+    t_cmd   *tmp;
+
+    tmp = data->cmd;
+    count = 0;
+    while (tmp)
+    {
+        if (tmp->type == PIPE || tmp->type == SPC)
+                tmp = tmp->next;
+        count++;
+        tmp = tmp->next;
+    }
+    return (count);
+}
+
+static char	**free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (NULL);
+}
+
+//  static size_t ft_words(t_data *data)
+//  {
+//      size_t count;
+//      t_cmd *tmp;
+
+//     tmp   = data->cmd;
+//     count = 0;
+//     while (tmp)
+//     {
+//         count += ft_strlen(tm->str);
+//         if (tmp->type == PIPE)
+//             return (count);
+//     }
+//     return (count);
+//  }
+
+
+char    **parse_args(t_data *data)
+{
+    int     i;
+    int     j;
+    int     k;
+    int     count = 0;
+    char    **tab;
+    t_cmd   *tmp;
+
+    tmp = data->cmd;
+    k   = 0;
+    tab = (char **)malloc(sizeof(char *) * (count_pipes(data) + 1));
+    if(!tab)
+        return(NULL);
+    // while(++k < count_pipes(data))
+    // {
+    //     tab[k] = (char *)malloc(sizeof(char) * ft_strlen())
+
+
+
+    // }
+    
+    while (tmp && count < count_str(data))
+    {
+        i = 0;
+        j = 0;
+        if (tmp->type == PIPE )
+            tmp = tmp->next;
+        tab[k] = (char *)malloc(sizeof(char) * (ft_strlen(tmp->str) + 1));
+        if (!tab[k])
+            return(free_tab(tab));
+        while (tmp->str && tmp->str[i] && tmp->type != PIPE)
+        {
+           if (tmp->type == SPC)
+                continue;
+            tab[k][j++] = tmp->str[i++];
+            // if(!tmp->str)
+            //     tmp = tmp->next;
+            // if (!tmp->str[i + 1])
+        }
+        tab[k][j] = '\0';
+        k++;
+        count++;
+        tmp = tmp->next;
+    }
+    tab[k] = 0;
     return (tab);
 }

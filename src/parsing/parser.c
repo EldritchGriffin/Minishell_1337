@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/04 00:34:59 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/05 01:16:26 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
         recursion_call(node, node_next, new_node, data);
     else if((*node)->prev && !(*node_next)->next)
          recursion_call(node, node_next, new_node, data);
-   return ;
+   return ; 
 }

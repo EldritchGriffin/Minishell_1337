@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/04 04:34:17 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:40:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static bool check_old_type(char *line, int *i, int *words, int *old_type, t_data
 {
     if (*old_type == S_QUOTES || *old_type == D_QUOTES)
     {
-        if (!quote_handler(line, i, get_quote(line[(*i)]), words))
+        if (!quote_handler(line, i, get_quote(line[(*i)]), words, old_type))
                 return (false);
     }
     else if (*old_type == VARIABLE)
-         var_handler(line, i, words, data, old_type);
+         var_handler(line, i, words, old_type);
     return (true);
 }
 
