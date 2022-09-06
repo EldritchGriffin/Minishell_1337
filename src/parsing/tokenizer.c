@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/05 22:40:54 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:46:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int get_token_type(char line)
 }
 
 
-static bool check_old_type(char *line, int *i, int *words, int *old_type, t_data *data)
+static bool check_old_type(char *line, int *i, int *words, int *old_type)
 {
     if (*old_type == S_QUOTES || *old_type == D_QUOTES)
     {
@@ -86,7 +86,7 @@ void    get_token(char *line, int *i, int start, t_data  *data)
         (*i)++;
     }
     old_type = redirection_handler(line[check], line[check + 1], old_type); 
-    if (!check_old_type(line, i, &words, &old_type, data))
+    if (!check_old_type(line, i, &words, &old_type))
         return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
         {
