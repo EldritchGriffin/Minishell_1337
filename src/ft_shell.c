@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/06 05:42:22 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/07 03:36:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void    ft_shell(t_data *data, t_env *env)
 {
 	char	*line;
 	char    *str; // im gonna delete it later
+	char    **hh;
 	char 	**tab;
 	t_cmd	**tmp;
 	int 	i;
@@ -47,7 +48,12 @@ void    ft_shell(t_data *data, t_env *env)
 			}
 			tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 			i = 0;
-
+			while(tab[i])
+			{
+				ft_putstr_fd("tab =====", 1);
+				ft_putendl_fd(tab[i], 1);
+				i++;
+			}
 			identify_builtin(data);
 			print_cmd(data->cmd);// change the address her
 			data->cmd = NULL;

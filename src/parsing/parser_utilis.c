@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 03:15:19 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/06 06:00:31 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ if (((node->type == D_QUOTES || node->type == S_QUOTES || node->type == WORD))
     && (node_next->type == D_QUOTES 
         || node_next->type == S_QUOTES || node_next->type == WORD))
             return(true);
-return(false);
+ return(false);
     
 }
-
+ 
 int     search_spc_node(t_cmd **cmd)
 {
     t_cmd *tmp;

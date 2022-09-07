@@ -73,7 +73,7 @@ typedef struct s_data
 
 //-------------- enum strcut contains ---------------------------------------
 
-
+char **parse_args1(t_data *data);
 //---------------- test_functions --------------------------------------------
 int redirection_handler(char a , char b, int old_type);
 void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data);
