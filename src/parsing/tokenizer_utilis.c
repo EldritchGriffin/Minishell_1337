@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/05 22:42:07 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/07 11:19:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int     first_check(char *line, char *str)
 
 bool    quote_handler(char *line, int *i, char quote, int *words, int *type)
 {
-   
     while (line[(*i)])
    { 
         (*i)++;
@@ -62,8 +61,6 @@ bool env_check(char *str, t_data *data)
     }
     return (false);
 }
-
-
 
 void    var_handler(char *line, int *i, int *words, int *type)
 {

@@ -6,11 +6,12 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 03:32:58 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/07 07:56:43 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
 static int  ft_words(t_cmd *cmd, t_cmd *pipe)
 {
     int i;
@@ -32,10 +33,10 @@ static int  ft_words(t_cmd *cmd, t_cmd *pipe)
 
 static char     **ft_cat(char **tab, t_cmd *cmd, int len)
 {
-    int i;
-    int j;
-    int k;
-    t_cmd *tmp;
+    int     i;
+    int     j;
+    int     k;
+    t_cmd   *tmp;
 
     i = 0;
     j = 0;
@@ -60,7 +61,6 @@ static char     **ft_cat(char **tab, t_cmd *cmd, int len)
     tab[i] = 0;
     return(tab);
 }
-
 
 static size_t ft_count_pipes(t_data *data)
 {
@@ -99,18 +99,16 @@ char **parse_args(t_data *data)
     int i;
     int j;
     int k;
-    int len;
-
-    len =  ft_count_pipes(data);  
+   
     i = -1;
-    str = (char **)malloc(sizeof(char *)* (len + 1));
+    str = (char **)malloc(sizeof(char *) * (ft_count_pipes(data) + 1));
     if (!str)
         return (NULL);
     tmp = data->cmd;
-    while (++i < len)
+    while (++i < ft_count_pipes(data))
     {
         k = 0;
-        while(tmp)
+        while (tmp)
         {
             if (tmp->type == PIPE || !tmp->str)
             {
@@ -118,12 +116,12 @@ char **parse_args(t_data *data)
                 break;
             }
             j = 0;
-            k+= ft_strlen(tmp->str);
+            k += ft_strlen(tmp->str);
             tmp = tmp->next;        
         }   
         str[i] = (char *)malloc(sizeof(char) * (k + 1));
         if (!str[i])
             return (free_tab(str)); 
     }
-    return (ft_cat(str, data->cmd, len));
+    return (ft_cat(str, data->cmd, ft_count_pipes(data)));
 }

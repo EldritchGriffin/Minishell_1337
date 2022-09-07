@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 03:36:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/07 08:47:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ static  void    print_cmd(t_cmd *cmd)
 void    ft_shell(t_data *data, t_env *env)
 {
 	char	*line;
-	char    *str; // im gonna delete it later
-	char    **hh;
+	char    *str;
 	char 	**tab;
 	t_cmd	**tmp;
 	int 	i;
@@ -50,7 +49,7 @@ void    ft_shell(t_data *data, t_env *env)
 			i = 0;
 			while(tab[i])
 			{
-				ft_putstr_fd("tab =====", 1);
+				ft_putstr_fd("tab ===== ", 1);
 				ft_putendl_fd(tab[i], 1);
 				i++;
 			}

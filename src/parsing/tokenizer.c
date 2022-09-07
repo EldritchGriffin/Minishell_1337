@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/05 22:46:39 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/07 11:31:38 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,7 @@ void    get_token(char *line, int *i, int start, t_data  *data)
     if (!check_old_type(line, i, &words, &old_type))
         return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
-        {
-            cmd_list(ft_strdup(" "), old_type, data);
-            return ;
-        }
+           return(cmd_list(ft_strdup(" "), old_type, data), (void)0);
     cmd_list(ft_substr(line, start, words), \
             old_type, data);
 } 
@@ -100,11 +97,22 @@ void    get_token(char *line, int *i, int start, t_data  *data)
 void    build_token_list(char *line, t_data *data)
 {
     int i;
-
+    t_cmd *tmp;
     i = -1;
     while (line[++i])
     {
         get_token(line, &i, i, data);
         i--;
     }
+    // if(!ft_check_toekns2(data)) // this function checks operator errors , still needs some work
+    //     return (data->cmd = NULL, (void)0);
+    
+    // tmp = data->cmd;
+    // while (tmp)
+    // {
+    //     if (!ft_check_tokens(tmp))
+    //         return (data->cmd = NULL, (void)0);
+    //     tmp = tmp->next;
+    // }
+    
 }
