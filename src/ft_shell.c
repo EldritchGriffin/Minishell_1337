@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 08:47:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/08 04:50:01 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,20 @@ void    ft_shell(t_data *data, t_env *env)
 		{
 			add_history(line);
 			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC: im gonna change it latterrr
-			build_token_list(str, data);
-			while((*tmp))
-			{ 
-				join_unspaced(tmp, &((*tmp)->next), &data);
-				tmp = &(*tmp)->next;
-			}
-			tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
-			i = 0;
-			while(tab[i])
+			if(build_token_list(str, data))
 			{
-				ft_putstr_fd("tab ===== ", 1);
-				ft_putendl_fd(tab[i], 1);
-				i++;
+				while((*tmp))
+				{ 
+					join_unspaced(tmp, &((*tmp)->next), &data);
+					tmp = &(*tmp)->next;
+				}
+				// tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				tab = get_path(data);
+				printf("path ==== %s\n", tab[2]);
+				identify_builtin(data);
+				print_cmd(data->cmd);// change the address her
+				data->cmd = NULL;
 			}
-			identify_builtin(data);
-			print_cmd(data->cmd);// change the address her
-			data->cmd = NULL;
 		} 
 	}
 }

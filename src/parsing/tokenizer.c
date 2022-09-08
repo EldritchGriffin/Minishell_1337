@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 11:31:38 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/08 03:53:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void    get_token(char *line, int *i, int start, t_data  *data)
             old_type, data);
 } 
 
-void    build_token_list(char *line, t_data *data)
+int    build_token_list(char *line, t_data *data)
 {
     int i;
     t_cmd *tmp;
@@ -104,9 +104,9 @@ void    build_token_list(char *line, t_data *data)
         get_token(line, &i, i, data);
         i--;
     }
-    // if(!ft_check_toekns2(data)) // this function checks operator errors , still needs some work
-    //     return (data->cmd = NULL, (void)0);
-    
+    // if (!ft_check_toekns2(data)) // this function checks operator errors , still needs some work
+    //     return (0);
+    return (1);
     // tmp = data->cmd;
     // while (tmp)
     // {
