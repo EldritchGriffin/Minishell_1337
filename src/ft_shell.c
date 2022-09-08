@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/08 04:50:01 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/08 13:21:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,34 @@ static  void    print_cmd(t_cmd *cmd)
         cmd = cmd->next;
     }
 }
+///-----------this function jut for test------------------------------------
+
+static void   execve_test(char **tab, t_data *data)
+{
+    int     i;
+    int     j;
+	char	*cmd;
+	char   	*line;
+    char    **str;
+    char    **path;
+
+    str = get_path(data);
+    j = 0;
+	cmd = ft_strdup("/"); 
+    while (tab[j]) 
+    {
+        i = 0;
+		line = ft_strjoin(cmd, tab[j]);
+        while (str[i])
+        {
+            str[i] = ft_strjoin(str[i], line);
+            if (execve(str[i], &str[i], NULL) == -1)
+					return (perror("Minishell$ : "), (void)0);
+            i++;
+        }
+        j++;
+    }
+}
 
 void    ft_shell(t_data *data, t_env *env)
 {
@@ -29,7 +57,7 @@ void    ft_shell(t_data *data, t_env *env)
 	char    *str;
 	char 	**tab;
 	t_cmd	**tmp;
-	int 	i;
+	int		i;
 
 	while (1)
 	{
@@ -38,19 +66,18 @@ void    ft_shell(t_data *data, t_env *env)
 		if (line)
 		{
 			add_history(line);
-			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC: im gonna change it latterrr
-			if(build_token_list(str, data))
+			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC : im gonna change it latterrr
+			if (build_token_list(str, data))
 			{
 				while((*tmp))
 				{ 
 					join_unspaced(tmp, &((*tmp)->next), &data);
 					tmp = &(*tmp)->next;
 				}
-				// tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
-				tab = get_path(data);
-				printf("path ==== %s\n", tab[2]);
+				 tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				identify_builtin(data);
-				print_cmd(data->cmd);// change the address her
+				print_cmd(data->cmd);
+				// execve_test(tab, data);
 				data->cmd = NULL;
 			}
 		} 

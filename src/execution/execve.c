@@ -12,7 +12,10 @@ char **get_path(t_data *data)
     {
         if (ft_strcmp("PATH", tmp->key) == 0)
             str = ft_split(tmp->value, ':');
-    tmp = tmp->next;
+        tmp = tmp->next;
     }
-    return(str);
+    return (str);
 }
+
+
+
