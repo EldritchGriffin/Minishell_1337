@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 18:18:51 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:41:14 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,8 @@ void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
         return ;
     if (check_one(*node, *node_next))
     {
-        if ((*node)->str[0] == '"' || (*node)->str[0] == '\'')
             str1 = trim_quote((*node)->str);
-        else
-            str1 = (*node)->str;
-        if ((*node_next)->str[0] == '"' || (*node_next)->str[0] == '\'')
             str2 = trim_quote((*node_next)->str);
-        else
-            str2 = (*node_next)->str;
     }
     else 
         return ;
@@ -69,12 +63,12 @@ void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
               return ;
          }
          replace_nodes(node, node_next, &new_node);
-        (*data)->cmd = new_node; 
+        (*data)->cmd = new_node;  
          join_unspaced(&new_node, &(new_node->next), data);
      }
-    else if((*node)->prev && (*node_next)->next)
+    else if ((*node)->prev && (*node_next)->next)
         recursion_call(node, node_next, new_node, data);
-    else if((*node)->prev && !(*node_next)->next)
+    else if ((*node)->prev && !(*node_next)->next)
          recursion_call(node, node_next, new_node, data);
-   return ;
+   return ; 
 }

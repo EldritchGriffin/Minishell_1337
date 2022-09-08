@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 03:24:17 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/07 11:30:24 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int redirection_handler(char a , char b, int old_type)
 
 void   ft_space_skip(char **line, int *i)
 {
-        while((*line[*i] == ' ' || *line[*i] == '\t' || *line[*i] == '\r'
-            || *line[*i] == '\v'))
-            (*i)++;
+    while ((*line[*i] == ' ' || *line[*i] == '\t' || *line[*i] == '\r'
+        || *line[*i] == '\v'))
+        (*i)++;
 }

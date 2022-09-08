@@ -11,7 +11,7 @@
 # include "../LIBFT/libft.h"
 # include <stdbool.h>
 # include <stdlib.h>
-
+# include <limits.h>
 //------------- typedefs --------------------------------------------------
 
 
@@ -72,19 +72,26 @@ typedef struct s_data
 	char		*abs_p;
 }				t_data;
 
+typedef struct s_exc{
+	char		**str;    // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
+	struct s_exc *next;
+} t_exc;
+
 //-------------- enum strcut contains ---------------------------------------
-
-
+int     ft_pwd(void);
+char	**parse_args1(t_data *data);
+int		ft_check_tokens(t_cmd *cmd);
+int		ft_check_toekns2(t_data *data);
 //---------------- test_functions --------------------------------------------
-int redirection_handler(char a , char b, int old_type);
-void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data);
+int		redirection_handler(char a , char b, int old_type);
+void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data);
 //--------------------------------lst-functions---------------------------
-bool check_one(t_cmd *node, t_cmd *node_next);
+bool 	check_one(t_cmd *node, t_cmd *node_next);
 void    sorted_env(t_env *env, t_data *data);
+
 //--------------------------------syntax_error_functions-------------------
 
-t_cmd *get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
-
+t_cmd	*get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
 void    quotes_error(char c);
 void    syntax_error(void);
 void    unexpected_token(char c);
@@ -92,7 +99,8 @@ char   	get_quote(char line);
 bool 	ft_break(int a, int b);
 char	*rmv_quotes(char	*str);
 int     search_spc_node(t_cmd **cmd);
-char *trim_quote(char *str);
+char    *trim_quote(char *str);
+char    **parse_args(t_data *data);
 
 
 //----------------------------------------------------------------------------
@@ -100,8 +108,8 @@ int     quote_check(int old_type, char  *line, int *i, int *words);
 t_cmd  	*create_node(char *content, t_tokens type, t_data *data);
 void    ft_create_cmd(t_cmd *cmd);
 void   	get_token(char *line, int *i, int start, t_data *data);
-void    var_handler(char *line, int *i, int *words, t_data *data, int *type);
-bool    quote_handler(char *line, int *i, char quote, int *words);
+void    var_handler(char *line, int *i, int *words, int *type);
+bool    quote_handler(char *line, int *i, char quote, int *words, int *type);
 int     get_token_type(char line);
 int     check_operators(char f, char s);
 void   	ft_space_skip(char **line, int *i);
@@ -118,7 +126,7 @@ int     ft_only_words(char *str, char *line, t_tokens *token);
 int     is_words(char c, char *str, t_tokens *token);
 int     ft_only_words(char *str, char *line, t_tokens *token);
 void   	cmd_list(char *str, t_tokens token, t_data *data);
-void     build_token_list(char *line, t_data *data);
+int		build_token_list(char *line, t_data *data);
 int     first_check(char *line, char *str);
 void    *ft_malloc(int size, t_ptr **ptrs);
 t_env   *env_list(char  **envp);
@@ -136,4 +144,8 @@ void    print_lst(t_cmd **cmd);
 void	ft_echo(t_data *data);
 void	ft_export(t_data	*data);
 void	ft_unset(t_data		*data);
+
+
+//-------------Execve--------------------------------
+char **get_path(t_data *data);
 #endif

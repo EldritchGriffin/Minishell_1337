@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/05 22:08:55 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:59:05 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ int     first_check(char *line, char *str)
 }
 
 
-bool    quote_handler(char *line, int *i, char quote, int *words)
+bool    quote_handler(char *line, int *i, char quote, int *words, int *type)
 {
-   
     while (line[(*i)])
    { 
         (*i)++;
         (*words)++;
+        if (line[*i] == '$' && quote == '"')
+        {
+            var_handler(line, i, words, type);
+            *type = EXPND_VB;
+        }
         if (line[*i] ==  quote)
         {
                 (*i)++;
@@ -58,32 +62,16 @@ bool env_check(char *str, t_data *data)
     return (false);
 }
 
-
-
-void    var_handler(char *line, int *i, int *words, t_data *data, int *type)
+void    var_handler(char *line, int *i, int *words, int *type)
 {
-    char    *vbl;
-    t_env   *tmp;
     char *check;
     int     j;
 
     j = 0;
-    tmp = data->env;
-    vbl = malloc(sizeof(int) * 5);
-    if (!vbl)
-        return((void)NULL);
-    if (line[(*i) - 1] == '$')
-           return ;
     while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
     {
-        // if(line[(*i)] == '$')
-        vbl[j] = line[*i];
         j++;
         (*i)++;
         (*words)++;
     }
-    vbl[j] = '\0';
-    if (env_check(vbl, data))
-            *type = EXPND_VB;
-    // free(vbl);
 }

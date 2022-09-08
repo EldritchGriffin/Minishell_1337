@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/05 23:27:14 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:58:44 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,35 @@ static  void    print_cmd(t_cmd *cmd)
     while(cmd)
     {
         printf("string is [%s] ------ token value is [%d]\n",cmd->str, cmd->type);
-		// if(cmd->prev)
-			//printf("string prev is [%s] ------ token value is [%d]\n",cmd->prev->str, cmd->prev->type);
         cmd = cmd->next;
+    }
+}
+///-----------this function jut for test------------------------------------
+
+static void   execve_test(char **tab, t_data *data)
+{
+    int     i;
+    int     j;
+	char	*cmd;
+	char   	*line;
+    char    **str;
+    char    **path;
+
+    str = get_path(data);
+    j = 0;
+	cmd = ft_strdup("/"); 
+    while (tab[j]) 
+    {
+        i = 0;
+		line = ft_strjoin(cmd, tab[j]);
+        while (str[i])
+        {
+            str[i] = ft_strjoin(str[i], line);
+            if (execve(str[i], &str[i], NULL) == -1)
+					return (perror("Minishell$ : "), (void)0);
+            i++;
+        }
+        j++;
     }
 }
 
@@ -29,27 +55,31 @@ void    ft_shell(t_data *data, t_env *env)
 {
 	char	*line;
 	char    *str;
+	char 	**tab;
 	t_cmd	**tmp;
-	t_cmd 	*tmp1;
+	int		i;
 
 	while (1)
 	{
-	 tmp = &data->cmd;	
+	 	tmp = &data->cmd;	
 		line = readline("Minishell$ ");
-		if(line)
+		if (line)
 		{
 			add_history(line);
-			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC: im gonna change it latterrr
-			build_token_list(str, data);
-			var_expnd(data);
-			while((*tmp))
-			{ 
-				join_unspaced(tmp, &((*tmp)->next), &data);
-				tmp = &(*tmp)->next;
+			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC : im gonna change it latterrr
+			if (build_token_list(str, data))
+			{
+				while((*tmp))
+				{ 
+					join_unspaced(tmp, &((*tmp)->next), &data);
+					tmp = &(*tmp)->next;
+				}
+				 tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				identify_builtin(data);
+				print_cmd(data->cmd);
+				// execve_test(tab, data);
+				data->cmd = NULL;
 			}
-			print_cmd(data->cmd);// change the address here
-			identify_builtin(data);
-			data->cmd = NULL;
 		} 
 	}
 }

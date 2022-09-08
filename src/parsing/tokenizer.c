@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/04 18:54:34 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:59:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int get_token_type(char line)
 }
 
 
-static bool check_old_type(char *line, int *i, int *words, int *old_type, t_data *data)
+static bool check_old_type(char *line, int *i, int *words, int *old_type)
 {
     if (*old_type == S_QUOTES || *old_type == D_QUOTES)
     {
-        if (!quote_handler(line, i, get_quote(line[(*i)]), words))
+        if (!quote_handler(line, i, get_quote(line[(*i)]), words, old_type))
                 return (false);
     }
     else if (*old_type == VARIABLE)
-         var_handler(line, i, words, data, old_type);
+         var_handler(line, i, words, old_type);
     return (true);
 }
 
@@ -86,34 +86,33 @@ void    get_token(char *line, int *i, int start, t_data  *data)
         (*i)++;
     }
     old_type = redirection_handler(line[check], line[check + 1], old_type); 
-    if (!check_old_type(line, i, &words, &old_type, data))
+    if (!check_old_type(line, i, &words, &old_type))
         return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
-        {
-            cmd_list(ft_strdup(" "), old_type, data);
-            return ;
-        }
+           return(cmd_list(ft_strdup(" "), old_type, data), (void)0);
     cmd_list(ft_substr(line, start, words), \
             old_type, data);
 } 
 
-void    build_token_list(char *line, t_data *data)
+int    build_token_list(char *line, t_data *data)
 {
     int i;
-    t_cmd   *tmp;
-
+    t_cmd *tmp;
     i = -1;
-    ft_space_skip(&line, &i);
     while (line[++i])
     {
         get_token(line, &i, i, data);
         i--;
     }
-    tmp = data->cmd;
-    while(tmp)
-    {
-        if(tmp->type == S_QUOTES || tmp->type == D_QUOTES)
-            tmp->str = rmv_quotes(tmp->str);
-        tmp = tmp->next;
-    }
+    // if (!ft_check_toekns2(data)) // this function checks operator errors , still needs some work
+    //     return (0);
+    return (1);
+    // tmp = data->cmd;
+    // while (tmp)
+    // {
+    //     if (!ft_check_tokens(tmp))
+    //         return (data->cmd = NULL, (void)0);
+    //     tmp = tmp->next;
+    // }
+    
 }
