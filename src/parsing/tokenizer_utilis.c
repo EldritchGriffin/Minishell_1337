@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utilis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 03:18:04 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/05 22:08:55 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,11 @@ void    var_handler(char *line, int *i, int *words, t_data *data, int *type)
     vbl = malloc(sizeof(int) * 5);
     if (!vbl)
         return((void)NULL);
+    if (line[(*i) - 1] == '$')
+           return ;
     while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
     {
+        // if(line[(*i)] == '$')
         vbl[j] = line[*i];
         j++;
         (*i)++;

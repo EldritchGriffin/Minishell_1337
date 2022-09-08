@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:59:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/03 18:07:54 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/04 18:47:43 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static t_cmd	*check_opt(t_cmd	*tmp, bool *n_opt)
 void	ft_echo(t_data *data)
 {
 	t_cmd	*tmp;
-	char	*prnt;
 	bool	n_opt;
 
 	tmp = data->cmd->next;
@@ -51,12 +50,9 @@ void	ft_echo(t_data *data)
 	{
 		if (tmp->next && tmp->type == SPC)
 			tmp = tmp->next;
-		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
+		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES && tmp->type != VARIABLE)
 			break ;
-		prnt = tmp->str;
-		if (tmp->type == D_QUOTES || tmp->type == S_QUOTES)
-			prnt = rmv_quotes(tmp->str);
-		printf("%s", prnt);
+		printf("%s", tmp->str);
 		tmp = tmp->next;
 		if (tmp)
 		{

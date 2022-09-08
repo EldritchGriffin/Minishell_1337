@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 06:25:40 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/05 23:27:14 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void    ft_shell(t_data *data, t_env *env)
 			add_history(line);
 			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC: im gonna change it latterrr
 			build_token_list(str, data);
+			var_expnd(data);
 			while((*tmp))
 			{ 
 				join_unspaced(tmp, &((*tmp)->next), &data);

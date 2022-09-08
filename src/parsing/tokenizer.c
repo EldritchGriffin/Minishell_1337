@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/03 03:25:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/04 18:54:34 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void    get_token(char *line, int *i, int start, t_data  *data)
 void    build_token_list(char *line, t_data *data)
 {
     int i;
+    t_cmd   *tmp;
 
     i = -1;
     ft_space_skip(&line, &i);
@@ -107,5 +108,12 @@ void    build_token_list(char *line, t_data *data)
     {
         get_token(line, &i, i, data);
         i--;
+    }
+    tmp = data->cmd;
+    while(tmp)
+    {
+        if(tmp->type == S_QUOTES || tmp->type == D_QUOTES)
+            tmp->str = rmv_quotes(tmp->str);
+        tmp = tmp->next;
     }
 }

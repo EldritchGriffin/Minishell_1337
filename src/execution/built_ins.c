@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/03 18:16:39 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/03 20:17:55 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int    identify_builtin(t_data *data)
 	// if(!ft_strcmp(data->cmd->str, "pwd"))
 	//     return(ft_pwd(data), 0);
 	if(!ft_strcmp(data->cmd->str, "export"))
-		return(sorted_env(data->env, data), 0);
+		return(ft_export(data), 0);
 	if(!ft_strcmp(data->cmd->str, "unset"))
 		return(ft_unset(data), 0);
 	if(!ft_strcmp(data->cmd->str, "env"))

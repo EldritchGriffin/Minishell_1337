@@ -69,6 +69,7 @@ typedef struct s_data
 	t_ptr 		*ptrs;
 	t_cmd 		*cmd;
 	t_env       *env;
+	char		*abs_p;
 }				t_data;
 
 //-------------- enum strcut contains ---------------------------------------
@@ -126,6 +127,7 @@ int     identify_builtin(t_data *data);
 void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
 t_cmd   *new_node_cmd(char  *str, t_tokens type, t_data *data);
+void    var_expnd(t_data    *data);
 // void  join_unspaced(t_cmd   **node, t_cmd    **node_next, t_data  *data);
 
 //----------------print fucntions------------------------------------------/
