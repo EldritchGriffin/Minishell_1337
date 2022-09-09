@@ -6,12 +6,11 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/09 05:55:15 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 14:43:58 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
-#include "../LIBFT/libft.h"
 
 //Testing purposes again...
 static  void    print_cmd(t_cmd *cmd)
@@ -39,31 +38,18 @@ static void print_exc(t_exc *exc)
 }
 ///-----------this function jut for test------------------------------------
 
-static void   execve_test(char **tab, t_data *data)
+static void cmd_call(t_exc *exc)
 {
-    int     i;
-    int     j;
-	char	*cmd;
-	char   	*line;
-    char    **str;
-    char    **path;
+	int i;
+	char *bin;
 
-    str = get_path(data);
-    j = 0;
-	cmd = ft_strdup("/"); 
-    while (tab[j]) 
-    {
-        i = 0;
-		line = ft_strjoin(cmd, tab[j]);
-        while (str[i])
-        {
-            str[i] = ft_strjoin(str[i], line);
-            if (execve(str[i], &str[i], NULL) == -1)
-					return (perror("Minishell$ : "), (void)0);
-            i++;
-        }
-        j++;
-    }
+	i = -1;
+	while (exc)
+	{
+		bin = get_path(exc->str);
+		exec_cmd(exc->str, bin);
+		exc = exc->next;
+	}
 }
 
 void    ft_shell(t_data *data, t_env *env)
@@ -91,10 +77,12 @@ void    ft_shell(t_data *data, t_env *env)
 				}
 				 tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				build_exc_list(tab, data);
+				cmd_call(data->exc);
 				identify_builtin(data);
-				print_cmd(data->cmd);
-				print_exc(data->exc);
+				// print_cmd(data->cmd);
+				// print_exc(data->exc);
 				// execve_test(tab, data);
+				data->exc = NULL;
 				data->cmd = NULL;
 			}
 		} 

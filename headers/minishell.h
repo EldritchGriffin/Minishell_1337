@@ -12,6 +12,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <limits.h>
+#include <signal.h>
 //------------- typedefs --------------------------------------------------
 
 
@@ -23,6 +24,7 @@
 # define ERROR 1
 # define SUCCESS 0
 
+# define PATH = /Users/zrabhi/goinfre/homebrew/bin:/Users/zrabhi/goinfre/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/zrabhi/goinfre/.brew/bin 
 //-----------------abstract syntax tree-------------------------------------
 
 
@@ -149,7 +151,9 @@ t_exc   *new_node_exc(char **str, t_data *data);
 void    build_exc_list(char **tab, t_data *data);
 
 //-------------Execve--------------------------------
-char **get_path(t_data *data);
+// char **get_path(t_data *data);
+void   exec_cmd(char **cmd, char *bin);
+char   *get_path(char **cmd);
 
 //----------------free_functions-------------------------------------------/
 char	**free_tab(char **tab);
