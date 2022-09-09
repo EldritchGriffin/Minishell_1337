@@ -6,7 +6,7 @@
 #    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/08 15:58:48 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/09/08 16:35:49 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,14 @@ PARSING    := $(SRC_DIR)/parsing
 
 SRC        := 	$(SRC_DIR)/ft_shell.c $(PARSING)/parser_utilis.c $(PARSING)/tokenizer_check.c $(PARSING)/tokenizer.c  $(PARSING)/parser.c $(TOOLS)/cmd_lst.c $(PARSING)/tokenizer_utilis.c  \
 					$(SRC_DIR)/execution/execve.c $(PARSING)/tokenizer_utilis2.c $(PARSING)/syntax_errors.c $(PARSING)/parcer2.c $(ENV)/env_list.c $(EXEC)/env_sort.c $(EXEC)/built_ins.c \
-						$(EXEC)/ft_echo.c $(EXEC)/ft_export.c $(EXEC)/exec_utils.c $(EXEC)/ft_unset.c $(EXEC)/ft_pwd.c
+						$(EXEC)/ft_echo.c $(EXEC)/ft_export.c $(EXEC)/exec_utils.c $(EXEC)/ft_unset.c $(EXEC)/ft_pwd.c $(PARSING)/var_expander.c
 
 
 
 main        := 	$(SRC_DIR)/main.c
 OBJ	        := 	$(SRC:.c=.o)
 CC          := 	gcc
-GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g
+GCCFLAGS    := -Wall -Wextra -Werror -lreadline -fsanitize=address -static-libsan -g
 HEADER      := $(HEADER_DIR)/minishell.h
 NAME        := Minishell
 RECOMPILING := echo "     $(YELLOW)Recompiling..........$(YELLOW)"

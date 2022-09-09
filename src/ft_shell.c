@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/08 15:58:44 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/09 02:32:19 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void   execve_test(char **tab, t_data *data)
         while (str[i])
         {
             str[i] = ft_strjoin(str[i], line);
-            if (execve(str[i], &str[i], NULL) == -1)
-					return (perror("Minishell$ : "), (void)0);
+            execve(str[i], &str[i], NULL);
+					
             i++;
         }
         j++;
@@ -74,10 +74,11 @@ void    ft_shell(t_data *data, t_env *env)
 					join_unspaced(tmp, &((*tmp)->next), &data);
 					tmp = &(*tmp)->next;
 				}
-				 tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				var_expnd(data);
 				identify_builtin(data);
 				print_cmd(data->cmd);
-				// execve_test(tab, data);
+				 execve_test(tab, data);
 				data->cmd = NULL;
 			}
 		} 

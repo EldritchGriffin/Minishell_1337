@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/08 15:59:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/08 21:02:13 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,13 @@ int    build_token_list(char *line, t_data *data)
     {
         get_token(line, &i, i, data);
         i--;
+    }
+    tmp = data->cmd;
+    while(tmp)
+    {
+        if(tmp->type == S_QUOTES || tmp->type == D_QUOTES || tmp->type == EXPND_VB)
+            tmp->str = rmv_quotes(tmp->str);
+        tmp = tmp->next;
     }
     // if (!ft_check_toekns2(data)) // this function checks operator errors , still needs some work
     //     return (0);
