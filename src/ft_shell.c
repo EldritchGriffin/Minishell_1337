@@ -6,12 +6,11 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/09 02:32:19 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:13:08 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
-#include "../LIBFT/libft.h"
 
 //Testing purposes again...
 static  void    print_cmd(t_cmd *cmd)
@@ -22,17 +21,29 @@ static  void    print_cmd(t_cmd *cmd)
         cmd = cmd->next;
     }
 }
+
+static void print_exc(t_exc *exc)
+{
+	int i;
+
+	// /i = 0;
+	while (exc)
+	{
+		i = -1;
+		while(exc->str[++i])
+			printf("exc ========= is[%s]\n", exc->str[i]);
+		printf("MOVING  to the next\n");
+		exc = exc->next;
+	}	
+}
 ///-----------this function jut for test------------------------------------
 
-static void   execve_test(char **tab, t_data *data)
+static void cmd_call(t_exc *exc)
 {
-    int     i;
-    int     j;
-	char	*cmd;
-	char   	*line;
-    char    **str;
-    char    **path;
+	int i;
+	char *bin;
 
+<<<<<<< HEAD
     str = get_path(data);
     j = 0;
 	cmd = ft_strdup("/"); 
@@ -49,6 +60,15 @@ static void   execve_test(char **tab, t_data *data)
         }
         j++;
     }
+=======
+	i = -1;
+	while (exc)
+	{
+		bin = get_path(exc->str);
+		exec_cmd(exc->str, bin);
+		exc = exc->next;
+	}
+>>>>>>> 41213b342411aa382c47559c8b418939ee34382c
 }
 
 void    ft_shell(t_data *data, t_env *env)
@@ -74,11 +94,22 @@ void    ft_shell(t_data *data, t_env *env)
 					join_unspaced(tmp, &((*tmp)->next), &data);
 					tmp = &(*tmp)->next;
 				}
+<<<<<<< HEAD
 				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				var_expnd(data);
 				identify_builtin(data);
 				print_cmd(data->cmd);
 				 execve_test(tab, data);
+=======
+				 tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				build_exc_list(tab, data);
+				cmd_call(data->exc);
+				identify_builtin(data);
+				// print_cmd(data->cmd);
+				// print_exc(data->exc);
+				// execve_test(tab, data);
+				data->exc = NULL;
+>>>>>>> 41213b342411aa382c47559c8b418939ee34382c
 				data->cmd = NULL;
 			}
 		} 

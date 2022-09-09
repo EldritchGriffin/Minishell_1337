@@ -12,6 +12,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <limits.h>
+#include <signal.h>
 //------------- typedefs --------------------------------------------------
 
 
@@ -23,6 +24,7 @@
 # define ERROR 1
 # define SUCCESS 0
 
+# define PATH = /Users/zrabhi/goinfre/homebrew/bin:/Users/zrabhi/goinfre/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/zrabhi/goinfre/.brew/bin 
 //-----------------abstract syntax tree-------------------------------------
 
 
@@ -63,19 +65,19 @@ typedef	struct	s_env
 	char			*value;
 	struct	s_env	*next;
 }					t_env;
+typedef struct s_exc{
+	char		**str;    // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
+	struct s_exc *next;
+} t_exc;
 
 typedef struct s_data
 {
 	t_ptr 		*ptrs;
 	t_cmd 		*cmd;
 	t_env       *env;
-	char		*abs_p;
+	t_exc		*exc;
 }				t_data;
 
-typedef struct s_exc{
-	char		**str;    // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
-	struct s_exc *next;
-} t_exc;
 
 //-------------- enum strcut contains ---------------------------------------
 int     ft_pwd(void);
@@ -144,8 +146,16 @@ void    print_lst(t_cmd **cmd);
 void	ft_echo(t_data *data);
 void	ft_export(t_data	*data);
 void	ft_unset(t_data		*data);
-
+//---------exc_list---------------------------------------------------------/
+void    exc_list(char **str, t_data *data);
+t_exc   *new_node_exc(char **str, t_data *data);
+void    build_exc_list(char **tab, t_data *data);
 
 //-------------Execve--------------------------------
-char **get_path(t_data *data);
+// char **get_path(t_data *data);
+void   exec_cmd(char **cmd, char *bin);
+char   *get_path(char **cmd);
+
+//----------------free_functions-------------------------------------------/
+char	**free_tab(char **tab);
 #endif

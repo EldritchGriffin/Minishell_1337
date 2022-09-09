@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 07:56:43 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 07:49:35 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static size_t ft_count_pipes(t_data *data)
     return (pipe);
 }
 
-static char	**free_tab(char **tab)
+char	**free_tab(char **tab)
 {
 	int	i;
 
