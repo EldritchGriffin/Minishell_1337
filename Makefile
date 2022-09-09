@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/08 05:49:04 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/09 08:14:56 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,18 +30,18 @@ HEADER_DIR := headers
 LIBFT_DIR  := LIBFT
 LIBFT      := $(LIBFT_DIR)/libft.a
 SRC_DIR    := src
-TOOLS      := $(SRC_DIR)/tools
-ENV        := $(SRC_DIR)/env
-EXEC       := $(SRC_DIR)/execution
-PARSING    := $(SRC_DIR)/parsing
+TOOLS      := cmd_list exc_list
+ENV        := env_list
+EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset 
+PARSING    := final_check parser_utils  parser parser2 parser3 syntax_errors tokenizer_check tokenizer_utils tokenizer_utils2 tokenizer  
+src        := ft_shell
+SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
+	  					$(addsuffix .c, $(addprefix src/execution/, $(EXEC))) \
+	  							$(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
+	 									$(addsuffix .c, $(addprefix src/tools/, $(TOOLS))) \
+										 	$(addsuffix .c, $(addprefix src/, $(src)))
 
-SRC        := 	$(SRC_DIR)/ft_shell.c $(PARSING)/parser_utilis.c $(PARSING)/tokenizer_check.c $(PARSING)/tokenizer.c  $(PARSING)/parser.c $(TOOLS)/cmd_lst.c $(PARSING)/tokenizer_utilis.c  \
-					$(SRC_DIR)/execution/execve.c $(PARSING)/tokenizer_utilis2.c $(PARSING)/syntax_errors.c $(PARSING)/parcer2.c $(ENV)/env_list.c $(EXEC)/env_sort.c $(EXEC)/built_ins.c \
-						$(EXEC)/ft_echo.c $(EXEC)/ft_export.c $(EXEC)/exec_utils.c $(EXEC)/ft_unset.c $(EXEC)/ft_pwd.c
-
-
-
-main        := 	$(SRC_DIR)/main.c
+main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := 	$(SRC:.c=.o)
 CC          := 	gcc
 GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g
@@ -65,7 +65,7 @@ $(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT)
 	@echo  "Building $(NAME) for" "Mandatory" "..."
 	@$(CC) $(GCCFLAGS) $(main) $(LIBFT) $(OBJ) -o $(NAME)
 	@echo""
-	@sleep 0.2
+	@sleep 0.1.5
 	@sleep 0.2
 	@echo ""
 	@echo  "$(NAME) is created!\n"
@@ -79,7 +79,7 @@ $(LIBFT) : $(shell find $(LIBFT_DIR) -name "*.c" -type f)
 
 %.o: %.c	
 	@echo "$(YELLOW)creating : $(@:OBJ/%=%) "
-	@sleep 0.2
+	@sleep 0.05
 	@$(CC) $(GCCFLAG) -g -c $< -o $@   
 
 #####################################################REMOVING ABJECTS FILE####################################

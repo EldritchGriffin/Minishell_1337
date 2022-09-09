@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/08 13:21:48 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 05:55:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,21 @@ static  void    print_cmd(t_cmd *cmd)
         printf("string is [%s] ------ token value is [%d]\n",cmd->str, cmd->type);
         cmd = cmd->next;
     }
+}
+
+static void print_exc(t_exc *exc)
+{
+	int i;
+
+	// /i = 0;
+	while (exc)
+	{
+		i = -1;
+		while(exc->str[++i])
+			printf("exc ========= is[%s]\n", exc->str[i]);
+		printf("MOVING  to the next\n");
+		exc = exc->next;
+	}	
 }
 ///-----------this function jut for test------------------------------------
 
@@ -75,8 +90,10 @@ void    ft_shell(t_data *data, t_env *env)
 					tmp = &(*tmp)->next;
 				}
 				 tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				build_exc_list(tab, data);
 				identify_builtin(data);
 				print_cmd(data->cmd);
+				print_exc(data->exc);
 				// execve_test(tab, data);
 				data->cmd = NULL;
 			}

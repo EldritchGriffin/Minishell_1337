@@ -6,11 +6,11 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/08/31 13:54:37 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 08:08:34 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../../headers/minishell.h"
 
 
 //TODO main function will have all our structs assigned into t_data
