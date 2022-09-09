@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/09 02:29:11 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/09 17:14:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,18 @@ static  int word_counter(char    *var)
     count = 0;
     while(var[++i])
     {
-        if(stat == 1 && var[i] != '$')
+        if (stat == 1 && var[i] != '$')
         {
             stat = 0;
             count++;
         }
-        if(var[i] == '$')
+        if (var[i] == '$')
         {
             count++;
             i++;
-            while(var[i] == '_' || ft_isalnum(var[i]))
+            while (var[i] == '_' || ft_isalnum(var[i]))
                 i++;
-            if(!var[i])
+            if (!var[i])
                 break;
             stat = 1;
             i--;
@@ -171,11 +171,11 @@ void    var_expnd(t_data    *data)
     tmp = data->cmd;
     while(tmp)
     {
-        if(tmp->type == SPC)
+        if (tmp->type == SPC)
             tmp = tmp->next;
-        if(tmp->type == VARIABLE)
+        if (tmp->type == VARIABLE)
             find_var(tmp, data->env);
-        if(tmp->type == EXPND_VB)
+        if (tmp->type == EXPND_VB)
             prep_expnd(tmp->str);
         tmp = tmp->next;
     }

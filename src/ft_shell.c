@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/09 17:10:30 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:30:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ static void print_exc(t_exc *exc)
 ///-----------this function jut for test------------------------------------
 
 
-void	cmd_call(t_exc *exc)
+void	cmd_call(t_exc *exc, t_data *data)
 {
-	int i;
-	char *bin;
+	int		i;
+	char	*bin;
 	
 	i = -1;
+	if (!identify_builtin(data))
+		return ;
 	while (exc)
 	{
 		bin = get_path(exc->str);
@@ -79,11 +81,10 @@ void    ft_shell(t_data *data, t_env *env)
 				}
 				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				var_expnd(data);
-				identify_builtin(data);
 				print_cmd(data->cmd);
 				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				build_exc_list(tab, data);
-				cmd_call(data->exc);
+				cmd_call(data->exc, data);
 				// identify_builtin(data);
 				// print_cmd(data->cmd);
 				// print_exc(data->exc);
