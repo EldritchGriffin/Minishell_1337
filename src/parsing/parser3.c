@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/09 07:51:57 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:56:36 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void    build_exc_list(char **tab, t_data *data)
     {
         j = -1;
         str = ft_strdup(tab[i]);
-        printf("str ======= %s\n", str);
         cmd = ft_split(str, ' ');
         // while(cmd[++j])
         //     printf("cmd ====== %s\n", cmd[j]);

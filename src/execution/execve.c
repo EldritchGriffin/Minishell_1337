@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/09 15:53:23 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:46:58 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char   *get_path(char **cmd)
     while (path_split[++i])
     {
         path_len = ft_strlen(path_split[i]);
-        bin = ft_calloc(sizeof(char), (path_len + cmd_len) + 1);
+        bin = calloc(sizeof(char), (path_len + cmd_len) + 2);
         if (!bin)
             return (NULL);
         strcat(bin, path_split[i]);
@@ -39,7 +39,6 @@ char   *get_path(char **cmd)
         strcat(bin, cmd[0]);
         if (!access(bin, F_OK | X_OK | R_OK))
                 break ;
-        free(bin);
     }
     return (bin);
 }

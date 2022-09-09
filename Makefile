@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
+#    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/09/08 16:35:49 by aelyakou         ###   ########.fr        #
-=======
-#    Updated: 2022/09/09 08:14:56 by zrabhi           ###   ########.fr        #
->>>>>>> 41213b342411aa382c47559c8b418939ee34382c
+#    Updated: 2022/09/09 16:20:01 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +33,13 @@ SRC_DIR    := src
 TOOLS      := cmd_list exc_list
 ENV        := env_list
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset 
-PARSING    := final_check parser_utils  parser parser2 parser3 syntax_errors tokenizer_check tokenizer_utils tokenizer_utils2 tokenizer  
+PARSING    := final_check parser_utils  parser parser2 parser3 syntax_errors tokenizer_check tokenizer_utils tokenizer_utils2 tokenizer  var_expander
 src        := ft_shell
 SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 	  					$(addsuffix .c, $(addprefix src/execution/, $(EXEC))) \
 	  							$(addsuffix .c, $(addprefix src/parsing/, $(PARSING))) \
 	 									$(addsuffix .c, $(addprefix src/tools/, $(TOOLS))) \
-										 	$(addsuffix .c, $(addprefix src/, $(src)))
+										 	$(addsuffix .c, $(addprefix src/, $(src))) \
 
 main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := 	$(SRC:.c=.o)
