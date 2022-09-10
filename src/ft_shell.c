@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 16:25:57 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:51:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void    ft_shell(t_data *data, t_env *env)
 				}
 				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				var_expnd(data);
-				print_cmd(data->cmd);
 				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				build_exc_list(tab, data);
 				cmd_call(data->exc, data);

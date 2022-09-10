@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 05:39:17 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 17:45:14 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 17:59:08 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ int     check_operators_sec(t_data *data)
     tmp = data->cmd;
     while (tmp)
     {   
-       
-        if ((tmp->opr && tmp->next->next->opr) || tmp->next->type == SPC)
-             return (unexpected_token(tmp->next->str[0]), 0);
         if (tmp->opr)
         {
+            if ((tmp->next->next->opr && tmp->next->type == SPC) || tmp->next->next->opr)
+                    return (unexpected_token(tmp->next->str[0]), 0);
             if (!operator_handler(tmp->str, tmp->type))
                     return (unexpected_token(tmp->str[0]), 0);
         }

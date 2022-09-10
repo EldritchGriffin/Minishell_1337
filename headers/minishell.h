@@ -33,6 +33,8 @@
 
 //---------------------------structs----------------------------------------
 
+
+
 typedef enum s_tokens{
 	PIPE,
 	WORD,
@@ -52,6 +54,8 @@ typedef enum s_tokens{
 	SOL,
 } t_tokens;
 
+
+
 typedef struct s_cmd
 {
 	char 			*str;
@@ -61,16 +65,22 @@ typedef struct s_cmd
 	struct s_cmd    *prev;
 }   				t_cmd;
 
+
+
 typedef	struct	s_env
 {
 	char			*key;
 	char			*value;
 	struct	s_env	*next;
 }					t_env;
+
+
 typedef struct s_exc{
 	char		**str;    // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
 	struct s_exc *next;
 } t_exc;
+
+
 
 typedef struct s_data
 {

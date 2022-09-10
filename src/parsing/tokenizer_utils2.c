@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 16:00:10 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 18:01:24 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int redirection_handler(char a , char b, int old_type, bool *operator)
 {
     if (a == '>' && b == '>')
             return((*operator = true), APPEND);
-    else if(a == '<' && b == '<')
+    else if (a == '<' && b == '<')
             return ((*operator = true), HERDOC);
     else
         return (old_type);
