@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 15:25:33 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/08/26 02:18:21 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:12:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	destroy(t_ptr **lst);
 void    *ft_malloc(int size, t_ptr **ptrs);
 void	ft_lstdelone(t_ptr *lst);
 void	ft_lstiter(t_ptr *lst, void (*f)(void *));
+char	*ft_strcat(char *dest, char *src);
 t_ptr	*ft_lstlast(t_ptr *lst);
 t_ptr	*ft_lstnew(void *content);
 #endif

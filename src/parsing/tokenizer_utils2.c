@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_utilis2.c                                :+:      :+:    :+:   */
+/*   tokenizer_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 11:30:24 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:00:10 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ char   get_quote(char line)
     return('\'');
 }
 
-int redirection_handler(char a , char b, int old_type)
+int redirection_handler(char a , char b, int old_type, bool *operator)
 {
     if (a == '>' && b == '>')
-            return(APPEND);
+            return((*operator = true), APPEND);
     else if(a == '<' && b == '<')
-            return (HERDOC);
+            return ((*operator = true), HERDOC);
     else
         return (old_type);
 }

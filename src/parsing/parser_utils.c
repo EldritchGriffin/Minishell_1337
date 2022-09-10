@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utilis.c                                    :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 08:08:46 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 10:57:34 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 
 bool check_one(t_cmd *node, t_cmd *node_next)
 {
-
-if (((node->type == D_QUOTES || node->type == S_QUOTES || node->type == WORD)) 
-    && (node_next->type == D_QUOTES 
-        || node_next->type == S_QUOTES || node_next->type == WORD))
-            return(true);
- return(false);
-    
+    if (((node->type == D_QUOTES || node->type == S_QUOTES || node->type == WORD)) 
+        && (node_next->type == D_QUOTES 
+            || node_next->type == S_QUOTES || node_next->type == WORD))
+                return (true);
+    return (false); 
 }
  
 int     search_spc_node(t_cmd **cmd)

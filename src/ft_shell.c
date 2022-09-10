@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/09 17:30:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:05:03 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static  void    print_cmd(t_cmd *cmd)
 {
     while(cmd)
     {
-        printf("string is [%s] ------ token value is [%d]\n",cmd->str, cmd->type);
+        printf("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
         cmd = cmd->next;
     }
 }
@@ -50,6 +50,7 @@ void	cmd_call(t_exc *exc, t_data *data)
 	while (exc)
 	{
 		bin = get_path(exc->str);
+		printf("bin ===== %s\n", bin);
 		exec_cmd(exc->str, bin);
 		exc = exc->next;
 		free(bin);
@@ -64,6 +65,7 @@ void    ft_shell(t_data *data, t_env *env)
 	t_cmd	**tmp;
 	int		i;
 
+	printf("ft_shell\n");
 	while (1)
 	{
 	 	tmp = &data->cmd;	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/08 21:02:13 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/10 15:58:47 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 //------------------ tokanization part is not finished , stilll working on it-----------------------------------
 
-int get_token_type(char line)
+int get_token_type(char line, bool *operator)
 {
     if (line == '|') 
-           return(PIPE);
-    else if(line == '\'')
+           return((*operator = true),PIPE);
+    else if (line == '\'')
             return(S_QUOTES);
-     else if(line == '>')
-        return(O_REDIRECTION);
-     else if(line == '<')
-        return(I_REDIRECTION);
-    else if(line == '\"')
-            return(D_QUOTES);
-    else if(line == '$')
-           return(VARIABLE);
-    else if(line == ' ' ||line == '\t')
+     else if (line == '>')
+        return ((*operator = true), O_REDIRECTION);
+     else if (line == '<')
+        return ((*operator = true), I_REDIRECTION);
+    else if (line == '\"')
+            return (D_QUOTES);
+    else if (line == '$')
+           return((*operator = true), VARIABLE);
+    else if (line == ' ' ||line == '\t')
              return(SPC);
-    else if(line == '(')
-            return(O_BCK);
-    else if(line == ')')
-            return(C_BCK);
     else
         return (WORD);
 }
@@ -72,26 +68,28 @@ void    get_token(char *line, int *i, int start, t_data  *data)
     int old_type;
     int words;
     int check;
+    bool operator;
 
-    tmp_type = get_token_type(line[*i]);
+    operator = false;
+    tmp_type = get_token_type(line[*i], &operator);
     old_type = tmp_type;
     words = -1;
     check = (*i);
     while (1)
     { 
-        tmp_type = get_token_type(line[*i]);
+        tmp_type = get_token_type(line[*i], &operator);
         words++;   
         if (ft_break(old_type, tmp_type) || !line[*i])
                 break ;
         (*i)++;
     }
-    old_type = redirection_handler(line[check], line[check + 1], old_type); 
+    old_type = redirection_handler(line[check], line[check + 1], old_type, &operator); 
     if (!check_old_type(line, i, &words, &old_type))
         return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
-           return(cmd_list(ft_strdup(" "), old_type, data), (void)0);
+           return(cmd_list(ft_strdup(" "), old_type, 0, data), (void)0);
     cmd_list(ft_substr(line, start, words), \
-            old_type, data);
+            old_type, operator, data);
 } 
 
 int    build_token_list(char *line, t_data *data)
@@ -111,8 +109,8 @@ int    build_token_list(char *line, t_data *data)
             tmp->str = rmv_quotes(tmp->str);
         tmp = tmp->next;
     }
-    // if (!ft_check_toekns2(data)) // this function checks operator errors , still needs some work
-    //     return (0);
+    if (!check_operators(data))
+        return (0);
     return (1);
     // tmp = data->cmd;
     // while (tmp)

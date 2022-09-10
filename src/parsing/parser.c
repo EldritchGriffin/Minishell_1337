@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/07 11:41:14 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 15:04:16 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void       join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
     else 
         return ;
     join = ft_strjoin(str1, str2);
-    new_node = new_node_cmd(join, WORD, *data);
+    new_node = new_node_cmd(join, WORD, 0, *data);
     if((!(*node)->prev && !(*node_next)->next) 
         || (!(*node)->prev && (*node_next)->next))
      {

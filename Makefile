@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/09 16:20:01 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/10 08:32:27 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := 	$(SRC:.c=.o)
 CC          := 	gcc
-GCCFLAGS    := -Wall -Wextra -Werror -lreadline -fsanitize=address -static-libsan -g
+GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g
 HEADER      := $(HEADER_DIR)/minishell.h
 NAME        := Minishell
 RECOMPILING := echo "     $(YELLOW)Recompiling..........$(YELLOW)"
