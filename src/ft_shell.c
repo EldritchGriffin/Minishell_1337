@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 15:05:03 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/10 16:25:57 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,10 @@ void    ft_shell(t_data *data, t_env *env)
 				// identify_builtin(data);
 				// print_cmd(data->cmd);
 				// print_exc(data->exc);
+				data->exc = NULL;
+				data->cmd = NULL;
+			}
+			else {
 				data->exc = NULL;
 				data->cmd = NULL;
 			}
