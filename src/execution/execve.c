@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 14:22:47 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/11 05:33:34 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,15 @@ void   exec_cmd(char **cmd, char *bin)
     pid = fork();
     if (pid == -1)
         perror("fork");
-     else if (pid > 0)
-     {
-         printf("status === %d\n", status);
-         kill(pid, SIGTERM);
-     }
-    else if (pid == 0)
+    if(pid == 0)
     {
-            if (execve(bin, cmd, NULL) == -1)
-                    perror("Minishell$ ");
-            //kill(pid, SIGINT);
-        exit(EXIT_FAILURE);
+        status = execve(bin, cmd, NULL);
+        if(status == -1)
+        {
+            waitpid(pid, &status, 0);
+            exit(EXIT_FAILURE);
+        }
+
     }
-    if( waitpid(pid, &status, 0))
-        printf("success\n");
+    waitpid(pid, &status, 0);
 }

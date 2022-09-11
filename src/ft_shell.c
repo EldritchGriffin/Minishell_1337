@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 17:51:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/11 04:57:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	cmd_call(t_exc *exc, t_data *data)
 	while (exc)
 	{
 		bin = get_path(exc->str);
-		printf("bin ===== %s\n", bin);
 		exec_cmd(exc->str, bin);
 		exc = exc->next;
 		free(bin);
@@ -65,7 +64,6 @@ void    ft_shell(t_data *data, t_env *env)
 	t_cmd	**tmp;
 	int		i;
 
-	printf("ft_shell\n");
 	while (1)
 	{
 	 	tmp = &data->cmd;	
