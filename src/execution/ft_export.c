@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/08 15:59:31 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/11 06:30:07 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static	bool	append_env(t_data	*data,char	**spltd)
 	tmp = data->env;
 	while(tmp)
 	{
-		if(!ft_strcmp(tmp->key, spltd[1]))
+		if(!ft_strcmp(tmp->key, spltd[0]))
 		{
-			if(spltd[2])
-				ft_strjoin(tmp->value, spltd[2]);
+			if(spltd[1])
+				ft_strcat(tmp->value, spltd[1]);
 			return	(true);
 		}
 		tmp = tmp->next;
 	}
-	return (false);
+	add_back_env(&data->env, new_node_env(spltd[0], spltd[1]));
+	return (true);
 }
 
 static	char	**splt(char	*str, bool *mode, char	**spltd)
@@ -46,36 +47,51 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 				*mode = true;
 				i--;
 			}
-			spltd[1] = ft_substr(str, 0, i);
+			spltd[0] = ft_substr(str, 0, i);
 			break;
 		}
 	}
-	if(!spltd[1])
-		spltd[1] = ft_strdup(str);
+	if(!spltd[0])
+		spltd[0] = ft_strdup(str);
 	else
 	{
 		if(*mode)
 			i++;
-		spltd[2] = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
+		spltd[1] = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
 	}
 	return (spltd);
 }
 
 static void	fill_export(char	*str, t_data	*data)
 {
-	t_env	*new_node;
 	bool	mode;
+	t_env	*tmp;
 	char	**spltd;
 	int		i;
 
-	spltd = malloc(sizeof(char	*) * 2);
+	tmp = data->env;
+	spltd = malloc(sizeof(char	*) * 3);
+	spltd[0] = NULL;
 	spltd[1] = NULL;
 	spltd[2] = NULL;
 	spltd = splt(str, &mode, spltd);
 	if(mode)
 		return(append_env(data, spltd), (void)0);
-	new_node = new_node_env(spltd[1], spltd[2]);
-	add_back_env(&data->env, new_node);
+	while(tmp)
+	{
+		if(!ft_strcmp(tmp->key, spltd[0]))
+		{
+			if(tmp->value)
+				return;
+			else if(!spltd[1])
+				tmp->value = NULL;
+			else
+				tmp->value = ft_strdup(spltd[1]);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	add_back_env(&data->env, new_node_env(spltd[0], spltd[1]));
 }
 
 void	ft_export(t_data	*data)

@@ -52,11 +52,15 @@ static char    *env_to_str(t_env *env, t_data *data)
         k = 0;
         while (tmp->key[j])
             str[i++] = tmp->key[j++];
-        str[i++] = '=';
-        str[i++] = '"';
+        if(tmp->value)
+        {
+            str[i++] = '=';
+            str[i++] = '"';
+        }
         while (tmp->value && tmp->value[k])
             str[i++] = tmp->value[k++];
-        str[i++] = '"';
+        if(tmp->value)
+            str[i++] = '"';
         if (tmp->next != NULL)
             str[i++] = '\n';
         tmp = tmp->next;
