@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/11 04:57:42 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:28:52 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,11 @@ void    ft_shell(t_data *data, t_env *env)
 					join_unspaced(tmp, &((*tmp)->next), &data);
 					tmp = &(*tmp)->next;
 				}
-				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				var_expnd(data);
 				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
 				build_exc_list(tab, data);
 				cmd_call(data->exc, data);
-				// identify_builtin(data);
-				// print_cmd(data->cmd);
+				print_cmd(data->cmd);
 				// print_exc(data->exc);
 				data->exc = NULL;
 				data->cmd = NULL;

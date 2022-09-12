@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 17:38:02 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/12 03:20:46 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ int    build_token_list(char *line, t_data *data)
             tmp->str = rmv_quotes(tmp->str);
         tmp = tmp->next;
     }
-    if (!check_operatrs_first(data) || !check_operators_sec(data))
-            return (0);
+    // if (!check_operatrs_first(data) || !check_operators_sec(data))
+    //         return (0);
+    //FIXME SIGFAULTS;
     return (1);
 }
