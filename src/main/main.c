@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/11 06:01:45 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:57:01 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
 
 //TODO main function will have all our structs assigned into t_data
 int main(int ac, char **av, char    **envp)
@@ -25,7 +24,8 @@ int main(int ac, char **av, char    **envp)
     data.cmd = NULL;
     data.ptrs = ptrs;
     data.cmd  =NULL;
-    env = env_list(envp);
+   
+ env = env_list(envp);
     data.env = env;
     // print_env(env);
      ft_shell(&data, env);

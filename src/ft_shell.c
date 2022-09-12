@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/11 04:57:42 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/12 09:47:31 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	cmd_call(t_exc *exc, t_data *data)
 		return ;
 	while (exc)
 	{
-		bin = get_path(exc->str);
+		bin = get_path(exc->str, data);
 		exec_cmd(exc->str, bin);
 		exc = exc->next;
 		free(bin);
@@ -58,11 +58,11 @@ void	cmd_call(t_exc *exc, t_data *data)
 
 void    ft_shell(t_data *data, t_env *env)
 {
+	int		i;
+	t_cmd	**tmp;
 	char	*line;
 	char    *str;
 	char 	**tab;
-	t_cmd	**tmp;
-	int		i;
 
 	while (1)
 	{
@@ -71,7 +71,7 @@ void    ft_shell(t_data *data, t_env *env)
 		if (line)
 		{
 			add_history(line);
-			str = ft_strtrim(line, " "); // removing space form the end and the start. NOTIC : im gonna change it latterr
+			str = ft_strtrim(line, " ");
 			if (build_token_list(str, data))
 			{
 				while((*tmp))
@@ -79,14 +79,9 @@ void    ft_shell(t_data *data, t_env *env)
 					join_unspaced(tmp, &((*tmp)->next), &data);
 					tmp = &(*tmp)->next;
 				}
-				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
-				var_expnd(data);
-				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
+				tab = parse_args(data);
 				build_exc_list(tab, data);
 				cmd_call(data->exc, data);
-				// identify_builtin(data);
-				// print_cmd(data->cmd);
-				// print_exc(data->exc);
 				data->exc = NULL;
 				data->cmd = NULL;
 			}

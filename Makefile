@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/10 08:32:27 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/12 09:40:15 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ $(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT)
 
 ################# wild card used in this make file , im gonna change it later#########################################
 
-$(LIBFT) : $(shell find $(LIBFT_DIR) -name "*.c" -type f)
+$(LIBFT) :
 	@$(MAKE) -C $(LIBFT_DIR)
 
 ######################################################################################################################
@@ -80,7 +80,7 @@ $(LIBFT) : $(shell find $(LIBFT_DIR) -name "*.c" -type f)
 %.o: %.c	
 	@echo "$(YELLOW)creating : $(@:OBJ/%=%) "
 	@sleep 0.05
-	@$(CC) $(GCCFLAG) -g -c $< -o $@   
+	@$(CC) $(GCCFLAG) -g -c $< -o $@
 
 #####################################################REMOVING ABJECTS FILE####################################
 

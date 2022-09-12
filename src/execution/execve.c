@@ -3,16 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/11 05:33:34 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/12 08:41:43 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-char   *get_path(char **cmd)
+static char *get_ev(t_data *data, char *str)
+{
+    t_env *tmp;
+    
+    tmp = data->env;
+    while (tmp)
+    {
+        if (ft_strcmp(str, tmp->key) == 0)
+            return (tmp->value);
+
+    tmp = tmp->next;
+    }
+    return (NULL);
+}
+
+
+char   *get_path(char **cmd, t_data *data)
 {
     char    *path;
     char    *bin;
@@ -22,13 +38,17 @@ char   *get_path(char **cmd)
     int     cmd_len;
     int     j;
 
-    path = ft_strdup(getenv("PATH"));
-    if (!path)
-        return (NULL);
+    path = ft_strdup(get_ev(data, "PATH"));
+    // if (!path)
+    //     path = 
     if (cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2 ) == 0)
-            return (cmd[0]);
+    {
+        //  if (!access(bin, F_OK | X_OK | R_OK))
+                return (cmd[0]);
+    }
     path_split = ft_split(path, ':');
     free (path);
+    path = NULL;
     i = -1; 
     cmd_len = ft_strlen(cmd[0]);
     while (path_split[++i])
@@ -54,11 +74,12 @@ void   exec_cmd(char **cmd, char *bin)
     pid = fork();
     if (pid == -1)
         perror("fork");
-    if(pid == 0)
+    if (pid == 0)
     {
-        status = execve(bin, cmd, NULL);
-        if(status == -1)
-        {
+        status = execve(bin, &cmd[0], NULL);
+        if (status == -1)
+        {   
+           printf("Minishell : %s: command not found\n", cmd[0]);
             waitpid(pid, &status, 0);
             exit(EXIT_FAILURE);
         }

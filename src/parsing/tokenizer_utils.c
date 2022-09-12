@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer_utilis.c                                 :+:      :+:    :+:   */
+/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/08 15:59:05 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/11 15:02:14 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int     first_check(char *line, char *str)
     int i;
 
     i = -1;
-    while(str[++i])
+    while (str[++i])
     {
         if (line[0] == str[i])
             return (unexpected_token(str[i]), 1);
@@ -64,13 +64,23 @@ bool env_check(char *str, t_data *data)
 
 void    var_handler(char *line, int *i, int *words, int *type)
 {
-    char *check;
-    int     j;
+    int *tmp;
 
-    j = 0;
+    tmp = i;
+    while (line[*i] && !((ft_isalnum(line[*i]) || line[*i] == '_')))
+    {   
+        (*i)++;
+        (*words)++;
+        if (line[*i] == '$')
+            {
+                (*i)++;
+                (*words)++;
+                return ;
+            }
+    }
+    i = tmp;
     while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
     {
-        j++;
         (*i)++;
         (*words)++;
     }

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 17:38:02 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/12 09:46:59 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int get_token_type(char line, bool *operator)
     else if (line == '\"')
             return (D_QUOTES);
     else if (line == '$')
-           return((*operator = true), VARIABLE);
+           return ((*operator = true), VARIABLE);
     else if (line == ' ' ||line == '\t')
              return(SPC);
     else
@@ -49,7 +49,9 @@ static bool check_old_type(char *line, int *i, int *words, int *old_type)
 
 bool ft_break(int a, int b)
 {
-    if (b == S_QUOTES)
+    if (b == VARIABLE)
+        return(true);
+    else if (b == S_QUOTES)
         return (true);
     else if (b == D_QUOTES)
         return (true);
@@ -94,8 +96,9 @@ void    get_token(char *line, int *i, int start, t_data  *data)
 
 int    build_token_list(char *line, t_data *data)
 {
-    int i;
-    t_cmd *tmp;
+    int     i;
+    t_cmd   *tmp;
+    
     i = -1;
     while (line[++i])
     {
@@ -103,6 +106,8 @@ int    build_token_list(char *line, t_data *data)
         i--;
     }
     tmp = data->cmd;
+    if (!tmp)
+        return (0);
     while(tmp)
     {
         if(tmp->type == S_QUOTES || tmp->type == D_QUOTES || tmp->type == EXPND_VB)

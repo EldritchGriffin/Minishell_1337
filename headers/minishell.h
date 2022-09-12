@@ -14,6 +14,7 @@
 # include <limits.h>
 #include <signal.h>
 # include <errno.h>
+# include <paths.h>
 //------------- typedefs --------------------------------------------------
 
 
@@ -24,8 +25,6 @@
 
 # define ERROR 1
 # define SUCCESS 0
-
-# define PATH = /Users/zrabhi/goinfre/homebrew/bin:/Users/zrabhi/goinfre/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/zrabhi/goinfre/.brew/bin 
 //-----------------abstract syntax tree-------------------------------------
 
 
@@ -198,7 +197,7 @@ void	cmd_call(t_exc *exc, t_data *data);
 //-------------Execve--------------------------------
 
 void   exec_cmd(char **cmd, char *bin);
-char   *get_path(char **cmd);
+char   *get_path(char **cmd, t_data *data);
 
 //----------------free_functions-------------------------------------------/
 
