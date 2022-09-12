@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/12 20:01:17 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/12 22:47:57 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int    identify_builtin(t_data *data)
 {
 	if (!data->cmd)
 		return (1);
-	// if (!ft_strcmp(data->cmd->str, "echo") || !ft_strcmp(data->cmd->str, "ECHO"))
+	 if (!ft_strcmp(data->cmd->str, "echo") || !ft_strcmp(data->cmd->str, "ECHO"))
 	// 	return(ft_echo(data), 0);
 	// if(!ft_strcmp(data->cmd->str, "cd"))
 	//     return(ft_cd(data), 0);

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/12 09:46:59 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/12 22:10:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,14 @@ int    build_token_list(char *line, t_data *data)
     tmp = data->cmd;
     if (!tmp)
         return (0);
-    while(tmp)
+    while (tmp)
     {
         if(tmp->type == S_QUOTES || tmp->type == D_QUOTES || tmp->type == EXPND_VB)
             tmp->str = rmv_quotes(tmp->str);
         tmp = tmp->next;
     }
-    if (!check_operatrs_first(data) || !check_operators_sec(data))
-            return (0);
+    // if (!check_operatrs_first(data) || !check_operators_sec(data))
+    //         return (0);
+    //FIXME SIGFAULTS;
     return (1);
 }

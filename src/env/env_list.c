@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/12 20:02:12 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/12 22:58:14 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static char	 **fill_extren_env(void)
 	
 	env = malloc(sizeof(char *) * 5);
 	if(!env)
-		printf("NULL\n");
+		return (NULL);
 	env[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin");
 	env[1] = ft_strdup("PWD=/Users/zrabhi/Desktop/Minishell");
 	env[2] = ft_strdup("SHLVL=1");
@@ -78,14 +78,10 @@ t_env   *env_list(char  **envp)
 	int     i;
 	t_env   *env;
 
-	if (!envp[0])
-		envp = fill_extren_env();
-	if(!envp[0])
-		printf("%s\n", envp[0]);
 	spltd = ft_split(envp[0], '=');
 	env = new_node_env(spltd[0], spltd[1]);
 	free(spltd);
-	i = 2;
+	i = 1;
 	while(envp[i])
 	{
 		spltd = ft_split(envp[i], '=');
