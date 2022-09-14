@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/12 22:10:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/14 16:54:37 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int get_token_type(char line, bool *operator)
     else if (line == '\"')
             return (D_QUOTES);
     else if (line == '$')
-           return ((*operator = true), VARIABLE);
+           return (VARIABLE);
     else if (line == ' ' ||line == '\t')
              return(SPC);
     else
@@ -89,7 +89,7 @@ void    get_token(char *line, int *i, int start, t_data  *data)
     if (!check_old_type(line, i, &words, &old_type))
         return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
-           return(cmd_list(ft_strdup(" "), old_type, 0, data), (void)0);
+           return (cmd_list(ft_strdup(" "), old_type, 0, data), (void)0);
     cmd_list(ft_substr(line, start, words), \
             old_type, operator, data);
 } 
@@ -114,8 +114,16 @@ int    build_token_list(char *line, t_data *data)
             tmp->str = rmv_quotes(tmp->str);
         tmp = tmp->next;
     }
-    // if (!check_operatrs_first(data) || !check_operators_sec(data))
-    //         return (0);
-    //FIXME SIGFAULTS;
+    if (!check_operatrs_first(data))
+            return (0);
+    if (data->cmd->type == HERDOC)
+        {
+            if (data->cmd->next->type == WORD)
+                here_doc(data->cmd->next);
+           else if (data->cmd->next->next->type == WORD)
+                here_doc(data->cmd->next->next);
+        }
+    if (!check_operators_sec(data))
+             return (0);
     return (1);
 }

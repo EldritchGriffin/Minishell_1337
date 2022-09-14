@@ -9,12 +9,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../LIBFT/libft.h"
+# include "../gnl/get_next_line.h"
 # include <stdbool.h>
 # include <stdlib.h>
 # include <limits.h>
-#include <signal.h>
+# include <signal.h>
 # include <errno.h>
 # include <paths.h>
+# include <fcntl.h>
 //------------- typedefs --------------------------------------------------
 
 
@@ -50,6 +52,7 @@ typedef enum s_tokens{
 	EXPND_VB,
 	I_REDIRECTION,
 	O_REDIRECTION,
+	CMD,
 	SOL,
 } t_tokens;
 
@@ -75,7 +78,8 @@ typedef	struct	s_env
 
 
 typedef struct s_exc{
-	char		**str;    // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
+	char		**str;  
+	int		redi;  // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
 	struct s_exc *next;
 } t_exc;
 
@@ -92,7 +96,7 @@ typedef struct s_data
 
 //-------------- enum strcut contains ---------------------------------------
 
-
+void    here_doc(t_cmd *delemiter);
 
 int     ft_pwd(void);
 char	**parse_args1(t_data *data);
@@ -190,7 +194,7 @@ void	ft_unset(t_data		*data);
 
 
 void    exc_list(char **str, t_data *data);
-t_exc   *new_node_exc(char **str, t_data *data);
+t_exc *new_node_exc(char **str, t_data *data);
 void    build_exc_list(char **tab, t_data *data);
 void	cmd_call(t_exc *exc, t_data *data);
 

@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/12 22:56:30 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/14 13:13:06 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,14 @@ YELLOW := \033[0;33m
 draw       := draw
 HEADER_DIR := headers
 LIBFT_DIR  := LIBFT
+GNL_DIR    := gnl
 LIBFT      := $(LIBFT_DIR)/libft.a
+GNL 	   := $(GNL_DIR)/get_next_line.a
 SRC_DIR    := src
 TOOLS      := cmd_list exc_list
 ENV        := env_list
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset 
-PARSING    := final_check parser_utils  parser parser2 parser3 syntax_errors tokenizer_check tokenizer_utils tokenizer_utils2 tokenizer  var_expander
+PARSING    := final_check parser_utils  parser parser2 parser3 syntax_errors tokenizer_check tokenizer_utils tokenizer_utils2 tokenizer  var_expander here_doc
 src        := ft_shell
 SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 	  					$(addsuffix .c, $(addprefix src/execution/, $(EXEC))) \
@@ -44,7 +46,7 @@ SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := 	$(SRC:.c=.o)
 CC          := 	gcc
-GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g -static-libsan -fsanitize=address -g
+GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g
 HEADER      := $(HEADER_DIR)/minishell.h
 NAME        := Minishell
 RECOMPILING := echo "     $(YELLOW)Recompiling..........$(YELLOW)"
@@ -59,11 +61,11 @@ all : $(NAME)
 	@echo""
 	@echo "                				$(YELLOW)By zrabhi && aelyakou $(YELLOW)                        "
 
-$(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT)
+$(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
 	@echo "\n"
 	@echo " $(YELLOW)Source files are compiled!\n$(YELLOW)"
 	@echo  "Building $(NAME) for" "Mandatory" "..."
-	@$(CC) $(GCCFLAGS) $(main) $(LIBFT) $(OBJ) -o $(NAME)
+	@$(CC) $(GCCFLAGS) $(main) $(LIBFT) $(GNL) $(OBJ) -o $(NAME)
 	@echo""
 	@sleep 0.1.5
 	@sleep 0.2
@@ -72,6 +74,8 @@ $(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT)
 
 ################# wild card used in this make file , im gonna change it later#########################################
 
+$(GNL)   :
+	@$(MAKE) -C $(GNL_DIR)
 $(LIBFT) :
 	@$(MAKE) -C $(LIBFT_DIR)
 
@@ -93,6 +97,7 @@ clean :
 
 fclean : clean
 	@$(MAKE) -C $(LIBFT_DIR)/ fclean
+	@$(MAKE) -C $(GNL_DIR)/ fclean
 	@echo "$(YELLOW)Removing Minishell ....    $(GREEN)$(shell basename $(NAME))$(GREEN)"
 	@rm -rf $(NAME)
 	@echo "     $(YELLOW)Successfully Removed$(YELLO)"

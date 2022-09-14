@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/12 22:57:34 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/13 14:06:25 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ char   *get_path(char **cmd, t_data *data)
     if (!path)
          return (NULL); 
     if (cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2 ) == 0)
-    {
-        //  if (!access(bin, F_OK | X_OK | R_OK))
                 return (cmd[0]);
-    }
     path_split = ft_split(path, ':');
     free (path);
     path = NULL;
@@ -79,11 +76,10 @@ void   exec_cmd(char **cmd, char *bin)
         status = execve(bin, &cmd[0], NULL);
         if (status == -1)
         {   
-           printf("Minishell : %s: command not found\n", cmd[0]);
+            printf("Minishell : %s: command not found\n", cmd[0]);
             waitpid(pid, &status, 0);
             exit(EXIT_FAILURE);
         }
-
     }
     waitpid(pid, &status, 0);
 }

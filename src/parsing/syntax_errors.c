@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:20 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 16:16:19 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/14 16:45:52 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,11 @@ void    unexpected_token(char c)
          unexpexted token `%c\"\n", STDERR);
          printf("Minishell: syntax error near\
          unexpexted token `%c\"\n", c);
+}
+
+void       mini_perror(int type)
+{
+    if (type == PIPE)
+        ft_putstr_fd("Minishell: syntax error near unexpected token `'", STDERR);
+    // else if (type == )
 }
