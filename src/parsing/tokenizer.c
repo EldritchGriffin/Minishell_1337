@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/14 16:54:37 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/15 11:53:00 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int    build_token_list(char *line, t_data *data)
         return (0);
     while (tmp)
     {
-        if(tmp->type == S_QUOTES || tmp->type == D_QUOTES || tmp->type == EXPND_VB)
+        if (tmp->type == S_QUOTES || tmp->type == D_QUOTES || tmp->type == EXPND_VB)
             tmp->str = rmv_quotes(tmp->str);
         tmp = tmp->next;
     }
@@ -118,10 +118,10 @@ int    build_token_list(char *line, t_data *data)
             return (0);
     if (data->cmd->type == HERDOC)
         {
-            if (data->cmd->next->type == WORD)
-                here_doc(data->cmd->next);
-           else if (data->cmd->next->next->type == WORD)
-                here_doc(data->cmd->next->next);
+            if (!data->cmd->next->opr && data->cmd->next->type != SPC)
+                here_doc(data->cmd->next, data);
+           else if (!data->cmd->next->next->opr)
+                here_doc(data->cmd->next->next, data);
         }
     if (!check_operators_sec(data))
              return (0);

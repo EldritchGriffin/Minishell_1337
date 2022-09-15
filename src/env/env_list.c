@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/12 22:58:14 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/14 18:55:53 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ t_env   *env_list(char  **envp)
 	char    **spltd;
 	int     i;
 	t_env   *env;
-
+	if (!envp[0])
+		envp = fill_extren_env(); 
 	spltd = ft_split(envp[0], '=');
 	env = new_node_env(spltd[0], spltd[1]);
 	free(spltd);
