@@ -79,7 +79,8 @@ typedef	struct	s_env
 
 typedef struct s_exc{
 	char		**str;  
-	int			redi;  // (str[0] = ls || exc->next->str[0] = grep || exc->next->str[1] = main.c)
+	int			in_file;
+	int			out_file;
 	struct s_exc *next;
 } t_exc;
 
@@ -96,7 +97,7 @@ typedef struct s_data
 
 //-------------- enum strcut contains ---------------------------------------
 
-void    here_doc(t_cmd *delemiter, t_data *data);
+void   here_doc(t_cmd *delemiter, t_data *data, int *her_file);
 
 int     ft_pwd(void);
 char	**parse_args1(t_data *data);

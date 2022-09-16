@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 03:49:29 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 08:32:18 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/16 14:35:50 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_exc *new_node_exc(char **str, t_data *data)
 
     new_node = ft_malloc(sizeof(t_exc), &data->ptrs);
     new_node->str = str;
+    new_node->in_file = 0;
+    new_node->out_file = 1;
     new_node->next = NULL;
     return(new_node);
 }

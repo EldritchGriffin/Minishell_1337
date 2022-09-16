@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/12 22:47:57 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/15 20:30:41 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int    identify_builtin(t_data *data)
 {
+
 	if (!data->cmd)
 		return (1);
-	 if (!ft_strcmp(data->cmd->str, "echo") || !ft_strcmp(data->cmd->str, "ECHO"))
-	// 	return(ft_echo(data), 0);
+	 if (!ft_strcmp(data->cmd->str, "echo"))
+			return(ft_echo(data), 0);
 	// if(!ft_strcmp(data->cmd->str, "cd"))
 	//     return(ft_cd(data), 0);
-	if (!ft_strcmp(data->cmd->str, "pwd") || !ft_strcmp(data->cmd->str, "PWD"))
+	if (!ft_strcmp(data->cmd->str, "pwd"))
 	    return(ft_pwd(), 0);
 	if (!ft_strcmp(data->cmd->str, "export"))
 		return(ft_export(data), 0);
 	if (!ft_strcmp(data->cmd->str, "unset"))
 		return(ft_unset(data), 0);
-	if (!ft_strcmp(data->cmd->str, "env") || !ft_strcmp(data->cmd->str, "ENV"))
+	if (!ft_strcmp(data->cmd->str, "env"))
 		return(print_env(data->env), 0);
 	if (!ft_strcmp(data->cmd->str, "exit"))
 		return(exit(0), 0); // TODO free_all_before_exiting

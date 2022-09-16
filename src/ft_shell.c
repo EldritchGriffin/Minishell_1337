@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/14 21:05:55 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:15:55 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void print_exc(t_exc *exc)
 {
 	int i;
 
-	// /i = 0;
 	while (exc)
 	{
 		i = -1;
 		while(exc->str[++i])
 			printf("exc ========= is[%s]\n", exc->str[i]);
+		printf("node-----> IN_  %d   OUT_   %d\n", exc->in_file, exc->out_file);
 		printf("MOVING  to the next\n");
 		exc = exc->next;
 	}	
@@ -51,6 +51,7 @@ void	cmd_call(t_exc *exc, t_data *data)
 	while (exc)
 	{
 		bin = get_path(exc->str, data);
+		printf("bin == %s\n", bin);
 		exec_cmd(exc->str, bin);
 		exc = exc->next;
 		free(bin);
@@ -59,7 +60,7 @@ void	cmd_call(t_exc *exc, t_data *data)
 
 void    ft_shell(t_data *data, t_env *env)
 {
-	int		i;
+	int		her_file;
 	t_cmd	**tmp;
 	char	*line;
 	char    *str;
@@ -75,17 +76,19 @@ void    ft_shell(t_data *data, t_env *env)
 			str = ft_strtrim(line, " ");
 			if (build_token_list(str, data))
 			{
-				while((*tmp))
+				while ((*tmp))
 				{ 
 					join_unspaced(tmp, &((*tmp)->next), &data);
 					tmp = &(*tmp)->next;
 				}
-				print_cmd(data->cmd);
 				var_expnd(data);
-				tab = parse_args(data); // im still workin on this fucntions (this function is the final part we still need to check other things before we use this fucntion)
-				build_exc_list(tab, data);
-				cmd_call(data->exc, data);
-				print_exc(data->exc);
+				tab = parse_args(data);
+				if (tab)
+				{	
+					build_exc_list(tab, data);
+					print_exc(data->exc);
+					cmd_call(data->exc, data);
+				}
 				data->exc = NULL;
 				data->cmd = NULL;
 			}

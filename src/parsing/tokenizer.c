@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/15 11:53:00 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:12:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int get_token_type(char line, bool *operator)
             return (D_QUOTES);
     else if (line == '$')
            return (VARIABLE);
-    else if (line == ' ' ||line == '\t')
+    else if (line == ' ' || line == '\t')
              return(SPC);
     else
         return (WORD);
@@ -97,7 +97,9 @@ void    get_token(char *line, int *i, int start, t_data  *data)
 int    build_token_list(char *line, t_data *data)
 {
     int     i;
+    int     her_file;
     t_cmd   *tmp;
+    t_cmd   *hdc;
     
     i = -1;
     while (line[++i])
@@ -116,13 +118,18 @@ int    build_token_list(char *line, t_data *data)
     }
     if (!check_operatrs_first(data))
             return (0);
-    if (data->cmd->type == HERDOC)
-        {
-            if (!data->cmd->next->opr && data->cmd->next->type != SPC)
-                here_doc(data->cmd->next, data);
-           else if (!data->cmd->next->next->opr)
-                here_doc(data->cmd->next->next, data);
-        }
+    hdc = data->cmd;
+    while (hdc)
+    {
+        if (hdc->type == HERDOC)
+            {
+                if (!hdc->next->opr && hdc->next->type != SPC)
+                    here_doc(hdc->next, data, &her_file);
+                else if (!hdc->next->next->opr)
+                    here_doc(hdc->next->next, data, &her_file);
+            }
+            hdc = hdc->next;
+    }
     if (!check_operators_sec(data))
              return (0);
     return (1);

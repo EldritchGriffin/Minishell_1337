@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/15 11:58:54 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/16 17:13:19 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char   *check_expanding(char *str, t_data *data)
     return (str);
 }
 
-void     here_doc(t_cmd *delemiter, t_data *data)
+void     here_doc(t_cmd *delemiter, t_data *data, int *her_file)
 {
     int fd[2];
     int i;
@@ -45,17 +45,17 @@ void     here_doc(t_cmd *delemiter, t_data *data)
         str = readline("> ");
         if (delemiter->type != D_QUOTES || delemiter->type != S_QUOTES)
             str = check_expanding(str, data);
-        str = ft_strjoin(str, new_line);
-        if (ft_strncmp(str, delemiter->str, ft_strlen(delemiter->str)) == 0)
+        if (!ft_strncmp(delemiter->str, str, ft_strlen(str)))
                 break ;
-        write(fd[1], str, ft_strlen(str));   
+        str = ft_strjoin(str, new_line);
+        write(fd[1], str, ft_strlen(str));
         i++;
     }
-    while(i-- != 0)
-    {
-        buf = get_next_line(fd[0]);
-        printf("%s", buf);
-        //  ft_putendl_fd(buf, 0);
-    } 
-    // printf("file read %s\n", buf);
+    *her_file = fd[0];
+    // while(i-- != 0)
+    // {
+    //     buf = get_next_line(fd[0]);
+    //     printf("%s", buf);
+    //     //  ft_putendl_fd(buf, 0);
+    // }
 }
