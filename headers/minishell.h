@@ -183,6 +183,8 @@ void    var_expnd(t_data    *data);
 void    print_lst(t_cmd **cmd);
 
 
+ int 	get_redirection(char **cmd, int *in_file, int *out_file, int her_file);
+ int	rederection_check(t_exc **exc, int her_file);
 //----------------Built-ins------------------------------------------------/
 
 
@@ -196,8 +198,8 @@ void	ft_unset(t_data		*data);
 
 void    exc_list(char **str, t_data *data);
 t_exc   *new_node_exc(char **str, t_data *data);
-int     build_exc_list(char **tab, t_data *data, int her_file);
-void	cmd_call(t_exc *exc, t_data *data, int is_redi, char **envp);
+void     build_exc_list(char **tab, t_data *data);
+void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------
 

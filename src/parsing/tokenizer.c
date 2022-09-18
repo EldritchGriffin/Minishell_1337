@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/17 13:33:19 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 23:32:23 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,10 @@ int    build_token_list(char *line, t_data *data, int *her_file)
     {
         if (hdc->type == HERDOC)
             {
-                printf("im hre");
                 if (!hdc->next->opr && hdc->next->type != SPC)
                   *her_file = here_doc(hdc->next, data);
                 else if (!hdc->next->next->opr)
                   *her_file =  here_doc(hdc->next->next, data);
-                printf("her_file %d\n", *her_file);
             }
         hdc = hdc->next;
     }

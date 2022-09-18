@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/18 20:23:30 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 23:51:03 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t exctab_len(char **tab)
 
 
 
-static int get_redirection(char **cmd, int *in_file, int *out_file, int her_file)
+ int get_redirection(char **cmd, int *in_file, int *out_file, int her_file)
 {
 
     char *str[5] = {">>", "<<", "<", ">", NULL};
@@ -43,14 +43,12 @@ static int get_redirection(char **cmd, int *in_file, int *out_file, int her_file
             {
                 if (j < 3 && j != 1)
                     *out_file = open(cmd[i + 1], O_RDWR | O_APPEND | O_CREAT ,0777);
-                // else if (j == 3)
-                //     *out_file = open(cmd[i + 1], O_CREAT | O_TRUNC | O_RDWR);
+                 else if (j == 3)
+                     *out_file = open(cmd[i + 1], O_CREAT | O_TRUNC | O_RDWR);
                 // else if(j == 2)
                 //     *out_file = open(cmd[i + 1], O_CREAT | O_TRUNC | O_RDWR);
                 else if (j == 1)
                     *in_file = her_file;
-                cmd[i] = ft_strdup(" ");
-                cmd[i + 1] = ft_strdup(" ");
                 return(true);
             }
         }      
@@ -60,29 +58,39 @@ static int get_redirection(char **cmd, int *in_file, int *out_file, int her_file
 
 
 
-static int    rederection_check(t_data **data, int her_file)
+int    rederection_check(t_exc **exc, int her_file)
 {
     t_exc *tmp;
-    int result = 0;
+    int     i;
+    int     j;
+    char *str[5] = {">>", "<<", "<", ">", NULL};
+    int result;
 
-    tmp = (*data)->exc;
-    while (tmp != NULL)
+    result = 0;
+    i = -1;
+    j = -1;
+    tmp = *exc;    
+    result = get_redirection(tmp->str, &tmp->in_file, &tmp->out_file, her_file);
+    if (result)
     {
-        result = get_redirection(tmp->str, &tmp->in_file, &tmp->out_file, her_file);
-        tmp = tmp->next;
-    }  
+     while (tmp->str[++i])
+        {
+         j = -1;
+         while(str[++j])
+         {
+            if (!ft_strcmp(tmp->str[i], str[j]))
+              {
+                    tmp->str[i] = 0;
+                    tmp->str[i + 1] = 0;
+                    break ;
+                }
+            }
+         }
+    }
     return (result);
 }
 
-static void remove_redi(t_exc **exc)
-{
-
-
-
-    
-} 
-
-int    build_exc_list(char **tab, t_data *data, int her_file)
+void    build_exc_list(char **tab, t_data *data)
 {
     int     i;
     int     len;
@@ -97,9 +105,6 @@ int    build_exc_list(char **tab, t_data *data, int her_file)
     {
         str = ft_strdup(tab[i]);
         cmd = ft_split(str, ' ');
-        exc_list(cmd, data);
-        is_redi = rederection_check(&data, her_file);        
+        exc_list(cmd, data);      
     }
-    free(str);
-    return(is_redi);
 }

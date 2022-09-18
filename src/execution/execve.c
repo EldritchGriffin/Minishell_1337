@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/18 20:25:48 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 23:30:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ char   *get_path(char **cmd, t_data *data)
     char    **path_split;
     int     i;
     int     path_len;
-    int     cmd_len;
-    int     j;
 
     path = ft_strdup(get_ev(data, "PATH"));
     if (!path)
@@ -46,12 +44,11 @@ char   *get_path(char **cmd, t_data *data)
     path_split = ft_split(path, ':');
     free (path);
     path = NULL;
-    i = -1; 
-    cmd_len = ft_strlen(cmd[0]);
+    i = -1;
     while (path_split[++i])
     {
         path_len = ft_strlen(path_split[i]);
-        bin = ft_calloc(sizeof(char), (path_len + cmd_len) + 2);
+        bin = ft_calloc(sizeof(char), (path_len + ft_strlen(cmd[0])) + 2);
         if (!bin)
             return (NULL);
         ft_strcat(bin, path_split[i]);
@@ -65,24 +62,17 @@ char   *get_path(char **cmd, t_data *data)
 void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
 {
     pid_t   pid = 0;
-   // int fd[2];
     int     status = 0;
     
     pid = fork();
-    // if (pid == -1)
-    //     perror("fork");
-    // if (pipe(fd) == -1)
-    //     perror("PIPE ");
-       // printf("str== %s\n", exc->str[0]);
     if (pid == 0)
     {
-           
-        // if (is_redi)
-        // {
-        //     dup2(exc->out_file, STDOUT_FILENO);
-        //     close(exc->out_file);
-        // }
-        status =  execve(bin , exc->str, envp);
+        if (is_redi)
+        {
+            dup2(exc->out_file, STDOUT_FILENO);
+            close(exc->out_file);
+        }
+        status =  execve(bin, &exc->str[0], envp);
         if (status == -1)
         {   
             printf("Minishell : %s: command not found\n", exc->str[0]);

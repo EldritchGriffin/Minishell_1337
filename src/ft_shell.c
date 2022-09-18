@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/18 19:00:09 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 23:53:11 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,20 @@ static void print_exc(t_exc *exc)
 ///-----------this function jut for test------------------------------------
 
 
-void	cmd_call(t_exc *exc, t_data *data, int is_redi, char **envp)
+void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {
 	int		i;
-	int j = -1;
+	int 	j;
 	char	*bin;
 	
-	i = -1;
+	i = 0;
 	if (!identify_builtin(data))
 		return ;
 	while (exc)
 	{
 		bin = get_path(exc->str, data);
-		printf("is _redi %s \n", bin);
-		exec_cmd(exc, bin, is_redi, envp);
+		j = rederection_check(&exc, her_file);
+		exec_cmd(exc, bin, j, envp);
 		exc = exc->next;
 		free(bin);
 	}
@@ -60,12 +60,12 @@ void	cmd_call(t_exc *exc, t_data *data, int is_redi, char **envp)
 
 void    ft_shell(t_data *data, t_env *env, char **envp)
 {
-	int		her_file = 0;
+	int		her_file;
 	t_cmd	**tmp;
-	int j;
 	char	*line;
 	char 	**tab;
 
+	her_file = 0;
 	while (1)
 	{
 	 	tmp = &data->cmd;	
@@ -84,9 +84,8 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 				tab = parse_args(data);
 				if (tab)
 				{	
-					j =	build_exc_list(tab, data, her_file);
-					print_exc(data->exc);
-					cmd_call(data->exc, data, j, envp);
+					build_exc_list(tab, data);
+					cmd_call(data->exc, data, envp, her_file);
 				}
 				data->exc = NULL;
 				data->cmd = NULL;
