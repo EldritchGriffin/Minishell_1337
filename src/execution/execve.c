@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/13 14:06:25 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 20:25:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,30 @@ char   *get_path(char **cmd, t_data *data)
     }
     return (bin);
 }
-void   exec_cmd(char **cmd, char *bin)
+void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
 {
     pid_t   pid = 0;
+   // int fd[2];
     int     status = 0;
     
-    
     pid = fork();
-    if (pid == -1)
-        perror("fork");
+    // if (pid == -1)
+    //     perror("fork");
+    // if (pipe(fd) == -1)
+    //     perror("PIPE ");
+       // printf("str== %s\n", exc->str[0]);
     if (pid == 0)
     {
-        status = execve(bin, &cmd[0], NULL);
+           
+        // if (is_redi)
+        // {
+        //     dup2(exc->out_file, STDOUT_FILENO);
+        //     close(exc->out_file);
+        // }
+        status =  execve(bin , exc->str, envp);
         if (status == -1)
         {   
-            printf("Minishell : %s: command not found\n", cmd[0]);
+            printf("Minishell : %s: command not found\n", exc->str[0]);
             waitpid(pid, &status, 0);
             exit(EXIT_FAILURE);
         }

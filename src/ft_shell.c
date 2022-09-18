@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/16 17:15:55 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 19:00:09 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void print_exc(t_exc *exc)
 ///-----------this function jut for test------------------------------------
 
 
-void	cmd_call(t_exc *exc, t_data *data)
+void	cmd_call(t_exc *exc, t_data *data, int is_redi, char **envp)
 {
 	int		i;
 	int j = -1;
@@ -51,30 +51,29 @@ void	cmd_call(t_exc *exc, t_data *data)
 	while (exc)
 	{
 		bin = get_path(exc->str, data);
-		printf("bin == %s\n", bin);
-		exec_cmd(exc->str, bin);
+		printf("is _redi %s \n", bin);
+		exec_cmd(exc, bin, is_redi, envp);
 		exc = exc->next;
 		free(bin);
 	}
 }
 
-void    ft_shell(t_data *data, t_env *env)
+void    ft_shell(t_data *data, t_env *env, char **envp)
 {
-	int		her_file;
+	int		her_file = 0;
 	t_cmd	**tmp;
+	int j;
 	char	*line;
-	char    *str;
 	char 	**tab;
 
 	while (1)
 	{
 	 	tmp = &data->cmd;	
-		line = readline("Minishell$ ");
+		line = ft_strtrim(readline("Minishell$ "), " ");
 		if (line)
 		{
 			add_history(line);
-			str = ft_strtrim(line, " ");
-			if (build_token_list(str, data))
+			if (build_token_list(line, data, &her_file))
 			{
 				while ((*tmp))
 				{ 
@@ -85,9 +84,9 @@ void    ft_shell(t_data *data, t_env *env)
 				tab = parse_args(data);
 				if (tab)
 				{	
-					build_exc_list(tab, data);
+					j =	build_exc_list(tab, data, her_file);
 					print_exc(data->exc);
-					cmd_call(data->exc, data);
+					cmd_call(data->exc, data, j, envp);
 				}
 				data->exc = NULL;
 				data->cmd = NULL;

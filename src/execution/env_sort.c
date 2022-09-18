@@ -29,7 +29,7 @@ static int    env_len(t_env *env)
     return (i);
 }
 
-static char    *env_to_str(t_env *env, t_data *data)
+ char    *env_to_str(t_env *env, t_data *data)
 {
     t_env   *tmp;
     char    *str;

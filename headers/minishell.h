@@ -97,7 +97,7 @@ typedef struct s_data
 
 //-------------- enum strcut contains ---------------------------------------
 
-void   here_doc(t_cmd *delemiter, t_data *data, int *her_file);
+int   here_doc(t_cmd *delemiter, t_data *data);
 
 int     ft_pwd(void);
 char	**parse_args1(t_data *data);
@@ -130,7 +130,7 @@ char	*rmv_quotes(char	*str);
 int     search_spc_node(t_cmd **cmd);
 char    *trim_quote(char *str);
 char    **parse_args(t_data *data);
-
+ char    *env_to_str(t_env *env, t_data *data);
 
 //----------------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ bool 	env_check(char *str, t_data *data);
 
 int     ft_pipe_check(char *line, t_tokens type);
 bool    ft_check_input(char *input);
-void    ft_shell(t_data *data, t_env *env);
+void    ft_shell(t_data *data, t_env *env, char **envp);
 t_cmd   *pipe_parse(char *s, t_cmd *cmd);
 char    *double_quotes_check(char *line);
 bool    number_of_quotes(char *line);
@@ -166,7 +166,7 @@ int     ft_only_words(char *str, char *line, t_tokens *token);
 int     is_words(char c, char *str, t_tokens *token);
 int     ft_only_words(char *str, char *line, t_tokens *token);
 void   	cmd_list(char *str, t_tokens token, bool operator, t_data *data);
-int		build_token_list(char *line, t_data *data);
+int		build_token_list(char *line, t_data *data, int *her_file);
 int     first_check(char *line, char *str);
 void    *ft_malloc(int size, t_ptr **ptrs);
 t_env   *env_list(char  **envp);
@@ -195,13 +195,13 @@ void	ft_unset(t_data		*data);
 
 
 void    exc_list(char **str, t_data *data);
-t_exc *new_node_exc(char **str, t_data *data);
-void    build_exc_list(char **tab, t_data *data);
-void	cmd_call(t_exc *exc, t_data *data);
+t_exc   *new_node_exc(char **str, t_data *data);
+int     build_exc_list(char **tab, t_data *data, int her_file);
+void	cmd_call(t_exc *exc, t_data *data, int is_redi, char **envp);
 
 //-------------Execve--------------------------------
 
-void   exec_cmd(char **cmd, char *bin);
+void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp);
 char   *get_path(char **cmd, t_data *data);
 
 //----------------free_functions-------------------------------------------/

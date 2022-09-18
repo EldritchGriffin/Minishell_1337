@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/16 17:12:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/17 13:33:19 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,9 @@ void    get_token(char *line, int *i, int start, t_data  *data)
             old_type, operator, data);
 } 
 
-int    build_token_list(char *line, t_data *data)
+int    build_token_list(char *line, t_data *data, int *her_file)
 {
     int     i;
-    int     her_file;
     t_cmd   *tmp;
     t_cmd   *hdc;
     
@@ -123,12 +122,14 @@ int    build_token_list(char *line, t_data *data)
     {
         if (hdc->type == HERDOC)
             {
+                printf("im hre");
                 if (!hdc->next->opr && hdc->next->type != SPC)
-                    here_doc(hdc->next, data, &her_file);
+                  *her_file = here_doc(hdc->next, data);
                 else if (!hdc->next->next->opr)
-                    here_doc(hdc->next->next, data, &her_file);
+                  *her_file =  here_doc(hdc->next->next, data);
+                printf("her_file %d\n", *her_file);
             }
-            hdc = hdc->next;
+        hdc = hdc->next;
     }
     if (!check_operators_sec(data))
              return (0);

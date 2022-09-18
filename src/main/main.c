@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/12 22:20:11 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/18 18:36:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int main(int ac, char **av, char    **envp)
    env = env_list(envp);
    data.env = env;
     // print_env(env);
-     ft_shell(&data, env);
+    ft_shell(&data, env, envp);
 }

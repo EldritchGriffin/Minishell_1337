@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/14 13:13:06 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/18 15:43:35 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 										 	$(addsuffix .c, $(addprefix src/, $(src))) \
 
 main        := 	$(SRC_DIR)/main/main.c
-OBJ	        := 	$(SRC:.c=.o)
+OBJ	        := $(SRC:.c=.o)
 CC          := 	gcc
 GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g
 HEADER      := $(HEADER_DIR)/minishell.h
@@ -81,7 +81,7 @@ $(LIBFT) :
 
 ######################################################################################################################
 
-%.o: %.c	
+%.o: %.c
 	@echo "$(YELLOW)creating : $(@:OBJ/%=%) "
 	@sleep 0.05
 	@$(CC) $(GCCFLAG) -g -c $< -o $@

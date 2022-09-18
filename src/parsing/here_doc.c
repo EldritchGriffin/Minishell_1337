@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/16 17:13:19 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/17 18:06:12 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ static char   *check_expanding(char *str, t_data *data)
     return (str);
 }
 
-void     here_doc(t_cmd *delemiter, t_data *data, int *her_file)
+int     here_doc(t_cmd *delemiter, t_data *data)
 {
     int fd[2];
     int i;
-    char *buf;
     char *str;
     char new_line[2];
    
@@ -51,11 +50,5 @@ void     here_doc(t_cmd *delemiter, t_data *data, int *her_file)
         write(fd[1], str, ft_strlen(str));
         i++;
     }
-    *her_file = fd[0];
-    // while(i-- != 0)
-    // {
-    //     buf = get_next_line(fd[0]);
-    //     printf("%s", buf);
-    //     //  ft_putendl_fd(buf, 0);
-    // }
+    return (fd[0]);
 }
