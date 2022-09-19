@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/18 15:43:35 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/19 13:03:17 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ GNL_DIR    := gnl
 LIBFT      := $(LIBFT_DIR)/libft.a
 GNL 	   := $(GNL_DIR)/get_next_line.a
 SRC_DIR    := src
+OBJ_DIR    := obj
 TOOLS      := cmd_list exc_list
 ENV        := env_list
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset 
@@ -61,7 +62,7 @@ all : $(NAME)
 	@echo""
 	@echo "                				$(YELLOW)By zrabhi && aelyakou $(YELLOW)                        "
 
-$(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
+$(NAME) :  $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
 	@echo "\n"
 	@echo " $(YELLOW)Source files are compiled!\n$(YELLOW)"
 	@echo  "Building $(NAME) for" "Mandatory" "..."
@@ -73,7 +74,8 @@ $(NAME) : $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
 	@echo  "$(NAME) is created!\n"
 
 ################# wild card used in this make file , im gonna change it later#########################################
-
+# create_dir:
+# 	@mkdir -p $(OBJ_DIR)
 $(GNL)   :
 	@$(MAKE) -C $(GNL_DIR)
 $(LIBFT) :

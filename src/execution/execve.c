@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/18 23:30:15 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/19 15:16:22 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,19 @@ void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
 {
     pid_t   pid = 0;
     int     status = 0;
-    
+    int in_save;
+    int ou_save;
+
+
+    in_save =  dup(STDIN_FILENO);
+    ou_save =  dup(STDOUT_FILENO);
+  
+    dup2(exc->out_file, STDOUT_FILENO);
+    dup2(exc->in_file, STDIN_FILENO);
     pid = fork();
+    
     if (pid == 0)
     {
-        if (is_redi)
-        {
-            dup2(exc->out_file, STDOUT_FILENO);
-            close(exc->out_file);
-        }
         status =  execve(bin, &exc->str[0], envp);
         if (status == -1)
         {   
@@ -81,4 +85,10 @@ void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
         }
     }
     waitpid(pid, &status, 0);
+    if (exc->in_file != 0)
+         close(exc->in_file);
+    if (exc->out_file != 1)
+        close(exc->out_file);
+    dup2(in_save, STDIN);
+    dup2(ou_save, STDOUT);
 }

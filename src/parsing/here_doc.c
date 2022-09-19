@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/17 18:06:12 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/19 13:29:45 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ int     here_doc(t_cmd *delemiter, t_data *data)
     int i;
     char *str;
     char new_line[2];
-   
-   
-   
+    int her_doc;
+
     new_line[0] = '\n';
     new_line[1] = '\0';
     pipe(fd);
@@ -50,5 +49,6 @@ int     here_doc(t_cmd *delemiter, t_data *data)
         write(fd[1], str, ft_strlen(str));
         i++;
     }
+    close(fd[1]);
     return (fd[0]);
 }

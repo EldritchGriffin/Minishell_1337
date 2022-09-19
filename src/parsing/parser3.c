@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/18 23:51:03 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/19 14:06:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ static size_t exctab_len(char **tab)
     return(i);
 }
 
-
-
- int get_redirection(char **cmd, int *in_file, int *out_file, int her_file)
+int get_redirection(char **cmd, int *in_file, int *out_file, int her_file)
 {
 
     char *str[5] = {">>", "<<", "<", ">", NULL};
-    int type[] = {APPEND, HERDOC, I_REDIRECTION, O_REDIRECTION};
-    char *ptr = NULL;
+    int type[] = {APPEND, I_REDIRECTION, O_REDIRECTION};
     int i;
     int j;
     
@@ -41,7 +38,7 @@ static size_t exctab_len(char **tab)
         {
             if (!ft_strcmp(cmd[i], str[j]))
             {
-                if (j < 3 && j != 1)
+                if (j == 0)
                     *out_file = open(cmd[i + 1], O_RDWR | O_APPEND | O_CREAT ,0777);
                  else if (j == 3)
                      *out_file = open(cmd[i + 1], O_CREAT | O_TRUNC | O_RDWR);
@@ -49,11 +46,10 @@ static size_t exctab_len(char **tab)
                 //     *out_file = open(cmd[i + 1], O_CREAT | O_TRUNC | O_RDWR);
                 else if (j == 1)
                     *in_file = her_file;
-                return(true);
             }
         }      
     }
-    return (false);
+    return (true);
 }
 
 
