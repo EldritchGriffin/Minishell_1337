@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 02:47:52 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/20 23:10:45 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,45 @@ static size_t exctab_len(char **tab)
     return(i);
 }
 
-int get_redirection(char **cmd, int *in_file, int *out_file, int her_file)
+char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result)
 {
-    int type[] = {APPEND, I_REDIRECTION, O_REDIRECTION};
-    int i;
-    int j;
+    int     type[] = {APPEND, I_REDIRECTION, O_REDIRECTION};
+    int     i;
+    int     j;
+    int     check;
+    char    *str;
     
+    check = 0;
     i = -1;
+    str = ft_calloc(sizeof(char), exctab_len(cmd));
     while(cmd[++i])
     {
         j = -1;
+        check = 0;
         while (RDS[++j])
         {
             if (!ft_strcmp(cmd[i], RDS[j]))
             {
+                check = 1;
+                i++;
                 if (j == 0)
-                    *out_file = open(cmd[i + 1], O_RDWR | O_APPEND | O_CREAT ,0777);
-                 else if (j == 3)
-                     *out_file = open(cmd[i + 1], O_CREAT | O_TRUNC | O_RDWR);
-                 else if(j == 2)
-                     *in_file = open(cmd[i + 1], O_RDONLY );
+                    *out_file = open(cmd[i], O_RDWR | O_APPEND | O_CREAT ,0777);
+                else if (j == 3)
+                    *out_file = open(cmd[i], O_CREAT | O_TRUNC | O_RDWR);
+                else if(j == 2)
+                    *in_file = open(cmd[i], O_RDONLY );
                 else if (j == 1)
                     *in_file = her_file;
+                *result = 1;
             }
         }      
+        if (!check)
+        {
+            ft_strcat(str, cmd[i]);
+            ft_strcat(str, ":");
+        }
     }
-    return (true);
+    return (str);
 }
 
  int ft_check(char *str)
@@ -69,31 +82,16 @@ int    rederection_check(t_exc **exc, int her_file)
 {
     t_exc   *tmp;
     int     i;
-    int     j;
-    int     k;
     int     result;
+    char    *str;
 
     result = 0;
     i = -1;
     tmp = *exc;    
-    result = get_redirection(tmp->str, &tmp->in_file,\
-            &tmp->out_file, her_file);
-    if (result)
-    {
-        while (tmp->str[++i])
-        {
-            j = -1;
-            while (RDS[++j])
-            {
-                if (!ft_strcmp(tmp->str[i], RDS[j]))
-                {
-                   tmp->str[i] = 0;
-                   tmp->str[i + 1] = 0;
-                    break ;
-                }
-            }
-        }
-    }
+    str = get_redirection(tmp->str, &tmp->in_file,\
+            &tmp->out_file, her_file, &result);
+    (*exc)->str = ft_split(str, ':');
+    free(str);
     return (result);
 }
 

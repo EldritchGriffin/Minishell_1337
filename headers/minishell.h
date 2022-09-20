@@ -150,6 +150,7 @@ void   	ft_space_skip(char **line, int *i);
 bool 	env_check(char *str, t_data *data);
 bool	rm_quotes(t_data **data);
 void     herdoc_handler(t_data *data, int *her_file);
+ void    ft_case1(char **str, int *i);
 
 
 //--------------------------------------------------------------------------
@@ -185,7 +186,7 @@ int ft_check(char *str);
 void    print_lst(t_cmd **cmd);
 
 
- int 	get_redirection(char **cmd, int *in_file, int *out_file, int her_file);
+ char 	*get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result);
  int	rederection_check(t_exc **exc, int her_file);
 //----------------Built-ins------------------------------------------------/
 
