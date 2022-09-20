@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/19 13:29:45 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/20 01:47:24 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,16 @@ int     here_doc(t_cmd *delemiter, t_data *data)
     {
         str = readline("> ");
         if (delemiter->type != D_QUOTES || delemiter->type != S_QUOTES)
-            str = check_expanding(str, data);
-        if (!ft_strncmp(delemiter->str, str, ft_strlen(str)))
-                break ;
+        {
+            if (str)
+                str = check_expanding(str, data);
+                    // break ;
+        }
+        if (str[0] != '\0')
+        {
+            if (!ft_strncmp(delemiter->str, str, ft_strlen(str)))
+                 break ;
+        }
         str = ft_strjoin(str, new_line);
         write(fd[1], str, ft_strlen(str));
         i++;

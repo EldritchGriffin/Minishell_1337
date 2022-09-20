@@ -148,7 +148,8 @@ int     check_operators_sec(t_data *data);
 int     operator_handler(char *str, int type);
 void   	ft_space_skip(char **line, int *i);
 bool 	env_check(char *str, t_data *data);
-
+bool	rm_quotes(t_data **data);
+void     herdoc_handler(t_data *data, int *her_file);
 
 
 //--------------------------------------------------------------------------
@@ -176,6 +177,7 @@ void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
 t_cmd   *new_node_cmd(char  *str, t_tokens type, bool operator, t_data *data);
 void    var_expnd(t_data    *data);
+int ft_check(char *str);
 
 //----------------print fucntions------------------------------------------/
 

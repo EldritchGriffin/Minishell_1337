@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/19 13:03:17 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/19 22:03:31 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ draw       := draw
 HEADER_DIR := headers
 LIBFT_DIR  := LIBFT
 GNL_DIR    := gnl
+FILE	   := files
 LIBFT      := $(LIBFT_DIR)/libft.a
 GNL 	   := $(GNL_DIR)/get_next_line.a
 SRC_DIR    := src
@@ -62,7 +63,7 @@ all : $(NAME)
 	@echo""
 	@echo "                				$(YELLOW)By zrabhi && aelyakou $(YELLOW)                        "
 
-$(NAME) :  $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
+$(NAME) : create_dir  $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
 	@echo "\n"
 	@echo " $(YELLOW)Source files are compiled!\n$(YELLOW)"
 	@echo  "Building $(NAME) for" "Mandatory" "..."
@@ -89,7 +90,8 @@ $(LIBFT) :
 	@$(CC) $(GCCFLAG) -g -c $< -o $@
 
 #####################################################REMOVING ABJECTS FILE####################################
-
+create_dir :
+	@mkdir -p $(FILE)
 clean :
 	@echo "$(YELLOW)Removing Objects file ....    $(GREEN)$(shell basename $(OBJ))$(GREEN)"
 	@rm -rf $(OBJ)

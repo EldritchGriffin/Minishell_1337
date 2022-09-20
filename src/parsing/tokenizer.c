@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/19 00:08:28 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/20 01:35:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,30 +106,12 @@ int    build_token_list(char *line, t_data *data, int *her_file)
         get_token(line, &i, i, data);
         i--;
     }
-    tmp = data->cmd;
-    if (!tmp)
+    if (!rm_quotes(&data))
         return (0);
-    while (tmp)
-    {
-        if (tmp->type == S_QUOTES || tmp->type == D_QUOTES || tmp->type == EXPND_VB)
-            tmp->str = rmv_quotes(tmp->str);
-        tmp = tmp->next;
-    }
     if (!check_operatrs_first(data))
             return (0);
-    hdc = data->cmd;
-    while (hdc)
-    {
-        if (hdc->type == HERDOC)
-            {
-                if (!hdc->next->opr && hdc->next->type != SPC)
-                  *her_file = here_doc(hdc->next, data);
-                else if (!hdc->next->next->opr)
-                  *her_file =  here_doc(hdc->next->next, data);
-            }
-        hdc = hdc->next;
-    }
+    herdoc_handler(data, her_file);
     if (!check_operators_sec(data))
-             return (0);
+            return (0);
     return (1);
 }

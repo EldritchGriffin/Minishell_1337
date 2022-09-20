@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/19 15:11:03 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/20 02:34:23 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,17 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	{
 		bin = get_path(exc->str, data);
 		j = rederection_check(&exc, her_file);
+		print_exc(exc);
 		exec_cmd(exc, bin, j, envp);
 		exc = exc->next;
 		free(bin);
 	}
+}
+
+static void initalize_data(t_data **data)
+{
+	(*data)->exc = NULL;
+	(*data)->cmd = NULL;	
 }
 
 void    ft_shell(t_data *data, t_env *env, char **envp)
@@ -69,7 +76,7 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 	while (1)
 	{
 	 	tmp = &data->cmd;	
-		line = ft_strtrim(readline("Minishell$ "), " ");
+		line = ft_strtrim(readline("\033[0;35m Minishell$: "), " ");
 		if (line)
 		{
 			add_history(line);
@@ -87,12 +94,10 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 					build_exc_list(tab, data);
 					cmd_call(data->exc, data, envp, her_file);
 				}
-				data->exc = NULL;
-				data->cmd = NULL;
+				initalize_data(&data);
 			}
 			else {
-				data->exc = NULL;
-				data->cmd = NULL;
+				initalize_data(&data);
 			}
 		} 
 	}

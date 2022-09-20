@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/19 15:16:22 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/20 01:21:09 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,52 +28,65 @@ static char *get_ev(t_data *data, char *str)
 }
 
 
+static void ft_dup(int *in_save, int *out_save)
+{
+    *in_save = dup(STDIN_FILENO);
+    *out_save = dup(STDOUT_FILENO);   
+}
+
+static void ft_cat(char **bin, char *path_split, char *cmd)
+{
+    ft_strcat(*bin, path_split);
+    ft_strcat(*bin, "/");
+    ft_strcat(*bin, cmd);
+}
+
+static void ft_dup2(int *in_file, int *out_file, int fd0, int fd1)
+{
+    dup2(*out_file, fd1);
+    dup2(*in_file, fd0);
+}
+
 char   *get_path(char **cmd, t_data *data)
 {
     char    *path;
     char    *bin;
     char    **path_split;
     int     i;
-    int     path_len;
 
     path = ft_strdup(get_ev(data, "PATH"));
     if (!path)
          return (NULL); 
-    if (cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2 ) == 0)
+    if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2 ) == 0)
+                && !access(bin, F_OK | X_OK | R_OK))
                 return (cmd[0]);
     path_split = ft_split(path, ':');
     free (path);
-    path = NULL;
     i = -1;
     while (path_split[++i])
     {
-        path_len = ft_strlen(path_split[i]);
-        bin = ft_calloc(sizeof(char), (path_len + ft_strlen(cmd[0])) + 2);
+        bin = ft_calloc(sizeof(char), (ft_strlen(path_split[i]) + ft_strlen(cmd[0])) + 2);
         if (!bin)
             return (NULL);
-        ft_strcat(bin, path_split[i]);
-        ft_strcat(bin , "/");
-        ft_strcat(bin, cmd[0]);
+        ft_cat(&bin, path_split[i], cmd[0]);
         if (!access(bin, F_OK | X_OK | R_OK))
                  break ;
     }
     return (bin);
 }
+
 void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
 {
     pid_t   pid = 0;
     int     status = 0;
-    int in_save;
-    int ou_save;
+    int     in_save;
+    int     out_save;
 
-
-    in_save =  dup(STDIN_FILENO);
-    ou_save =  dup(STDOUT_FILENO);
-  
-    dup2(exc->out_file, STDOUT_FILENO);
-    dup2(exc->in_file, STDIN_FILENO);
+    ft_dup(&in_save, &out_save);
+    ft_dup2(&exc->in_file, &exc->out_file,\
+             STDIN_FILENO, STDOUT_FILENO);
+    pid = 0;  
     pid = fork();
-    
     if (pid == 0)
     {
         status =  execve(bin, &exc->str[0], envp);
@@ -90,5 +103,5 @@ void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
     if (exc->out_file != 1)
         close(exc->out_file);
     dup2(in_save, STDIN);
-    dup2(ou_save, STDOUT);
+    dup2(out_save, STDOUT);
 }
