@@ -2,7 +2,7 @@
 
 // workk not doneee yet-----------------------------------------------------------------
 
-static size_t envtab_len(char **env)
+ size_t envtab_len(char **env)
 {
     size_t     i;
 
@@ -95,6 +95,14 @@ static void    sort_env(char **tab, int tab_len)
     }
 }
 
+// static void printer(char *str)
+// {
+//     ft_putchar_fd("declare -x ", data->exc->out_file);
+
+
+
+// }
+
 void    sorted_env(t_env *env, t_data *data)
 {
     char **str;
@@ -107,8 +115,9 @@ void    sorted_env(t_env *env, t_data *data)
     sort_env(str, envtab_len(str));
     while (str[i])
     {
-        ft_putstr_fd("declare -x ", 1);
-        ft_putendl_fd(str[i], 1);
+        // if (data->exc->out_file != 1)
+        ft_putstr_fd("declare -x ", data->exc->out_file);
+        ft_putendl_fd(str[i], data->exc->out_file);
         i++;
     }
     free(str);

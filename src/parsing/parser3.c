@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 23:10:45 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 03:07:21 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static size_t exctab_len(char **tab)
         i++;
     return(i);
 }
+
 
 char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result)
 {
@@ -44,13 +45,7 @@ char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int
             {
                 check = 1;
                 i++;
-                if (j == 0)
-                    *out_file = open(cmd[i], O_RDWR | O_APPEND | O_CREAT ,0777);
-                else if (j == 3)
-                    *out_file = open(cmd[i], O_CREAT | O_TRUNC | O_RDWR);
-                else if(j == 2)
-                    *in_file = open(cmd[i], O_RDONLY );
-                else if (j == 1)
+                if (!ft_open(out_file, in_file, j, cmd[i]))
                     *in_file = her_file;
                 *result = 1;
             }
@@ -62,20 +57,6 @@ char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int
         }
     }
     return (str);
-}
-
- int ft_check(char *str)
-{
-    int i;
-
-    i = -1;
-    while (str[++i])
-    {
-        if (ft_isalpha(str[i]) || str[i] == '-')
-                                
-                return(1);
-    }
-    return (0);
 }
 
 int    rederection_check(t_exc **exc, int her_file)

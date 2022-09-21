@@ -6,26 +6,35 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/14 18:55:53 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 02:52:24 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void    print_env(t_env *env)
+void    print_env(t_env *env, t_data *data)
 {
 	t_env	*tmp;
-	char *str;
+	char 	*str;
+	int 	fd;
+
+	fd = data->exc->in_file;
 	tmp = env;
 	if (!tmp)
 	{
 		printf("its true \n\n\n");
 		tmp = env_list(&str);
 	}
-	while(tmp)
+			
+	while (tmp)
 	{
 		if (tmp->value)
-			printf("%s=%s\n",tmp->key, tmp->value);
+		{
+			ft_putstr_fd(tmp->key, data->exc->in_file);
+			ft_putstr_fd("=", data->exc->in_file);
+			ft_putendl_fd(tmp->value, data->exc->in_file);
+		}
+			// printf("%s=%s\n",tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
 }
@@ -72,6 +81,7 @@ static char	 **fill_extren_env(void)
 	env[4] = 0;	
 	return (env);
 }
+
 t_env   *env_list(char  **envp)
 {
 	char    **spltd;

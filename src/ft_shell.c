@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 21:02:08 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 01:06:30 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	int 	j;
 	char	*bin;
 	
+		
 	i = 0;
-	if (!identify_builtin(data))
-		return ;
 	while (exc)
 	{
 		bin = get_path(exc->str, data);
 		j = rederection_check(&exc, her_file);
+		if (!identify_builtin(data))
+				return ;
 		if(!exc->str[0])
 			return ;
 		exec_cmd(exc, bin, j, envp);
