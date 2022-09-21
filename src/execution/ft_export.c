@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/21 01:28:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:22:43 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	bool	append_env(t_data	*data,char	**spltd)
 	{
 		if(!ft_strcmp(tmp->key, spltd[0]))
 		{
-			if(spltd[1])
+			if (spltd[1])
 				ft_strcat(tmp->value, spltd[1]);
 			return	(true);
 		}
@@ -38,11 +38,11 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 	int		i;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
-		if(str[i] == '=')
+		if (str[i] == '=')
 		{
-			if(str[i - 1] == '+')
+			if (str[i - 1] == '+')
 			{
 				*mode = true;
 				i--;
@@ -51,7 +51,7 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 			break;
 		}
 	}
-	if(!spltd[0])
+	if (!spltd[0])
 		spltd[0] = ft_strdup(str);
 	else
 	{

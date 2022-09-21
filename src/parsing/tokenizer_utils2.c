@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 01:34:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 17:06:03 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,8 @@ void     herdoc_handler(t_data *data, int *her_file)
     {
         if (hdc->type == HERDOC)
             {
-                if (!hdc->next->opr && hdc->next->type != SPC)
-                  *her_file = here_doc(hdc->next, data);
-                else if (!hdc->next->next->opr)
-                  *her_file =  here_doc(hdc->next->next, data);
+                if (!hdc->next->opr && hdc->next->type == SPC && hdc->next->next->type == WORD) 
+                  *her_file = here_doc(hdc->next->next, data);
             }
         hdc = hdc->next;
     }

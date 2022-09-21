@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/21 03:07:21 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:27:07 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int
     check = 0;
     i = -1;
     str = ft_calloc(sizeof(char), exctab_len(cmd));
-    while(cmd[++i])
+    if (!str)
+        return (NULL);
+    while (cmd[++i])
     {
         j = -1;
         check = 0;

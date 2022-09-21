@@ -184,7 +184,7 @@ int ft_check(char *str);
 
 
 void    print_lst(t_cmd **cmd);
-
+void    print_cmd(t_cmd *cmd);
 
  char 	*get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result);
  int	rederection_check(t_exc **exc, int her_file);
