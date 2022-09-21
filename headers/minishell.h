@@ -151,7 +151,8 @@ bool 	env_check(char *str, t_data *data);
 bool	rm_quotes(t_data **data);
 void     herdoc_handler(t_data *data, int *her_file);
  void    ft_case1(char **str, int *i);
-
+  void print_exc(t_exc *exc);
+char	**i_split(const char *s, char *c);
 
 //--------------------------------------------------------------------------
 

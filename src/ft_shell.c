@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/21 19:11:41 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 20:53:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    print_cmd(t_cmd *cmd)
     }
 }
 
-static void print_exc(t_exc *exc)
+ void print_exc(t_exc *exc)
 {
 	int i;
 
@@ -95,6 +95,7 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 				if (tab)
 				{	
 					build_exc_list(tab, data);
+					// print_exc(data->exc);
 					cmd_call(data->exc, data, envp, her_file);
 				}
 				initalize_data(&data);

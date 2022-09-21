@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 10:34:04 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/12 08:53:35 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:45:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ static char	**ft_cat(char **str, const char *s, char *c, int len)
 	return (str);
 }
 
-typedef struct vrbls
+typedef struct vrb
 {
 	int		i;
 	int		j;
 	int		k;
 	int		len;
-}	t_vrbls;
+}	t_vrb;
 
 char	**i_split(const char *s, char *c)
 {
 	char	**str;
-	t_vrbls	vb;
+	t_vrb	vb;
 
 	if (!s)
 		return (NULL);

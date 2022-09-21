@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 03:49:29 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/16 14:35:50 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:59:56 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void  add_back_exc(t_exc **exc, t_exc *new_node)
     if (!*exc)
         return(*exc = new_node, (void)0);
     tmp = *exc;
-    tmp->next = new_node;
     while (tmp->next)
         tmp = tmp->next;
+    tmp->next = new_node;
     return ;
 }
 

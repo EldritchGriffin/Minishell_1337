@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/21 15:27:07 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 22:01:21 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static size_t exctab_len(char **tab)
         i++;
     return(i);
 }
+
 
 
 char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result)
@@ -81,16 +82,18 @@ int    rederection_check(t_exc **exc, int her_file)
 void    build_exc_list(char **tab, t_data *data)
 {
     int     i;
-    int     is_redi;
-    char    *str;
     char    **cmd;
 
     i = -1;
-    is_redi = 0;
+    int j = -1;
+    while (tab[++j])
+            tab[j] = ft_strtrim(tab[j], " ");
     while (++i < exctab_len(tab))
     {
-        str = ft_strdup(tab[i]);
-        cmd = ft_split(str, ' ');
+        printf("tabb ===== %s\n", tab[i]);
+        cmd = ft_split(ft_strdup(tab[i]), ' ');
         exc_list(cmd, data);      
     }
+    // free_tab(cmd);
+    print_exc(data->exc);
 }
