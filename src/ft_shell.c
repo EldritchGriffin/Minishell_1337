@@ -6,14 +6,14 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/21 20:34:23 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:20:43 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
 //Testing purposes again...
-static  void    print_cmd(t_cmd *cmd)
+void    print_cmd(t_cmd *cmd)
 {
     while(cmd)
     {
@@ -35,8 +35,8 @@ static  void    print_cmd(t_cmd *cmd)
 		exc = exc->next;
 	}	
 }
-///-----------this function jut for test------------------------------------
 
+///-----------this function jut for test------------------------------------
 
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {
@@ -44,18 +44,19 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	int 	j;
 	char	*bin;
 	
+		
 	i = 0;
-	if (!identify_builtin(data))
-		return ;
 	while (exc)
 	{
 		bin = get_path(exc->str, data);
 		j = rederection_check(&exc, her_file);
-		if(!exc->str[0])
+		if (!identify_builtin(data))
+				return ;
+		if (!exc->str[0])
 			return ;
 		exec_cmd(exc, bin, j, envp);
 		exc = exc->next;
-		free(bin);
+		free (bin);
 	}
 }
 
@@ -77,9 +78,10 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 	while (1)
 	{
 	 	tmp = &data->cmd;	
-		line = ft_strtrim(readline("\033[0;35m Minishell$: "), " ");
+		line = ft_strtrim(readline("\033[0;35mMinishell$: "), " ");
 		if (line)
 		{
+			
 			add_history(line);
 			if (build_token_list(line, data, &her_file))
 			{

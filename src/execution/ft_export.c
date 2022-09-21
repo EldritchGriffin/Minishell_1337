@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/11 06:30:07 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:22:43 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	bool	append_env(t_data	*data,char	**spltd)
 	{
 		if(!ft_strcmp(tmp->key, spltd[0]))
 		{
-			if(spltd[1])
+			if (spltd[1])
 				ft_strcat(tmp->value, spltd[1]);
 			return	(true);
 		}
@@ -38,11 +38,11 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 	int		i;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
-		if(str[i] == '=')
+		if (str[i] == '=')
 		{
-			if(str[i - 1] == '+')
+			if (str[i - 1] == '+')
 			{
 				*mode = true;
 				i--;
@@ -51,7 +51,7 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 			break;
 		}
 	}
-	if(!spltd[0])
+	if (!spltd[0])
 		spltd[0] = ft_strdup(str);
 	else
 	{
@@ -94,6 +94,8 @@ static void	fill_export(char	*str, t_data	*data)
 	add_back_env(&data->env, new_node_env(spltd[0], spltd[1]));
 }
 
+
+
 void	ft_export(t_data	*data)
 {
 	t_cmd	*tmp;
@@ -101,9 +103,9 @@ void	ft_export(t_data	*data)
 	int		i = 1;
 	
 	tmp = data->cmd->next;
-	if(!tmp)
+	if(!tmp || data->exc->out_file != 1)
 		return(sorted_env(data->env, data), (void)0);
-	while(tmp)
+	while (tmp)
 	{
         if (tmp->next && tmp->type == SPC)
 			tmp = tmp->next;

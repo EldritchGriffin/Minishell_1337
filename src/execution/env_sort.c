@@ -2,7 +2,7 @@
 
 // workk not doneee yet-----------------------------------------------------------------
 
-static size_t envtab_len(char **env)
+ size_t envtab_len(char **env)
 {
     size_t     i;
 
@@ -52,14 +52,14 @@ static int    env_len(t_env *env)
         k = 0;
         while (tmp->key[j])
             str[i++] = tmp->key[j++];
-        if(tmp->value)
+        if (tmp->value)
         {
             str[i++] = '=';
             str[i++] = '"';
         }
         while (tmp->value && tmp->value[k])
             str[i++] = tmp->value[k++];
-        if(tmp->value)
+        if (tmp->value)
             str[i++] = '"';
         if (tmp->next != NULL)
             str[i++] = '\n';
@@ -82,7 +82,7 @@ static void    sort_env(char **tab, int tab_len)
         sort = 1;
         while(i < tab_len - 1)
         {
-            if(ft_strcmp(tab[i], tab[i + 1]) > 0)
+            if (ft_strcmp(tab[i], tab[i + 1]) > 0)
             {
                 tmp = tab[i];
                 tab[i] = tab[i + 1];
@@ -94,6 +94,14 @@ static void    sort_env(char **tab, int tab_len)
         tab_len--;
     }
 }
+
+// static void printer(char *str)
+// {
+//     ft_putchar_fd("declare -x ", data->exc->out_file);
+
+
+
+// }
 
 void    sorted_env(t_env *env, t_data *data)
 {
@@ -107,8 +115,9 @@ void    sorted_env(t_env *env, t_data *data)
     sort_env(str, envtab_len(str));
     while (str[i])
     {
-        ft_putstr_fd("declare -x ", 1);
-        ft_putendl_fd(str[i], 1);
+        // if (data->exc->out_file != 1)
+        ft_putstr_fd("declare -x ", data->exc->out_file);
+        ft_putendl_fd(str[i], data->exc->out_file);
         i++;
     }
     free(str);

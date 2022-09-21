@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 01:35:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 21:48:20 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,17 @@ void    get_token(char *line, int *i, int start, t_data  *data)
                 break ;
         (*i)++;
     }
-    old_type = redirection_handler(line[check], line[check + 1], old_type, &operator); 
+    old_type = redirection_handler(line[check], line[check + 1], old_type, &operator);
     if (!check_old_type(line, i, &words, &old_type))
         return(data->cmd = NULL, (void)0);
     if (old_type == SPC)
            return (cmd_list(ft_strdup(" "), old_type, 0, data), (void)0);
+    
     cmd_list(ft_substr(line, start, words), \
             old_type, operator, data);
+    if (operator == true && tmp_type != SPC)
+            cmd_list(ft_strdup(" "), SPC, 0, data);
+        
 } 
 
 int    build_token_list(char *line, t_data *data, int *her_file)
@@ -110,6 +114,7 @@ int    build_token_list(char *line, t_data *data, int *her_file)
         return (0);
     if (!check_operatrs_first(data))
             return (0);
+            print_cmd(data->cmd);
     herdoc_handler(data, her_file);
     if (!check_operators_sec(data))
             return (0);

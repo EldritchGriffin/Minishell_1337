@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:59:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/04 18:47:43 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/21 02:07:16 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void	ft_echo(t_data *data)
 			tmp = tmp->next;
 		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES && tmp->type != VARIABLE)
 			break ;
-		printf("%s", tmp->str);
+		ft_putstr_fd(tmp->str, data->exc->out_file);
 		tmp = tmp->next;
 		if (tmp)
 		{
 			if (tmp->type == SPC)
-				printf(" ");
+				ft_putstr_fd(" ", data->exc->out_file);
 		}
 	}
 	if (!n_opt)
-		printf("\n");
+	 	ft_putstr_fd("\n", data->exc->out_file);
 }

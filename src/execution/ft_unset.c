@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:15:55 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/04 15:09:24 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/21 02:10:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_unset(t_data		*data)
 			}
 			env = env->next;
 		}
-		if(!env)
+		if (!env)
 			break;
 		env->next = env->next->next;
 		tmp = tmp->next;

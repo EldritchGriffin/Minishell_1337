@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 10:57:34 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:33:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,19 @@ char *trim_quote(char *str)
     rtr[0] = get_quote(str[0]);
     rtr[1] = '\0'; 
     lstr = ft_strtrim(str, rtr);
-    if(!lstr)
+    if (!lstr)
        return (NULL);
     return (lstr);
+}
+
+int ft_open(int *out_file, int *in_file, int j, char *str)
+{
+    
+    if (j == 0)
+       return(*out_file = open(str, O_RDWR | O_APPEND | O_CREAT ,0777), 1);
+    else if (j == 3)
+        return(*out_file = open(str, O_CREAT | O_TRUNC | O_RDWR, 0644), 1);
+    else if (j == 2)
+        return(*in_file = open(str, O_RDONLY), 1);
+    return (0);
 }

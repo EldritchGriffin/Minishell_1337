@@ -102,9 +102,9 @@ typedef struct s_data
 
 //-------------- enum strcut contains ---------------------------------------
 
-int   here_doc(t_cmd *delemiter, t_data *data);
-
-int     ft_pwd(void);
+int		here_doc(t_cmd *delemiter, t_data *data);
+int		ft_open(int *out_file, int *in_file, int j, char *str);
+int     ft_pwd(t_data *data);
 char	**parse_args1(t_data *data);
 int		ft_check_tokens(t_cmd *cmd);
 int		ft_check_toekns2(t_data *data);
@@ -135,7 +135,7 @@ char	*rmv_quotes(char	*str);
 int     search_spc_node(t_cmd **cmd);
 char    *trim_quote(char *str);
 char    **parse_args(t_data *data);
- char    *env_to_str(t_env *env, t_data *data);
+char    *env_to_str(t_env *env, t_data *data);
 
 //----------------------------------------------------------------------------
 
@@ -156,7 +156,8 @@ bool 	env_check(char *str, t_data *data);
 bool	rm_quotes(t_data **data);
 void     herdoc_handler(t_data *data, int *her_file);
  void    ft_case1(char **str, int *i);
-
+  void print_exc(t_exc *exc);
+char	**i_split(const char *s, char *c);
 
 //--------------------------------------------------------------------------
 
@@ -177,7 +178,7 @@ int		build_token_list(char *line, t_data *data, int *her_file);
 int     first_check(char *line, char *str);
 void    *ft_malloc(int size, t_ptr **ptrs);
 t_env   *env_list(char  **envp);
-void    print_env(t_env *env);
+void    print_env(t_env *env, t_data *data);
 int     identify_builtin(t_data *data);
 void    add_back_env(t_env  **env, t_env    *new_node);
 t_env   *new_node_env(char  *key,   char    *value);
@@ -189,7 +190,7 @@ int ft_check(char *str);
 
 
 void    print_lst(t_cmd **cmd);
-
+void    print_cmd(t_cmd *cmd);
 
  char 	*get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result);
  int	rederection_check(t_exc **exc, int her_file);
