@@ -84,6 +84,11 @@ typedef struct s_exc{
 	struct s_exc *next;
 } t_exc;
 
+typedef	struct s_pipe
+{
+	int	p_c;
+	int	**p_fd;
+}				t_pipe;
 
 
 typedef struct s_data
@@ -205,12 +210,12 @@ void     build_exc_list(char **tab, t_data *data);
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------
-
+void print_exc(t_exc *exc);
 void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp);
 char   *get_path(char **cmd, t_data *data);
-
+//----------------pipes-------------------------------------------/
+int check_pipes(t_exc   *exc);
 //----------------free_functions-------------------------------------------/
-
 char	**free_tab(char **tab);
 
 #endif

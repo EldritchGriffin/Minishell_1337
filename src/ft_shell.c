@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 21:02:08 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 20:34:23 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static  void    print_cmd(t_cmd *cmd)
     }
 }
 
-static void print_exc(t_exc *exc)
+ void print_exc(t_exc *exc)
 {
 	int i;
 
@@ -31,7 +31,6 @@ static void print_exc(t_exc *exc)
 		i = -1;
 		while(exc->str[++i])
 			printf("exc ========= is[%s]\n", exc->str[i]);
-		printf("node-----> IN_  %d   OUT_   %d\n", exc->in_file, exc->out_file);
 		printf("MOVING  to the next\n");
 		exc = exc->next;
 	}	
@@ -72,6 +71,7 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 	t_cmd	**tmp;
 	char	*line;
 	char 	**tab;
+	int i = -1;
 
 	her_file = 0;
 	while (1)
@@ -93,6 +93,8 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 				if (tab)
 				{	
 					build_exc_list(tab, data);
+					// print_exc(data->exc);
+					check_pipes(data->exc);
 					cmd_call(data->exc, data, envp, her_file);
 				}
 				initalize_data(&data);

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 23:10:45 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/21 20:38:25 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 # define  static const char *RDS[5] = {">>", "<<", "<", ">", NULL};
 
-static size_t exctab_len(char **tab)
+static int exctab_len(char **tab)
 {
-    size_t     i;
+    int     i;
 
-    i = 0;
-    while (tab[i])
-        i++;
+    i = -1;
+    while (tab[++i]);
+        
     return(i);
 }
 
@@ -47,7 +47,7 @@ char *get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int
                 if (j == 0)
                     *out_file = open(cmd[i], O_RDWR | O_APPEND | O_CREAT ,0777);
                 else if (j == 3)
-                    *out_file = open(cmd[i], O_CREAT | O_TRUNC | O_RDWR);
+                    *out_file = open(cmd[i], O_CREAT | O_TRUNC | O_RDWR, 0644);
                 else if(j == 2)
                     *in_file = open(cmd[i], O_RDONLY );
                 else if (j == 1)
@@ -97,17 +97,25 @@ int    rederection_check(t_exc **exc, int her_file)
 
 void    build_exc_list(char **tab, t_data *data)
 {
-    int     i;
+    int     i, j;
     int     is_redi;
     char    *str;
     char    **cmd;
 
-    i = -1;
+    j = -1;
+    i = 0;
     is_redi = 0;
-    while (++i < exctab_len(tab))
+    while (tab[++j])
+		printf("tab ==== %s\n", tab[j]);
+    while (i < exctab_len(tab))
     {
+        j = -1;
         str = ft_strdup(tab[i]);
         cmd = ft_split(str, ' ');
-        exc_list(cmd, data);      
+        printf("cmdd ====== %s\n", cmd[0]);
+        exc_list(cmd, data);
+        free(str);
+        i++;    
     }
+    print_exc(data->exc);
 }
