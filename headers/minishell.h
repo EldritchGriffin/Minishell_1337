@@ -97,6 +97,7 @@ typedef struct s_data
 	t_cmd 		*cmd;
 	t_env       *env;
 	t_exc		*exc;
+	t_pipe		*pps;
 }				t_data;
 
 
@@ -156,7 +157,6 @@ bool 	env_check(char *str, t_data *data);
 bool	rm_quotes(t_data **data);
 void     herdoc_handler(t_data *data, int *her_file);
  void    ft_case1(char **str, int *i);
-  void print_exc(t_exc *exc);
 char	**i_split(const char *s, char *c);
 
 //--------------------------------------------------------------------------
@@ -212,10 +212,12 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------
 void print_exc(t_exc *exc);
-void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp);
+void   exec_cmd(t_exc *exc, char *bin, char **envp);
 char   *get_path(char **cmd, t_data *data);
 //----------------pipes-------------------------------------------/
 int check_pipes(t_exc   *exc);
+int **create_pipes(int count);
+void    exec_pipes(t_exc    *exc, t_data    *data, int   her_file, char **envp);
 //----------------free_functions-------------------------------------------/
 char	**free_tab(char **tab);
 

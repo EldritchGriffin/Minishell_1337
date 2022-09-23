@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/21 22:20:33 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/23 06:01:47 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ void    build_exc_list(char **tab, t_data *data)
             tab[j] = ft_strtrim(tab[j], " ");
     while (++i < exctab_len(tab))
     {
-        printf("tabb ===== %s\n", tab[i]);
         cmd = ft_split(ft_strdup(tab[i]), ' ');
         exc_list(cmd, data);      
     }
-    // free_tab(cmd);
-    print_exc(data->exc);
 }

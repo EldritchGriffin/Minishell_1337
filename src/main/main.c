@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 02:21:14 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/22 00:09:13 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int ac, char **av, char    **envp)
     t_data  data;
     t_ptr   *ptrs = NULL;
     data.cmd = NULL;
+    data.pps = malloc(sizeof(t_pipe));
     data.ptrs = ptrs;
     data.cmd  = NULL;
    

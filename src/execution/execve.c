@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/20 01:21:09 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/23 01:20:31 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ char   *get_path(char **cmd, t_data *data)
     return (bin);
 }
 
-void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
+void   exec_cmd(t_exc *exc, char *bin, char **envp)
 {
-    pid_t   pid = 0;
+    pid_t   pid;
     int     status = 0;
     int     in_save;
     int     out_save;
@@ -85,23 +85,24 @@ void   exec_cmd(t_exc *exc, char *bin, int is_redi, char **envp)
     ft_dup(&in_save, &out_save);
     ft_dup2(&exc->in_file, &exc->out_file,\
              STDIN_FILENO, STDOUT_FILENO);
-    pid = 0;  
     pid = fork();
     if (pid == 0)
     {
-        status =  execve(bin, &exc->str[0], envp);
+        status =  execve(bin, exc->str, envp);
         if (status == -1)
         {   
             printf("Minishell : %s: command not found\n", exc->str[0]);
-            waitpid(pid, &status, 0);
             exit(EXIT_FAILURE);
         }
     }
-    waitpid(pid, &status, 0);
-    if (exc->in_file != 0)
-         close(exc->in_file);
-    if (exc->out_file != 1)
-        close(exc->out_file);
-    dup2(in_save, STDIN);
-    dup2(out_save, STDOUT);
+    else
+    {
+        waitpid(pid, &status, 0);
+        if (exc->in_file != 0)
+            close(exc->in_file);
+        if (exc->out_file != 1)
+            close(exc->out_file);
+        dup2(in_save, STDIN);
+        dup2(out_save, STDOUT);
+    }
 }

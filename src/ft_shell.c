@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/21 22:20:43 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/23 05:47:10 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    print_cmd(t_cmd *cmd)
     }
 }
 
- void print_exc(t_exc *exc)
+void print_exc(t_exc *exc)
 {
 	int i;
 
@@ -41,21 +41,28 @@ void    print_cmd(t_cmd *cmd)
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {
 	int		i;
-	int 	j;
 	char	*bin;
 	
 		
 	i = 0;
+	if (data->pps->p_c)
+	{
+		exec_pipes(exc, data, her_file, envp);
+		return;
+	}
 	while (exc)
 	{
 		bin = get_path(exc->str, data);
-		j = rederection_check(&exc, her_file);
+		rederection_check(&exc, her_file);
 		if (!identify_builtin(data))
 				return ;
 		if (!exc->str[0])
 			return ;
-		exec_cmd(exc, bin, j, envp);
-		exc = exc->next;
+		else
+		{
+			exec_cmd(exc, bin, envp);
+			exc = exc->next;
+		}
 		free (bin);
 	}
 }
@@ -63,7 +70,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 static void initalize_data(t_data **data)
 {
 	(*data)->exc = NULL;
-	(*data)->cmd = NULL;	
+	(*data)->cmd = NULL;
 }
 
 void    ft_shell(t_data *data, t_env *env, char **envp)
@@ -95,8 +102,7 @@ void    ft_shell(t_data *data, t_env *env, char **envp)
 				if (tab)
 				{	
 					build_exc_list(tab, data);
-					// print_exc(data->exc);
-					check_pipes(data->exc);
+					data->pps->p_c = check_pipes(data->exc);
 					cmd_call(data->exc, data, envp, her_file);
 				}
 				initalize_data(&data);
