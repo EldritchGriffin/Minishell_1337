@@ -6,26 +6,24 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/21 15:22:43 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/24 05:15:37 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-
-//TODO EXPORT STILL UNFINISHED will fix after sortenv is all done (sigfaults in case of null)
-static	bool	append_env(t_data	*data,char	**spltd)
+static	bool	append_env(t_data	*data, char	**spltd)
 {
 	t_env	*tmp;
 
 	tmp = data->env;
-	while(tmp)
+	while (tmp)
 	{
-		if(!ft_strcmp(tmp->key, spltd[0]))
+		if (!ft_strcmp(tmp->key, spltd[0]))
 		{
 			if (spltd[1])
 				ft_strcat(tmp->value, spltd[1]);
-			return	(true);
+			return (true);
 		}
 		tmp = tmp->next;
 	}
@@ -48,14 +46,14 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 				i--;
 			}
 			spltd[0] = ft_substr(str, 0, i);
-			break;
+			break ;
 		}
 	}
 	if (!spltd[0])
 		spltd[0] = ft_strdup(str);
 	else
 	{
-		if(*mode)
+		if (*mode)
 			i++;
 		spltd[1] = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
 	}
@@ -70,20 +68,20 @@ static void	fill_export(char	*str, t_data	*data)
 	int		i;
 
 	tmp = data->env;
-	spltd = malloc(sizeof(char	*) * 3);
+	spltd = malloc(sizeof(char *) * 3);
 	spltd[0] = NULL;
 	spltd[1] = NULL;
 	spltd[2] = NULL;
 	spltd = splt(str, &mode, spltd);
-	if(mode)
-		return(append_env(data, spltd), (void)0);
-	while(tmp)
+	if (mode)
+		return (append_env(data, spltd), (void)0);
+	while (tmp)
 	{
-		if(!ft_strcmp(tmp->key, spltd[0]))
+		if (!ft_strcmp(tmp->key, spltd[0]))
 		{
-			if(tmp->value)
-				return;
-			else if(!spltd[1])
+			if (tmp->value)
+				return ;
+			else if (!spltd[1])
 				tmp->value = NULL;
 			else
 				tmp->value = ft_strdup(spltd[1]);
@@ -94,25 +92,24 @@ static void	fill_export(char	*str, t_data	*data)
 	add_back_env(&data->env, new_node_env(spltd[0], spltd[1]));
 }
 
-
-
 void	ft_export(t_data	*data)
 {
 	t_cmd	*tmp;
 	char	*str;
-	int		i = 1;
-	
+	int		i;
+
+	i = 1;
 	tmp = data->cmd->next;
-	if(!tmp || data->exc->out_file != 1)
-		return(sorted_env(data->env, data), (void)0);
+	if (!tmp || data->exc->out_file != 1)
+		return (sorted_env(data->env, data), (void)0);
 	while (tmp)
 	{
-        if (tmp->next && tmp->type == SPC)
+		if (tmp->next && tmp->type == SPC)
 			tmp = tmp->next;
-		if(tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
-			break;
+		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
+			break ;
 		str = tmp->str;
-		if(tmp->type == D_QUOTES || tmp->type == S_QUOTES)
+		if (tmp->type == D_QUOTES || tmp->type == S_QUOTES)
 			str = rmv_quotes(tmp->str);
 		fill_export(str, data);
 		tmp = tmp->next;

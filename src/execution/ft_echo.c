@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:59:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/21 02:07:16 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/24 05:14:12 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ static t_cmd	*check_opt(t_cmd	*tmp, bool *n_opt)
 
 	i = 1;
 	*n_opt = false;
-	while(tmp)
+	while (tmp)
 	{
-		if(tmp->type == SPC)
+		if (tmp->type == SPC)
 			tmp = tmp->next;
-		if(tmp->str[0] == '-')
+		if (tmp->str[0] == '-')
 		{
-			while(tmp->str[i])
+			while (tmp->str[i])
 			{
-				if(tmp->str[i] != 'n')
-					return(tmp);
+				if (tmp->str[i] != 'n')
+					return (tmp);
 				i++;
 			}
 			*n_opt = true;
 		}
 		else
-			return(tmp);
+			return (tmp);
 		tmp = tmp->next;
 	}
 	return (tmp);
@@ -50,7 +50,8 @@ void	ft_echo(t_data *data)
 	{
 		if (tmp->next && tmp->type == SPC)
 			tmp = tmp->next;
-		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES && tmp->type != VARIABLE)
+		if (tmp->type != WORD && tmp->type != D_QUOTES
+			&& tmp->type != S_QUOTES && tmp->type != VARIABLE)
 			break ;
 		ft_putstr_fd(tmp->str, data->exc->out_file);
 		tmp = tmp->next;
@@ -61,5 +62,5 @@ void	ft_echo(t_data *data)
 		}
 	}
 	if (!n_opt)
-	 	ft_putstr_fd("\n", data->exc->out_file);
+		ft_putstr_fd("\n", data->exc->out_file);
 }

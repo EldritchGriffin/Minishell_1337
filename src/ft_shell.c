@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/23 05:47:10 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/24 04:22:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,74 +42,56 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {
 	int		i;
 	char	*bin;
-	
-		
+
 	i = 0;
 	if (data->pps->p_c)
 	{
 		exec_pipes(exc, data, her_file, envp);
-		return;
+		return ;
 	}
-	while (exc)
+	else
 	{
 		bin = get_path(exc->str, data);
 		rederection_check(&exc, her_file);
 		if (!identify_builtin(data))
-				return ;
+			return ;
 		if (!exc->str[0])
 			return ;
 		else
-		{
 			exec_cmd(exc, bin, envp);
-			exc = exc->next;
-		}
 		free (bin);
 	}
 }
 
-static void initalize_data(t_data **data)
+static	void	initalize_data(t_data **data)
 {
 	(*data)->exc = NULL;
 	(*data)->cmd = NULL;
 }
 
-void    ft_shell(t_data *data, t_env *env, char **envp)
+void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 {
-	int		her_file;
 	t_cmd	**tmp;
-	char	*line;
-	char 	**tab;
-	int i = -1;
+	char	**tab;
+	int		her_file;
 
 	her_file = 0;
-	while (1)
+	tmp = &data->cmd;
+	if (build_token_list(line, data, &her_file))
 	{
-	 	tmp = &data->cmd;	
-		line = ft_strtrim(readline("\033[0;35mMinishell$: "), " ");
-		if (line)
+		while ((*tmp))
 		{
-			
-			add_history(line);
-			if (build_token_list(line, data, &her_file))
-			{
-				while ((*tmp))
-				{ 
-					join_unspaced(tmp, &((*tmp)->next), &data);
-					tmp = &(*tmp)->next;
-				}
-				var_expnd(data);
-				tab = parse_args(data);
-				if (tab)
-				{	
-					build_exc_list(tab, data);
-					data->pps->p_c = check_pipes(data->exc);
-					cmd_call(data->exc, data, envp, her_file);
-				}
-				initalize_data(&data);
-			}
-			else {
-				initalize_data(&data);
-			}
-		} 
+			join_unspaced(tmp, &((*tmp)->next), &data);
+			tmp = &(*tmp)->next;
+		}
+		var_expnd(data);
+		tab = parse_args(data);
+		if (tab)
+		{	
+			build_exc_list(tab, data);
+			data->pps->p_c = check_pipes(data->exc);
+			cmd_call(data->exc, data, envp, her_file);
+		}
 	}
+	initalize_data(&data);
 }

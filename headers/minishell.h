@@ -1,4 +1,14 @@
-//------------- global-header-file -----------------------------------------
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/09/24 05:25:32 by zrabhi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -19,8 +29,6 @@
 # include <fcntl.h>
 //------------- typedefs --------------------------------------------------
 
-
-
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
@@ -29,12 +37,7 @@
 # define SUCCESS 0
 //-----------------abstract syntax tree-------------------------------------
 
-
-
-
 //---------------------------structs----------------------------------------
-
-
 
 typedef enum s_tokens{
 	PIPE,
@@ -54,171 +57,157 @@ typedef enum s_tokens{
 	O_REDIRECTION,
 	CMD,
 	SOL,
-} t_tokens;
-
-
+}	t_tokens;
 
 typedef struct s_cmd
 {
-	char 			*str;
-	t_tokens 		type;
-	bool				opr;
-	struct s_cmd 	*next;
-	struct s_cmd    *prev;
-}   				t_cmd;
+	char			*str;
+	t_tokens		type;
+	bool			opr;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+}	t_cmd;
 
-
-
-typedef	struct	s_env
+typedef struct s_env
 {
 	char			*key;
 	char			*value;
-	struct	s_env	*next;
-}					t_env;
-
+	struct s_env	*next;
+}	t_env;
 
 typedef struct s_exc{
-	char		**str;  
-	int			in_file;
-	int			out_file;
-	struct s_exc *next;
-} t_exc;
+	char			**str;
+	int				in_file;
+	int				out_file;
+	struct s_exc	*next;
+}	t_exc;
 
-typedef	struct s_pipe
+typedef struct s_pipe
 {
-	int	p_c;
-	int	**p_fd;
-}				t_pipe;
-
+	int		p_c;
+	int		**p_fd;
+}	t_pipe;
 
 typedef struct s_data
 {
-	t_ptr 		*ptrs;
-	t_cmd 		*cmd;
-	t_env       *env;
-	t_exc		*exc;
-	t_pipe		*pps;
+	t_ptr	*ptrs;
+	t_cmd	*cmd;
+	t_env	*env;
+	t_exc	*exc;
+	t_pipe	*pps;
 }				t_data;
-
 
 //-------------- enum strcut contains ---------------------------------------
 
 int		here_doc(t_cmd *delemiter, t_data *data);
 int		ft_open(int *out_file, int *in_file, int j, char *str);
-int     ft_pwd(t_data *data);
+int		ft_pwd(t_data *data);
 char	**parse_args1(t_data *data);
 int		ft_check_tokens(t_cmd *cmd);
 int		ft_check_toekns2(t_data *data);
 
-
 //---------------- test_functions --------------------------------------------
 
-
-int		redirection_handler(char a , char b, int old_type, bool *operator);
-void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data);
-
+int		redirection_handler(char a,	char b, int old_type, bool *operator);
+void	join_unspaced(t_cmd **node,	t_cmd **node_next, t_data **data);
 
 //--------------------------------lst-functions---------------------------
 
-
-bool 	check_one(t_cmd *node, t_cmd *node_next);
-void    sorted_env(t_env *env, t_data *data);
+bool	check_one(t_cmd *node, t_cmd *node_next);
+void	sorted_env(t_env *env, t_data *data);
 
 //--------------------------------syntax_error_functions-------------------
 
 t_cmd	*get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
-void    quotes_error(char c);
-void    syntax_error(void);
-void    unexpected_token(char c);
-char   	get_quote(char line);
-bool 	ft_break(int a, int b);
+void	quotes_error(char c);
+void	syntax_error(void);
+void	unexpected_token(char c);
+char	get_quote(char line);
+bool	ft_break(int a, int b);
 char	*rmv_quotes(char	*str);
-int     search_spc_node(t_cmd **cmd);
-char    *trim_quote(char *str);
-char    **parse_args(t_data *data);
-char    *env_to_str(t_env *env, t_data *data);
+int		search_spc_node(t_cmd **cmd);
+char	*trim_quote(char *str);
+char	**parse_args(t_data *data);
+char	*env_to_str(t_env *env, t_data *data);
 
 //----------------------------------------------------------------------------
 
-
-
-int     quote_check(int old_type, char  *line, int *i, int *words);
-t_cmd  	*create_node(char *content, t_tokens type, t_data *data);
-void    ft_create_cmd(t_cmd *cmd);
-void   	get_token(char *line, int *i, int start, t_data *data);
-void    var_handler(char *line, int *i, int *words, int *type);
-bool    quote_handler(char *line, int *i, char quote, int *words, int *type);
-int     get_token_type(char line, bool *operator);
-int     check_operatrs_first(t_data *data);
-int     check_operators_sec(t_data *data);
-int     operator_handler(char *str, int type);
-void   	ft_space_skip(char **line, int *i);
-bool 	env_check(char *str, t_data *data);
+int		quote_check(int old_type, char	*line, int	*i, int	*words);
+t_cmd	*create_node(char *content, t_tokens type, t_data *data);
+void	ft_create_cmd(t_cmd *cmd);
+void	get_token(char *line, int *i, int words, t_data *data);
+void	var_handler(char *line, int *i, int *words, int *type);
+bool	quote_handler(char *line, int *i, int *words, int *type);
+int		get_token_type(char line, bool *operator);
+int		check_operatrs_first(t_data *data);
+int		check_operators_sec(t_data *data);
+int		operator_handler(char *str, int type);
+void	ft_space_skip(char **line, int *i);
+bool	env_check(char *str, t_data *data);
 bool	rm_quotes(t_data **data);
-void     herdoc_handler(t_data *data, int *her_file);
- void    ft_case1(char **str, int *i);
+void	herdoc_handler(t_data *data, int *her_file);
+void	ft_case1(char **str, int *i);
+void	print_exc(t_exc *exc);
 char	**i_split(const char *s, char *c);
+void	mini_perror(int type);
 
 //--------------------------------------------------------------------------
 
-
-
-int     ft_pipe_check(char *line, t_tokens type);
-bool    ft_check_input(char *input);
-void    ft_shell(t_data *data, t_env *env, char **envp);
-t_cmd   *pipe_parse(char *s, t_cmd *cmd);
-char    *double_quotes_check(char *line);
-bool    number_of_quotes(char *line);
-char    *line_check(char *path);
-int     ft_only_words(char *str, char *line, t_tokens *token);
-int     is_words(char c, char *str, t_tokens *token);
-int     ft_only_words(char *str, char *line, t_tokens *token);
-void   	cmd_list(char *str, t_tokens token, bool operator, t_data *data);
+int		ft_pipe_check(char *line, t_tokens type);
+bool	ft_check_input(char *input);
+void	ft_shell(char *line, t_data *data, t_env *env, char **envp);
+t_cmd	*pipe_parse(char *s, t_cmd *cmd);
+char	*double_quotes_check(char *line);
+bool	number_of_quotes(char *line);
+char	*line_check(char *path);
+int		ft_only_words(char *str, char *line, t_tokens *token);
+int		is_words(char c, char *str, t_tokens *token);
+int		ft_only_words(char *str, char *line, t_tokens *token);
+void	cmd_list(char *str, t_tokens token, bool operator, t_data *data);
 int		build_token_list(char *line, t_data *data, int *her_file);
-int     first_check(char *line, char *str);
-void    *ft_malloc(int size, t_ptr **ptrs);
-t_env   *env_list(char  **envp);
-void    print_env(t_env *env, t_data *data);
-int     identify_builtin(t_data *data);
-void    add_back_env(t_env  **env, t_env    *new_node);
-t_env   *new_node_env(char  *key,   char    *value);
-t_cmd   *new_node_cmd(char  *str, t_tokens type, bool operator, t_data *data);
-void    var_expnd(t_data    *data);
-int ft_check(char *str);
+int		first_check(char *line, char *str);
+void	*ft_malloc(int size, t_ptr **ptrs);
+t_env	*env_list(char	**envp);
+void	print_env(t_env *env, t_data *data);
+int		identify_builtin(t_data *data);
+void	add_back_env(t_env	**env, t_env	*new_node);
+t_env	*new_node_env(char	*key, char	*value);
+t_cmd	*new_node_cmd(char	*str, t_tokens type, bool operator, t_data *data);
+void	var_expnd(t_data	*data);
+int		ft_check(char *str);
 
 //----------------print fucntions------------------------------------------/
 
+void	print_lst(t_cmd **cmd);
+void	print_cmd(t_cmd *cmd);
 
-void    print_lst(t_cmd **cmd);
-void    print_cmd(t_cmd *cmd);
-
- char 	*get_redirection(char **cmd, int *in_file, int *out_file, int her_file, int *result);
- int	rederection_check(t_exc **exc, int her_file);
+char	*get_redirection(t_exc **exc, int her_file, int *result);
+int		rederection_check(t_exc **exc, int her_file);
 //----------------Built-ins------------------------------------------------/
 
-
+void	ft_cd(t_data	*data);
 void	ft_echo(t_data *data);
 void	ft_export(t_data	*data);
-void	ft_unset(t_data		*data);
-
+void	ft_unset(t_data	*data);
 
 //---------exc_list---------------------------------------------------------/
 
-
-void    exc_list(char **str, t_data *data);
-t_exc   *new_node_exc(char **str, t_data *data);
-void     build_exc_list(char **tab, t_data *data);
+void	exc_list(char **str, t_data *data);
+t_exc	*new_node_exc(char **str, t_data *data);
+void	build_exc_list(char **tab, t_data *data);
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------
-void print_exc(t_exc *exc);
-void   exec_cmd(t_exc *exc, char *bin, char **envp);
-char   *get_path(char **cmd, t_data *data);
+void	exec_cmd(t_exc *exc, char *bin, char **envp);
+char	*get_path(char **cmd, t_data *data);
 //----------------pipes-------------------------------------------/
-int check_pipes(t_exc   *exc);
-int **create_pipes(int count);
-void    exec_pipes(t_exc    *exc, t_data    *data, int   her_file, char **envp);
+int		check_pipes(t_exc	*exc);
+int		**create_pipes(int count);
+void	exec_pipes(t_exc	*exc, t_data	*data, int her_file, char **envp);
 //----------------free_functions-------------------------------------------/
 char	**free_tab(char **tab);
+void	free_cmd(t_data *data);
+void	free_exc(t_data *data);
+void	free_env(t_data *data);
 
 #endif
