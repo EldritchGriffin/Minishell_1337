@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:25:32 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 05:58:06 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ typedef struct s_pipe
 
 typedef struct s_data
 {
-	t_ptr	*ptrs;
 	t_cmd	*cmd;
 	t_env	*env;
 	t_exc	*exc;
 	t_pipe	*pps;
+	char	path[PATH_MAX];
 }				t_data;
 
 //-------------- enum strcut contains ---------------------------------------
@@ -166,15 +166,15 @@ int		ft_only_words(char *str, char *line, t_tokens *token);
 void	cmd_list(char *str, t_tokens token, bool operator, t_data *data);
 int		build_token_list(char *line, t_data *data, int *her_file);
 int		first_check(char *line, char *str);
-void	*ft_malloc(int size, t_ptr **ptrs);
 t_env	*env_list(char	**envp);
 void	print_env(t_env *env, t_data *data);
-int		identify_builtin(t_data *data);
+int		identify_builtin(t_data *data, t_exc	*cmd);
 void	add_back_env(t_env	**env, t_env	*new_node);
 t_env	*new_node_env(char	*key, char	*value);
 t_cmd	*new_node_cmd(char	*str, t_tokens type, bool operator, t_data *data);
 void	var_expnd(t_data	*data);
 int		ft_check(char *str);
+void	fill_export(char	*str, t_data	*data);
 
 //----------------print fucntions------------------------------------------/
 
@@ -186,7 +186,7 @@ int		rederection_check(t_exc **exc, int her_file);
 //----------------Built-ins------------------------------------------------/
 
 void	ft_cd(t_data	*data);
-void	ft_echo(t_data *data);
+void	ft_echo(t_exc	*exc);
 void	ft_export(t_data	*data);
 void	ft_unset(t_data	*data);
 

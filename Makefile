@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/24 05:34:20 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/24 20:06:21 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_DIR    := obj
 TOOLS      := cmd_list exc_list
 ENV        := env_list
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe
-PARSING    := final_check parser_utils  parser parser2 parser3 syntax_errors tokenizer_utils tokenizer_utils2 tokenizer var_expander here_doc
+PARSING    := final_check parser_utils  parser parser2 parser3  free_list syntax_errors tokenizer_utils tokenizer_utils2 tokenizer var_expander here_doc
 src        := ft_shell
 SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 	  					$(addsuffix .c, $(addprefix src/execution/, $(EXEC))) \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/24 05:17:55 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 05:41:37 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 			j = -1;
 			while (++j < data->pps->p_c)
 			{
-				if ((j != i && j + 1 != i) || i == 0)
+				if (j + 1 != i || i == 0)
 					close(data->pps->p_fd[j][0]);
 				if (i == data->pps->p_c || i != j)
 					close(data->pps->p_fd[j][1]);

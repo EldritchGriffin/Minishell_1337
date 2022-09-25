@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:13:23 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/24 20:17:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_path(char **cmd, t_data *data)
 		if (!access(bin, F_OK | X_OK | R_OK))
 			break ;
 	}
-	return (bin);
+	return (free_tab(path_split), bin);
 }
 
 void	exec_cmd(t_exc *exc, char *bin, char **envp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/24 05:15:37 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 03:16:50 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 	i = -1;
 	while (str[++i])
 	{
+		if(i == 0 && i == '=')
+		{
+			printf("invalid identifier\n");
+			return (NULL);
+		}
 		if (str[i] == '=')
 		{
 			if (str[i - 1] == '+')
@@ -60,7 +65,7 @@ static	char	**splt(char	*str, bool *mode, char	**spltd)
 	return (spltd);
 }
 
-static void	fill_export(char	*str, t_data	*data)
+void	fill_export(char	*str, t_data	*data)
 {
 	bool	mode;
 	t_env	*tmp;
@@ -73,13 +78,15 @@ static void	fill_export(char	*str, t_data	*data)
 	spltd[1] = NULL;
 	spltd[2] = NULL;
 	spltd = splt(str, &mode, spltd);
+	if(!spltd)
+		return ;
 	if (mode)
 		return (append_env(data, spltd), (void)0);
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, spltd[0]))
 		{
-			if (tmp->value)
+			if (tmp->value && !spltd[1])
 				return ;
 			else if (!spltd[1])
 				tmp->value = NULL;
@@ -100,7 +107,7 @@ void	ft_export(t_data	*data)
 
 	i = 1;
 	tmp = data->cmd->next;
-	if (!tmp || data->exc->out_file != 1)
+	if (!tmp || data->exc->out_file != 1 || tmp->type == SPC)
 		return (sorted_env(data->env, data), (void)0);
 	while (tmp)
 	{

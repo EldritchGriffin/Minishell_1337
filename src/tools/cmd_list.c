@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:20:26 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:35:19 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 00:22:35 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_cmd	*new_node_cmd(char *str, t_tokens type, bool operator, t_data *data)
 {
 	t_cmd	*new_node;
 
-	new_node = ft_malloc(sizeof(t_cmd), &data->ptrs);
+	new_node = malloc(sizeof(t_cmd));
 	if (!new_node)
 		return (NULL);
 	new_node->str = str;

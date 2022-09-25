@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   built_ins.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/24 00:04:20 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 16:53:52 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	identify_builtin(t_data *data)
+int	identify_builtin(t_data *data, t_exc	*cmd)
 {
-	char	*str;
-
-	if (!data->cmd)
+	if (!cmd)
 		return (1);
-	str = ft_strdup(data->cmd->str);
-	if (!ft_strcmp(str, "echo"))
-		return (ft_echo(data), 0);
-	if (!ft_strcmp(str, "cd"))
+	if (!ft_strcmp(data->exc->str[0], "echo"))
+		return (ft_echo(cmd), 0);
+	if (!ft_strcmp(data->exc->str[0], "cd"))
 		return (ft_cd(data), 0);
-	if (!ft_strcmp(str, "pwd"))
+	if (!ft_strcmp(data->exc->str[0], "pwd"))
 		return (ft_pwd(data), 0);
-	if (!ft_strcmp(str, "export"))
+	if (!ft_strcmp(data->exc->str[0], "export"))
 		return (ft_export(data), 0);
-	if (!ft_strcmp(str, "unset"))
+	if (!ft_strcmp(data->exc->str[0], "unset"))
 		return (ft_unset(data), 0);
-	if (!ft_strcmp(str, "env"))
+	if (!ft_strcmp(data->exc->str[0], "env"))
 		return (print_env(data->env, data), 0);
-	if (!ft_strcmp(str, "exit"))
+	if (!ft_strcmp(data->exc->str[0], "exit"))
 		return (exit(0), 0);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 04:21:53 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 00:25:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	initialize(t_data *data, char **line)
 {
 	data->cmd = NULL;
 	data->exc = NULL;
-	data->ptrs = NULL;
 	*line = NULL;
 }
 
@@ -30,9 +29,9 @@ int	main(int ac, char **av, char	**envp)
 	(void)av;
 	data.pps = malloc(sizeof(t_pipe));
 	initialize(&data, &line);
+	data.env = env_list(envp);
 	while (1)
 	{
-		data.env = env_list(envp);
 		line = ft_strtrim(readline("Guest@\033[0;35mMinishell$: \033[0;37m")\
 				, " ");
 		if (!line)
@@ -45,6 +44,7 @@ int	main(int ac, char **av, char	**envp)
 			add_history(line);
 			ft_shell(line, &data, data.env, envp);
 			initialize(&data, &line);
+			//system("leaks Minishell");
 		}
 	}
 	ft_putstr_fd("\b\b  \b\bexit\n", 2);

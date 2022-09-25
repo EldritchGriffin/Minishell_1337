@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:39:24 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/24 20:14:33 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,5 @@ void	build_exc_list(char **tab, t_data *data)
 		cmd = ft_split(ft_strdup(tab[i]), ' ');
 		exc_list(cmd, data);
 	}
+	// free_tab(cmd);
 }

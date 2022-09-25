@@ -3,64 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:59:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/24 05:14:12 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 18:36:08 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static t_cmd	*check_opt(t_cmd	*tmp, bool *n_opt)
+static	int	check_opt(t_exc	*exc, bool	*mode)
 {
-	int	i;
+	int i;
+	int	j;
+	t_exc	*tmp;
 
-	i = 1;
-	*n_opt = false;
-	while (tmp)
+	i = 0;
+	j = 0;
+	tmp = exc;
+	*mode = false;
+	while (exc->str[++i])
 	{
-		if (tmp->type == SPC)
-			tmp = tmp->next;
-		if (tmp->str[0] == '-')
+		j = 0;
+		if(exc->str[i][j++] == '-' && exc->str[i][1] == 'n')
 		{
-			while (tmp->str[i])
-			{
-				if (tmp->str[i] != 'n')
-					return (tmp);
-				i++;
-			}
-			*n_opt = true;
+			while(exc->str[i][j] == 'n')
+				j++;
+			if(!exc->str[i][j])
+				*mode = true;
+			else
+				return (i);
 		}
 		else
-			return (tmp);
-		tmp = tmp->next;
+			break;
 	}
-	return (tmp);
+	return (i);
 }
 
-void	ft_echo(t_data *data)
+void	ft_echo(t_exc	*exc)
 {
-	t_cmd	*tmp;
-	bool	n_opt;
+	int	i;
+	bool	mode;
 
-	tmp = data->cmd->next;
-	tmp = check_opt(tmp, &n_opt);
-	while (tmp)
+	i = check_opt(exc, &mode);
+	if(!exc->str[1])
 	{
-		if (tmp->next && tmp->type == SPC)
-			tmp = tmp->next;
-		if (tmp->type != WORD && tmp->type != D_QUOTES
-			&& tmp->type != S_QUOTES && tmp->type != VARIABLE)
-			break ;
-		ft_putstr_fd(tmp->str, data->exc->out_file);
-		tmp = tmp->next;
-		if (tmp)
-		{
-			if (tmp->type == SPC)
-				ft_putstr_fd(" ", data->exc->out_file);
-		}
+		if(!mode)
+			return(ft_putstr_fd("\n", exc->out_file), (void)0);
+		else
+			return;
+
 	}
-	if (!n_opt)
-		ft_putstr_fd("\n", data->exc->out_file);
+	while(exc->str[i])
+	{
+		ft_putstr_fd(exc->str[i], exc->out_file);
+			if(exc->str[i + 1])
+				ft_putstr_fd(" ", exc->out_file);
+		i++;
+	}
+	if(!mode)
+		ft_putstr_fd("\n", exc->out_file);
 }

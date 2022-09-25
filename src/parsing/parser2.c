@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:02:25 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/24 20:07:14 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
-	free(tab);
+	// free(tab);
 	return (NULL);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 15:25:33 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/10 08:12:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 00:23:33 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ size_t	ft_strlcat(char	*dst, const char *src, size_t dstzie);
 int		ft_lstsize(t_ptr *lst);
 void	ft_lstadd_back(t_ptr **lst, t_ptr *new);
 void	ft_lstadd_front(t_ptr **lst, t_ptr *new);
-void	destroy(t_ptr **lst);
-void    *ft_malloc(int size, t_ptr **ptrs);
 void	ft_lstdelone(t_ptr *lst);
 void	ft_lstiter(t_ptr *lst, void (*f)(void *));
 char	*ft_strcat(char *dest, char *src);

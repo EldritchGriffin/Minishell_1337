@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 03:49:29 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:21:48 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 00:23:07 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_exc	*new_node_exc(char **str, t_data *data)
 {
 	t_exc	*new_node;
 
-	new_node = ft_malloc(sizeof(t_exc), &data->ptrs);
+	new_node = malloc(sizeof(t_exc));
 	if (!new_node)
 		return (NULL);
 	new_node->str = str;
