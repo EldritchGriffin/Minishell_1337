@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:20 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:00:10 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:37:58 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	quotes_error(char c)
 
 void	unexpected_token(char c)
 {
-	printf("Minishell: syntax error near\
+	printf  ("Minishell: syntax error near\
 		 unexpexted token `%c\"\n", c);
 }
 

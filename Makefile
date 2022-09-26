@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
+#    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/24 20:06:21 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/09/26 05:42:14 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := $(SRC:.c=.o)
 CC          := 	gcc
-GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g
+GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g #-static-libsan -fsanitize=address
 HEADER      := $(HEADER_DIR)/minishell.h
 NAME        := Minishell
 RECOMPILING := echo "     $(YELLOW)Recompiling..........$(YELLOW)"

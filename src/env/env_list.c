@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/24 05:26:01 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:39:06 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	print_env(t_env *env, t_data *data)
 	tmp = env;
 	if (!tmp)
 	{
-		printf("its true \n\n\n");
 		tmp = env_list(&str);
 	}
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 05:58:06 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:56:15 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ int		rederection_check(t_exc **exc, int her_file);
 
 void	ft_cd(t_data	*data);
 void	ft_echo(t_exc	*exc);
-void	ft_export(t_data	*data);
+void	ft_export(t_exc	*cmd, t_data	*data);
 void	ft_unset(t_data	*data);
 
 //---------exc_list---------------------------------------------------------/

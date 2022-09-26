@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:07:59 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:39:26 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	here_doc(t_cmd *delemiter, t_data *data)
 		}
 		if (!str)
 		{
-			printf("\b\b  \b\b\n");
 			break ;
 		}
 		if (!ft_strcmp(delemiter->str, str))

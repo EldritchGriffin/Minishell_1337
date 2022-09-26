@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:09:27 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 02:36:09 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:56:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,5 @@ void	ft_cd(t_data	*data)
 	if (tmp->next)
 		tmp = tmp->next;
 	if (chdir(tmp->next->str) == -1)
-		return (printf("(%s) No such file or directory\n", tmp->next->str), (void)0);
-	else
-		fill_export(ft_strjoin("OLDPWD=", data->path), data);
+		return (printf ("(%s) No such file or directory\n", tmp->next->str), (void)0);
 }

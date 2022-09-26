@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 18:35:03 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/26 05:46:32 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    print_cmd(t_cmd *cmd)
 {
     while(cmd)
     {
-        printf("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
+        printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
         cmd = cmd->next;
     }
 }
@@ -30,8 +30,8 @@ void print_exc(t_exc *exc)
 	{
 		i = -1;
 		while(exc->str[++i])
-			printf("exc ========= is[%s]\n", exc->str[i]);
-		printf("MOVING  to the next\n");
+			printf  ("exc ========= is[%s]\n", exc->str[i]);
+		printf  ("MOVING  to the next\n");
 		exc = exc->next;
 	}	
 }
@@ -52,15 +52,17 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	}
 	else
 	{
-		bin = get_path(exc->str, data);
 		rederection_check(&exc, her_file);
 		if (!identify_builtin(data, exc))
 			return ;
 		if (!exc->str[0])
 			return ;
 		else
+		{
+			bin = get_path(exc->str, data);
 			exec_cmd(exc, bin, envp);
-		free (bin);
+			free (bin);
+		}
 	}
 	// free_cmd(data);
 	// free_exc(data);
@@ -90,7 +92,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 		var_expnd(data);
 		tab = parse_args(data);
 		if (tab)
-		{	
+		{
 			build_exc_list(tab, data);
 			print_exc(data->exc);
 			data->pps->p_c = check_pipes(data->exc);

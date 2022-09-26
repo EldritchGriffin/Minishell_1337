@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:09:16 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 03:28:54 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:55:39 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	sorted_env(t_env *env, t_data *data)
 	i = 0;
 	str_to_env = env_to_str(env, data);
 	str = ft_split(str_to_env, '\n');
+	free(str_to_env);
 	sort_env(str, envtab_len(str));
 	while (str[i])
 	{

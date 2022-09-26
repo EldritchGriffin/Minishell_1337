@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/24 05:31:06 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 20:56:35 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*join_expnd(char **spltd, t_env *env, int count)
 	{
 		if (spltd[count][0] == '$')
 			spltd[count] = find_var(spltd[count], env);
-		ft_strcat(str, spltd[count]);
+		str = ft_strjoin(str, spltd[count]);
 		count--;
 	}
 	return (str);

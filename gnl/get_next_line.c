@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:46:18 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/14 13:06:08 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:38:28 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,3 @@ char	*get_next_line(int fd)
 	str = ft_rest(str);
 	return (line);
 }
-
-// int main(void)
-// {
-//     char *str;
-//     int fd = open("multiple_nlx5", O_RDONLY);
-//      str = get_next_line(fd);
-//      printf("%s", str);
-//      str = get_next_line(fd);
-//      printf("%s", str);
-//       str = get_next_line(fd);
-//      printf("%s", str);
-//       str = get_next_line(fd);
-//      printf("%s", str);
-//        str = get_next_line(fd);
-//      printf("%s", str);
-// }

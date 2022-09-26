@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 16:53:52 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:48:09 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	identify_builtin(t_data *data, t_exc	*cmd)
 	if (!ft_strcmp(data->exc->str[0], "pwd"))
 		return (ft_pwd(data), 0);
 	if (!ft_strcmp(data->exc->str[0], "export"))
-		return (ft_export(data), 0);
+		return (ft_export(cmd, data), 0);
 	if (!ft_strcmp(data->exc->str[0], "unset"))
 		return (ft_unset(data), 0);
 	if (!ft_strcmp(data->exc->str[0], "env"))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 20:17:39 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/26 05:44:30 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	ft_dup(int *in_save, int *out_save)
 
 static void	ft_cat(char **bin, char *path_split, char *cmd)
 {
-	ft_strcat(*bin, path_split);
-	ft_strcat(*bin, "/");
-	ft_strcat(*bin, cmd);
+	*bin = ft_strjoin(*bin, path_split);
+	*bin = ft_strjoin(*bin, "/");
+	*bin = ft_strjoin(*bin, cmd);
 }
 
 static void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1)
@@ -69,6 +69,7 @@ char	*get_path(char **cmd, t_data *data)
 		ft_cat(&bin, path_split[i], cmd[0]);
 		if (!access(bin, F_OK | X_OK | R_OK))
 			break ;
+		//free(bin);
 	}
 	return (free_tab(path_split), bin);
 }
@@ -87,10 +88,11 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
+		printf("bin ==== %s\n", bin);
 		status = execve(bin, exc->str, envp);
 		if (status == -1)
 		{
-			printf("Minishell : %s: command not found\n", exc->str[0]);
+			printf  ("Minishell : %s: command not found\n", exc->str[0]);
 			exit(EXIT_FAILURE);
 		}
 	}

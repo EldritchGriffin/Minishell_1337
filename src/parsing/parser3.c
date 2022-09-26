@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 20:14:33 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:39:48 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 		if (!check)
 		{
 			str = ft_strjoin(str, (*exc)->str[i]);
-			ft_strcat(str, ":");
+			str = ft_strjoin(str, ":");
 		}
 	}
 	return (str);
@@ -71,8 +71,10 @@ int	rederection_check(t_exc **exc, int her_file)
 	i = -1;
 	tmp = *exc;
 	str = get_redirection(&tmp, her_file, &result);
-	if (result)
+	if (result) {
 		(*exc)->str = ft_split(str, ':');
+
+	}
 	free(str);
 	return (result);
 }

@@ -6,119 +6,142 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 03:16:50 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/26 05:29:23 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static	bool	append_env(t_data	*data, char	**spltd)
+static	int check_identifier(char	*str)
 {
-	t_env	*tmp;
+	int i;
 
-	tmp = data->env;
-	while (tmp)
+	i = 0;
+	if(str[0] != '_' && !ft_isalpha(str[0]))
+		return (1);
+	while(str[++i])
 	{
-		if (!ft_strcmp(tmp->key, spltd[0]))
-		{
-			if (spltd[1])
-				ft_strcat(tmp->value, spltd[1]);
-			return (true);
-		}
-		tmp = tmp->next;
+		if(str[i] != '_' && !ft_isalnum(str[i]))
+			return (1);
 	}
-	add_back_env(&data->env, new_node_env(spltd[0], spltd[1]));
-	return (true);
+	return (0);
 }
 
-static	char	**splt(char	*str, bool *mode, char	**spltd)
+static	char	*get_key(char	*str, bool	*mode)
 {
-	int		i;
+	int i;
+	char	*key;
+
+	i = 0;
+	*mode = false;
+	while(str[i] && str[i] != '=')
+		i++;
+	if(str[i] == '=' && str[i - 1] == '+')
+		*mode = true;
+	if(*mode)
+		key = ft_substr(str, 0, i - 1);
+	else
+		key = ft_substr(str, 0, i);
+	if(check_identifier(key))
+	{
+		printf("invalid identifier (%s)\n", key);
+		free(key);
+		return (NULL);
+	}
+	return (key);
+}
+
+static	char	*get_value(char	*str)
+{
+	int	i;
+	char	*val;
 
 	i = -1;
-	while (str[++i])
+	while(str[++i])
 	{
-		if(i == 0 && i == '=')
+		if(str[i] == '=')
 		{
-			printf("invalid identifier\n");
-			return (NULL);
-		}
-		if (str[i] == '=')
-		{
-			if (str[i - 1] == '+')
-			{
-				*mode = true;
-				i--;
-			}
-			spltd[0] = ft_substr(str, 0, i);
-			break ;
+			val = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
+			return (val);
 		}
 	}
-	if (!spltd[0])
-		spltd[0] = ft_strdup(str);
-	else
-	{
-		if (*mode)
-			i++;
-		spltd[1] = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
-	}
-	return (spltd);
+	return (NULL);
 }
 
-void	fill_export(char	*str, t_data	*data)
+static void	append_env(t_data	*data, char	*key, char	*val)
 {
-	bool	mode;
 	t_env	*tmp;
-	char	**spltd;
-	int		i;
+	char	*ptr;
 
 	tmp = data->env;
-	spltd = malloc(sizeof(char *) * 3);
-	spltd[0] = NULL;
-	spltd[1] = NULL;
-	spltd[2] = NULL;
-	spltd = splt(str, &mode, spltd);
-	if(!spltd)
-		return ;
-	if (mode)
-		return (append_env(data, spltd), (void)0);
-	while (tmp)
+	while(tmp)
 	{
-		if (!ft_strcmp(tmp->key, spltd[0]))
+		if(!ft_strcmp(key, tmp->key))
 		{
-			if (tmp->value && !spltd[1])
-				return ;
-			else if (!spltd[1])
-				tmp->value = NULL;
+			if(!tmp->value)
+				tmp->value = ft_strdup(val);
 			else
-				tmp->value = ft_strdup(spltd[1]);
+			{
+				ptr = tmp->value;
+				tmp->value = ft_strjoin(tmp->value, ft_strdup(val));
+				free(ptr);
+			}
 			return ;
 		}
 		tmp = tmp->next;
 	}
-	add_back_env(&data->env, new_node_env(spltd[0], spltd[1]));
+	add_back_env(&data->env, new_node_env(ft_strdup(key), ft_strdup(val)));
 }
 
-void	ft_export(t_data	*data)
+static void	do_export(t_data	*data, char	*key, char	*val, bool mode)
 {
-	t_cmd	*tmp;
-	char	*str;
-	int		i;
+	t_env	*tmp;
+
+	tmp = data->env;
+	if(mode)
+	{
+		append_env(data, key, val);
+		return ;
+	}
+	while(tmp)
+	{
+		if(!ft_strcmp(key, tmp->key))
+		{
+			if(!val)
+				return;
+			free(tmp->value);
+			tmp->value = ft_strdup(val);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+	if(val)
+		add_back_env(&data->env, new_node_env(ft_strdup(key), ft_strdup(val)));
+	else
+		add_back_env(&data->env, new_node_env(ft_strdup(key), NULL));
+}
+
+void	ft_export(t_exc	*cmd, t_data	*data)
+{
+	int 	i;
+	char	*key;
+	char	*val;
+	bool	mode;
 
 	i = 1;
-	tmp = data->cmd->next;
-	if (!tmp || data->exc->out_file != 1 || tmp->type == SPC)
-		return (sorted_env(data->env, data), (void)0);
-	while (tmp)
+	if(!cmd->str[i])
+		return (sorted_env(data->env, data), (void) 0);
+	while(cmd->str[i])
 	{
-		if (tmp->next && tmp->type == SPC)
-			tmp = tmp->next;
-		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
-			break ;
-		str = tmp->str;
-		if (tmp->type == D_QUOTES || tmp->type == S_QUOTES)
-			str = rmv_quotes(tmp->str);
-		fill_export(str, data);
-		tmp = tmp->next;
+		key = get_key(cmd->str[i], &mode);
+		if(key)
+		{
+			val = get_value(cmd->str[i]);
+			do_export(data, key, val, mode);
+			free(key);
+			if(val)
+				free(val);
+		}
+		i++;
 	}
 }
