@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 03:49:29 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 00:23:07 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:36:35 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_exc	*new_node_exc(char **str, t_data *data)
 	return (new_node);
 }
 
-static void	add_back_exc(t_exc **exc, t_exc *new_node)
+void	add_back_exc(t_exc **exc, t_exc *new_node)
 {
 	t_exc	*tmp;
 

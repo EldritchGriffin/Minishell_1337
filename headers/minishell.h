@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 02:12:30 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:58:47 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,8 @@ char	**i_split(const char *s, char *c);
 void	mini_perror(int type);
 
 //--------------------------------------------------------------------------
-
+void	add_back_exc(t_exc **exc, t_exc *new_node);
+int		ft_count_pipes(t_data *data);
 int		ft_pipe_check(char *line, t_tokens type);
 bool	ft_check_input(char *input);
 void	ft_shell(char *line, t_data *data, t_env *env, char **envp);
@@ -184,7 +185,6 @@ void	print_cmd(t_cmd *cmd);
 char	*get_redirection(t_exc **exc, int her_file, int *result);
 int		rederection_check(t_exc **exc, int her_file);
 //----------------Built-ins------------------------------------------------/
-
 int		check_identifier(char	*str);
 void	ft_cd(t_data	*data);
 void	ft_echo(t_exc	*exc);
@@ -193,9 +193,10 @@ void	ft_unset(t_exc	*cmd, t_data *data);
 
 //---------exc_list---------------------------------------------------------/
 
+void    fill_exclist(t_cmd  *cmd, t_data    *data);
+char    **prep_excstr(t_cmd *cmd);
 void	exc_list(char **str, t_data *data);
 t_exc	*new_node_exc(char **str, t_data *data);
-void	build_exc_list(char **tab, t_data *data);
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------

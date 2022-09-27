@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 02:31:26 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:56:12 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	else
 	{
 		rederection_check(&exc, her_file);
-		if (!identify_builtin(data, exc))
-			return ;
 		if (!exc->str[0])
+			return ;
+		if (!identify_builtin(data, exc))
 			return ;
 		else
 		{
@@ -84,17 +84,17 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 	tmp = &data->cmd;
 	if (build_token_list(line, data, &her_file))
 	{
+		var_expnd(data);
 		while ((*tmp))
 		{
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
-		var_expnd(data);
-		tab = parse_args(data);
 		if (tab)
 		{
-			build_exc_list(tab, data);
-			//print_exc(data->exc);
+			fill_exclist(data->cmd, data);
+			// print_exc(data->exc);
+			//print_cmd(data->cmd);
 			data->pps->p_c = check_pipes(data->exc);
 			cmd_call(data->exc, data, envp, her_file);
 			// free_cmd(data);
