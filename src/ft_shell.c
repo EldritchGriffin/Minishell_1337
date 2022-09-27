@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/26 05:46:32 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 02:31:26 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 		if (tab)
 		{
 			build_exc_list(tab, data);
-			print_exc(data->exc);
+			//print_exc(data->exc);
 			data->pps->p_c = check_pipes(data->exc);
 			cmd_call(data->exc, data, envp, her_file);
 			// free_cmd(data);

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 05:41:37 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 02:28:12 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		{
 			close(data->pps->p_fd[i][1]);
 			dup2(tmp->out_file, data->pps->p_fd[i][1]);
-			close(tmp->out_file);
 		}
 		pids[i] = fork();
 		if (pids[i] == 0)
@@ -85,7 +84,11 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 				dup2(data->pps->p_fd[i][1], STDOUT_FILENO);
 				close(data->pps->p_fd[i][1]);
 			}
-			execve(get_path(tmp->str, data), tmp->str, envp);
+			if(!identify_builtin(data, tmp))
+				close(tmp->out_file);
+			else
+				if(execve(get_path(tmp->str, data), tmp->str, envp) == -1)
+					printf  ("Minishell : %s: command not found\n", tmp->str[0]);
 			exit(EXIT_FAILURE);
 		}
 		tmp = tmp->next;

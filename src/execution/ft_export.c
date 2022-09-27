@@ -6,26 +6,11 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/26 05:29:23 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 02:12:09 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-static	int check_identifier(char	*str)
-{
-	int i;
-
-	i = 0;
-	if(str[0] != '_' && !ft_isalpha(str[0]))
-		return (1);
-	while(str[++i])
-	{
-		if(str[i] != '_' && !ft_isalnum(str[i]))
-			return (1);
-	}
-	return (0);
-}
 
 static	char	*get_key(char	*str, bool	*mode)
 {

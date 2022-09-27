@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/26 05:42:03 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:23:28 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char	**envp)
 			add_history(line);
 			ft_shell(line, &data, data.env, envp);
 			initialize(&data, &line);
-			system("leaks Minishell");
+			//system("leaks Minishell");
 		}
 	}
 	ft_putstr_fd("\b\b  \b\bexit\n", 2);

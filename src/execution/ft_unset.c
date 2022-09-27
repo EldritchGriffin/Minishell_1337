@@ -6,39 +6,72 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:15:55 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 02:46:14 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 02:38:21 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-// funtion has more than 25 line
-void	ft_unset(t_data *data)
+
+void	set_null(t_env	*env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while(tmp->next->next)
+		tmp = tmp->next;
+	free(tmp->next->key);
+	if(tmp->next->value)
+		free(tmp->next->value);
+	free(tmp->next);
+	tmp->next = NULL;
+}
+
+t_env	*find_node(char	*str, t_data	*data)
 {
 	t_env	*env;
-	t_cmd	*tmp;
-	char	*str;
+	t_env	*node;
 
 	env = data->env;
-	tmp = data->cmd->next;
-	while (tmp)
+	if(!ft_strcmp(env->key, str))
+		return (node = data->env, data->env = env->next, node);
+	while(env->next)
 	{
-		env = data->env;
-		if (tmp->type == SPC)
-			tmp = tmp->next;
-		if (tmp->type != WORD && tmp->type != D_QUOTES && tmp->type != S_QUOTES)
-			break ;
-		while (env)
+		if(!ft_strcmp(env->next->key, str))
+			return (node = env->next, env->next = env->next->next, node);
+		env = env->next;
+	}
+	if(!ft_strcmp(env->key, str))
+	{
+		set_null(data->env);
+		return (NULL);
+	}
+	return (NULL);
+}
+
+void	free_node(t_env	*node)
+{
+	free(node->key);
+	if(node->value)
+		free(node->value);
+	free(node);
+}
+
+void	ft_unset(t_exc	*cmd, t_data *data)
+{
+	int	i;
+	t_env	*node;
+
+	i = 1;
+	while(cmd->str[i])
+	{
+		if(!check_identifier(cmd->str[i]))
 		{
-			if (env->next)
-			{
-				if (!ft_strcmp(env->next->key, tmp->str))
-					break ;
-			}
-			env = env->next;
+			node = find_node(cmd->str[i], data);
+			if(node)
+				free_node(node);
 		}
-		if (!env)
-			break ;
-		env->next = env->next->next;
-		tmp = tmp->next;
-	}	
+		else
+			printf("invalid identifier (%s)\n", cmd->str[i]);
+		i++;
+	}
 }
