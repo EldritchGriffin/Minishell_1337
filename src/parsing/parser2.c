@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 20:56:54 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:57:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ char	**free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
-	// free(tab);
+	free(tab);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 05:59:49 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 06:56:50 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,14 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
-			fill_exclist(data->cmd, data);
-			data->pps->p_c = check_pipes(data->exc);
-			// free_cmd(data);
-			cmd_call(data->exc, data, envp, her_file);
-			// free_exc(data);
-	}
+		fill_exclist(data->cmd, data);
+		// print_exc(data->exc);
+		print_cmd(data->cmd);
+		data->pps->p_c = check_pipes(data->exc);
+		cmd_call(data->exc, data, envp, her_file);
+		// free_cmd(data);
+		// free_exc(data);
+		// free_env(data);
+}
 	// initalize_data(&data);
 }

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 05:42:56 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 06:59:26 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,10 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_exc{
+typedef struct s_exc
+{
 	char			**str;
+	char			*flg;
 	int				in_file;
 	int				out_file;
 	struct s_exc	*next;
@@ -95,11 +97,12 @@ typedef struct s_types
 }			t_types;
 typedef struct s_data
 {
-	t_cmd	 *cmd;
-	t_env	 *env;
-	t_exc	 *exc;
-	t_pipe	 *pps;
+	t_cmd	*cmd;
+	t_env	*env;
+	t_exc	*exc;
+	t_pipe	*pps;
 	t_types *tokens;
+	int		x_st;
 	char	path[PATH_MAX];
 }			t_data;
 
@@ -200,6 +203,7 @@ void	ft_unset(t_exc	*cmd, t_data *data);
 
 //---------exc_list---------------------------------------------------------/
 
+char    *flag_str(t_cmd *cmd);
 void    fill_exclist(t_cmd  *cmd, t_data    *data);
 char    **prep_excstr(t_cmd *cmd);
 void	exc_list(char **str, t_data *data);
