@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/27 02:28:12 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 10:48:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 {
 	t_exc	*tmp;
 	int		*pids;
+	int		status;
 	int		i;
 	int		j;
 
@@ -62,6 +63,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		{
 			close(data->pps->p_fd[i][1]);
 			dup2(tmp->out_file, data->pps->p_fd[i][1]);
+			close(tmp->out_file);
 		}
 		pids[i] = fork();
 		if (pids[i] == 0)
@@ -87,9 +89,14 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 			if(!identify_builtin(data, tmp))
 				close(tmp->out_file);
 			else
-				if(execve(get_path(tmp->str, data), tmp->str, envp) == -1)
-					printf  ("Minishell : %s: command not found\n", tmp->str[0]);
-			exit(EXIT_FAILURE);
+				{
+					if(execve(get_path(tmp->str, data), tmp->str, envp) == -1)
+					{
+						x_st = 127;
+						printf  ("Minishell : %s: command not found\n", tmp->str[0]);
+					}
+				}
+			exit(x_st);
 		}
 		tmp = tmp->next;
 		i++;
@@ -102,5 +109,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	}
 	i = -1;
 	while (++i <= data->pps->p_c)
-		wait(NULL);
+		wait(&status);
+	if (WIFEXITED(status)) 
+        x_st = WEXITSTATUS(status);
 }

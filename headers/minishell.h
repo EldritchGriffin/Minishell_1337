@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 04:18:01 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 09:05:57 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ typedef struct s_data
 	t_env	*env;
 	t_exc	*exc;
 	t_pipe	*pps;
-	int		x_st;
 	char	path[PATH_MAX];
 }				t_data;
 
+int		x_st;
 //-------------- enum strcut contains ---------------------------------------
 
 int		here_doc(t_cmd *delemiter, t_data *data);

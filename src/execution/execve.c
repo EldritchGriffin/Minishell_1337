@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 23:25:38 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:08:01 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*get_ev(t_data *data, char *str)
 			return (tmp->value);
 	tmp = tmp->next;
 	}
-	return (NULL);
+	return ("\0");
 }
 
 static void	ft_dup(int *in_save, int *out_save)
@@ -49,12 +49,13 @@ char	*get_path(char **cmd, t_data *data)
 {
 	char	*path;
 	char	*bin;
+	char 	*str;
 	char	**path_split;
 	int		i;
 
 	path = ft_strdup(get_ev(data, "PATH"));
-	if (!path || !cmd[0])
-		return (NULL);
+	if (!*path)
+		return(cmd[0]);
 	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2 ) == 0))
 		return (cmd[0]);
 	path_split = ft_split(path, ':');
@@ -67,11 +68,10 @@ char	*get_path(char **cmd, t_data *data)
 		if (!bin)
 			return (NULL);
 		ft_cat(&bin, path_split[i], cmd[0]);
-		if (!access(bin, F_OK | X_OK | R_OK))
-			break ;
-		//free(bin);
+		if (access(bin, F_OK | X_OK | R_OK) == 0)
+			return (bin);
 	}
-	return (free_tab(path_split), bin);
+	return (free_tab(path_split), cmd[0]);
 }
 
 void	exec_cmd(t_exc *exc, char *bin, char **envp)
@@ -88,15 +88,17 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 	pid = fork();
 	if (pid == 0)
 	{
-		printf("bin ==== %s\n", bin);
 		status = execve(bin, exc->str, envp);
 		if (status == -1)
 		{
+			x_st = 127;
 			printf  ("Minishell : %s: command not found\n", exc->str[0]);
-			exit(EXIT_FAILURE);
+			exit(x_st);
 		}
 	}
 	waitpid(pid, &status, 0);
+	if (WIFEXITED(status)) 
+        x_st = WEXITSTATUS(status);
 	if (exc->in_file != 0)
 		close(exc->in_file);
 	if (exc->out_file != 1)

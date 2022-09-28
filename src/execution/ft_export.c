@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/27 02:12:09 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 09:19:09 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static	char	*get_key(char	*str, bool	*mode)
 		key = ft_substr(str, 0, i);
 	if(check_identifier(key))
 	{
+		x_st = 1598;
 		printf("invalid identifier (%s)\n", key);
 		free(key);
 		return (NULL);
@@ -129,4 +130,8 @@ void	ft_export(t_exc	*cmd, t_data	*data)
 		}
 		i++;
 	}
+	if(x_st == 1598)
+		x_st = 1;
+	else
+		x_st = 0;
 }

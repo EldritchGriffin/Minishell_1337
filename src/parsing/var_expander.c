@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 20:56:35 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 10:52:29 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,24 @@ void var_expnd(t_data *data)
 			tmp = tmp->next;
 		if (tmp->type == VARIABLE)
 		{
-			tmp->str = find_var(tmp->str, data->env);
-			tmp->type = WORD;
+			if(!ft_strcmp(tmp->str, "$0"))
+			{
+				free(tmp->str);
+				tmp->str = ft_strdup("Minishell");
+				tmp->type = WORD;
+			}
+			else if(!ft_strcmp(tmp->str, "$?"))
+			{
+				free(tmp->str);
+				tmp->str = ft_itoa(x_st);
+				tmp->type = WORD;
+			}
+			else
+			{
+				free(tmp->str);
+				tmp->str = find_var(tmp->str, data->env);
+				tmp->type = WORD;
+			}
 		}
 		if (tmp->type == EXPND_VB)
 		{

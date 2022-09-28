@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 21:39:06 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 09:36:26 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	print_env(t_env *env, t_data *data)
 		}
 		tmp = tmp->next;
 	}
+	x_st = 0;
 }
 
 void	add_back_env(t_env **env, t_env    *new_node)
