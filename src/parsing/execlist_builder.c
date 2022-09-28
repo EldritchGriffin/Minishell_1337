@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execlist_builder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:51:07 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/27 21:48:56 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:08:01 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ char    **prep_excstr(t_cmd *cmd)
             i++;
         cmd = cmd->next;
     }
-    str = malloc(sizeof(char    *) * (i + 1));
+    str = malloc(sizeof(char *) * (i + 1));
+    if(!str)
+        return(NULL);
     str[i] = NULL;
     return (str);
 }
@@ -68,6 +70,7 @@ void    build_exclist(t_cmd  *cmd, t_data    *data)
         }
         cmd = cmd->next;
     }
+    
 }
 
 void    fill_exclist(t_cmd  *cmd, t_data    *data)

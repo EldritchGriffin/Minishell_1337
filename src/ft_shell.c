@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 20:56:12 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:59:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	}
 	else
 	{
+		print_exc(exc);
 		rederection_check(&exc, her_file);
 		if (!exc->str[0])
 			return ;
@@ -64,8 +65,8 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 			free (bin);
 		}
 	}
-	// free_cmd(data);
-	// free_exc(data);
+	free_cmd(data);
+	free_exc(data);
 }
 
 static	void	initalize_data(t_data **data)
@@ -77,30 +78,24 @@ static	void	initalize_data(t_data **data)
 void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 {
 	t_cmd	**tmp;
-	char	**tab;
 	int		her_file;
 
 	her_file = 0;
 	tmp = &data->cmd;
 	if (build_token_list(line, data, &her_file))
 	{
+		free(line);
 		var_expnd(data);
 		while ((*tmp))
 		{
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
-		if (tab)
-		{
 			fill_exclist(data->cmd, data);
-			// print_exc(data->exc);
-			//print_cmd(data->cmd);
 			data->pps->p_c = check_pipes(data->exc);
-			cmd_call(data->exc, data, envp, her_file);
 			// free_cmd(data);
+			cmd_call(data->exc, data, envp, her_file);
 			// free_exc(data);
-			// free_env(data);
-		}
 	}
 	// initalize_data(&data);
 }

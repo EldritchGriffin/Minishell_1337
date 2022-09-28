@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/26 05:44:30 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:12:05 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@ static void	ft_dup(int *in_save, int *out_save)
 
 static void	ft_cat(char **bin, char *path_split, char *cmd)
 {
+	char *tmp;
+	
 	*bin = ft_strjoin(*bin, path_split);
-	*bin = ft_strjoin(*bin, "/");
-	*bin = ft_strjoin(*bin, cmd);
+	tmp = *bin;
+	free(*bin);
+	*bin = ft_strjoin(tmp, "/");
+	tmp = *bin;
+	free(*bin);
+	*bin = ft_strjoin(tmp, cmd);
 }
 
 static void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1)
@@ -62,14 +68,14 @@ char	*get_path(char **cmd, t_data *data)
 	i = -1;
 	while (path_split[++i])
 	{
-		bin = malloc(sizeof(char) * (ft_strlen(path_split[i]) \
+		bin = ft_calloc(sizeof(char), (ft_strlen(path_split[i]) \
 			+ ft_strlen(cmd[0])) + 2);
 		if (!bin)
 			return (NULL);
 		ft_cat(&bin, path_split[i], cmd[0]);
 		if (!access(bin, F_OK | X_OK | R_OK))
 			break ;
-		//free(bin);
+	  free(bin);
 	}
 	return (free_tab(path_split), bin);
 }

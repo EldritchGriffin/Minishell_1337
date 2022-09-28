@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 21:39:06 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:47:10 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_env	*new_node_env(char *key, char *value)
 static char	**fill_extren_env(void)
 {	
 	char	**env;
+	char	**tmp;
 
 	env = malloc(sizeof(char *) * 5);
 	if (!env)
@@ -77,7 +78,9 @@ static char	**fill_extren_env(void)
 	env[2] = ft_strdup("SHLVL=1");
 	env[3] = ft_strdup("_=/usr/bin/env");
 	env[4] = 0;	
-	return (env);
+	tmp = env;
+	free_tab(env);
+	return (tmp);
 }
 
 t_env	*env_list(char **envp)
@@ -99,5 +102,6 @@ t_env	*env_list(char **envp)
 		free(spltd);
 		i++;
 	}
+	// free_tab(envp);
 	return (env);
 }

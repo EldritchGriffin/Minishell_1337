@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 20:55:46 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:18:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,34 +73,33 @@ static int	ft_creat_list(int old_type, t_data *data, int operator, char *line)
 
 //FIXME FUNC HAS MORE THAN 25 LINES
 
-void	get_token(char *line, int *i, int words, t_data	*data)
+int	get_token(char *line, int *i, int words, t_data	*data)
 {
-	int		tmp_type;
-	int		old_type;
 	int		check;
 	char	*str;
 	bool	operator;
 
 	operator = false;
-	tmp_type = get_token_type(line[*i], &operator);
-	old_type = tmp_type;
+	data->tokens->tmp_type = get_token_type(line[*i], &operator);
+	data->tokens->old_type = data->tokens->tmp_type;
 	check = (*i);
 	while (1)
 	{
-		tmp_type = get_token_type(line[*i], &operator);
+		data->tokens->tmp_type = get_token_type(line[*i], &operator);
 		words++;
-		if (ft_break(old_type, tmp_type) || !line[*i])
+		if (ft_break(data->tokens->old_type, data->tokens->tmp_type) || !line[*i])
 			break ;
 		(*i)++;
 	}
-	old_type = redirection_handler(line[check], line[check + 1], \
-			old_type, &operator);
-	if (!check_old_type(line, i, &words, &old_type))
-		return (data->cmd = NULL, (void)0);
+	data->tokens->old_type = redirection_handler(line[check], line[check + 1], \
+			data->tokens->old_type, &operator);
+	if (!check_old_type(line, i, &words, &data->tokens->old_type))
+		return(0);
 	str = ft_substr(line, check, words);
-	ft_creat_list(old_type, data, operator, str);
-	if (operator == true && tmp_type != SPC)
+	ft_creat_list(data->tokens->old_type, data, operator, str);
+	if (operator == true && data->tokens->tmp_type != SPC)
 		cmd_list(ft_strdup(" "), SPC, 0, data);
+	return (1);
 }
 
 int	build_token_list(char *line, t_data *data, int *her_file)
@@ -114,11 +113,13 @@ int	build_token_list(char *line, t_data *data, int *her_file)
 	while (line[++i])
 	{
 		words = -1;
-		get_token(line, &i, words, data);
+		if(!get_token(line, &i, words, data))
+			return (0);
 		i--;
 	}
 	if (!rm_quotes(&data))
 		return (0);
+	print_cmd(data->cmd);
 	if (!check_operatrs_first(data))
 		return (0);
 	herdoc_handler(data, her_file);

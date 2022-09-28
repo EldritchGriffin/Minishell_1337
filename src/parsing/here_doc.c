@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 21:39:26 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:31:58 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ static char	*check_expanding(char *str, t_data *data)
 	}
 	return (str);
 }
-
+static void ft_join(char **str)
+{
+	char *tmp;
+	
+	tmp = *str;
+	free(*str);
+	*str = ft_strjoin(tmp, "\n");
+	free(tmp);
+}
 int	here_doc(t_cmd *delemiter, t_data *data)
 {
 	int		fd[2];
@@ -47,9 +55,10 @@ int	here_doc(t_cmd *delemiter, t_data *data)
 		}
 		if (!ft_strcmp(delemiter->str, str))
 			break ;
-		str = ft_strjoin(str, "\n");
+		ft_join(&str);
 		write(fd[1], str, ft_strlen(str));
 	}
+	free(str);
 	close(fd[1]);
 	return (fd[0]);
 }
