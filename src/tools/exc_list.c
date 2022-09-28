@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 03:49:29 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 19:36:35 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:15:56 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_exc	*new_node_exc(char **str, t_data *data)
 	new_node->str = str;
 	new_node->in_file = 0;
 	new_node->out_file = 1;
+	new_node->flg = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }

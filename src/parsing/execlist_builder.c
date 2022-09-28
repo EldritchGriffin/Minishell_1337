@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:51:07 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/27 21:48:56 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 04:12:02 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,14 @@ void    build_exclist(t_cmd  *cmd, t_data    *data)
     prep_exclist(cmd, data);
     exc = data->exc;
     exc->str = prep_excstr(cmd);
+    exc->flg = flag_str(cmd);
     exc = exc->next;
     while(cmd)
     {
         if(cmd->type == PIPE)
         {
             exc->str = prep_excstr(cmd->next);
+            exc->flg = flag_str(cmd->next);
             exc = exc->next;
         }
         cmd = cmd->next;

@@ -6,11 +6,32 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:59:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/25 21:39:23 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 04:10:17 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+static void	handle_words(t_exc	*exc, int i)
+{
+	char	**spltd;
+	int		j;
+	if(exc->flg[i] == '1')
+	{
+		j = 0;
+		spltd = ft_split(exc->str[i], ' ');
+		while(spltd[j])
+		{
+			ft_putstr_fd(spltd[j], exc->out_file);
+			if(spltd[j + 1])
+				ft_putstr_fd(" ", exc->out_file);
+			j++;
+		}
+		free_tab(spltd);
+	}
+	else
+		ft_putstr_fd(exc->str[i], exc->out_file);
+}
 
 static	int	check_opt(t_exc	*exc, bool	*mode)
 {
@@ -56,9 +77,9 @@ void	ft_echo(t_exc	*exc)
 	}
 	while(exc->str[i])
 	{
-		ft_putstr_fd(exc->str[i], exc->out_file);
-			if(exc->str[i + 1])
-				ft_putstr_fd(" ", exc->out_file);
+		handle_words(exc, i);
+		if(exc->str[i + 1])
+			ft_putstr_fd(" ", exc->out_file);
 		i++;
 	}
 	if(!mode)

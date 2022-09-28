@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 20:56:12 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 02:42:52 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static	void	initalize_data(t_data **data)
 void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 {
 	t_cmd	**tmp;
-	char	**tab;
 	int		her_file;
 
 	her_file = 0;
@@ -90,17 +89,14 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
-		if (tab)
-		{
-			fill_exclist(data->cmd, data);
-			// print_exc(data->exc);
-			//print_cmd(data->cmd);
-			data->pps->p_c = check_pipes(data->exc);
-			cmd_call(data->exc, data, envp, her_file);
-			// free_cmd(data);
-			// free_exc(data);
-			// free_env(data);
-		}
-	}
+		fill_exclist(data->cmd, data);
+		// print_exc(data->exc);
+		print_cmd(data->cmd);
+		data->pps->p_c = check_pipes(data->exc);
+		cmd_call(data->exc, data, envp, her_file);
+		// free_cmd(data);
+		// free_exc(data);
+		// free_env(data);
+}
 	// initalize_data(&data);
 }
