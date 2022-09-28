@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 11:11:22 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:43:50 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static char	**fill_extren_env(void)
 	env[3] = ft_strdup("_=/usr/bin/env");
 	env[4] = 0;	
 	tmp = env;
-	free_tab(env);
 	return (tmp);
 }
 
@@ -103,6 +102,5 @@ t_env	*env_list(char **envp)
 		free(spltd);
 		i++;
 	}
-	// free_tab(envp);
 	return (env);
 }

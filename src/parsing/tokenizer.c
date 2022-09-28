@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/27 23:18:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 11:16:13 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int	build_token_list(char *line, t_data *data, int *her_file)
 	}
 	if (!rm_quotes(&data))
 		return (0);
-	print_cmd(data->cmd);
 	if (!check_operatrs_first(data))
 		return (0);
 	herdoc_handler(data, her_file);

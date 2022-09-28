@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 05:19:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 20:03:02 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char 	*ft_join_exc(char *str, char *cmd)
 	lrt = ft_strjoin(str, cmd);
 	free(str);
 	tmp = lrt;
-	free(lrt);
-	lrt = ft_strjoin(tmp, ":");
+	lrt = ft_strjoin(lrt, ":");
+	free(tmp);
 	return (lrt);
 }
 
@@ -72,8 +72,6 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 		if (!check)
 			str = ft_join_exc(str, (*exc)->str[i]);
 	}
-	// if (*result)
-	// 	free_tab()
 	return (str);
 }
 
@@ -89,25 +87,10 @@ int	rederection_check(t_exc **exc, int her_file)
 	tmp = *exc;
 	str = get_redirection(&tmp, her_file, &result);
 	if (result)
+	{
+		free_tab((*exc)->str);
 		(*exc)->str = ft_split(str, ':');
+	}
 	free(str);
 	return (result);
-}
-
-void	build_exc_list(char **tab, t_data *data)
-{
-	int		i;
-	char	**cmd;
-	int		j;
-
-	j = -1;
-	i = -1;
-	while (tab[++j])
-			tab[j] = ft_strtrim(tab[j], " ");
-	while (++i < exctab_len(tab))
-	{
-		cmd = ft_split(ft_strdup(tab[i]), ' ');
-		exc_list(cmd, data);
-	}
-	// free_tab(cmd);
 }

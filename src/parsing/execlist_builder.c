@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:51:07 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 11:11:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:15:56 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ void    fill_exclist(t_cmd  *cmd, t_data    *data)
         else
         {
             if(cmd->type != SPC)
+            {
                 tmp->str[i++] = ft_strdup(cmd->str);
+            }
         }
         cmd = cmd->next;
     }

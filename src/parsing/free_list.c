@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:20:19 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 05:43:10 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 19:53:04 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	free_cmd(t_data *data)
 	{
 		current = tmp;
 		tmp = tmp->next;
+		free(current->str);
 		free(current);
 	}
-	free(tmp);
 }
 
 void	free_exc(t_data *data)
@@ -39,9 +39,9 @@ void	free_exc(t_data *data)
 		tmp = tmp->next;
 		free_tab(current->str);
 		free(current->str);
+		free(current->flg);
 		free(current);
 	}
-	free(tmp);
 }
 
 void	free_env(t_env *env)
@@ -54,6 +54,9 @@ void	free_env(t_env *env)
 	{
 		current = tmp;
 		tmp = tmp->next;
+		free(current->key);
+		if(current->value)
+			free(current->value);
 		free(current);
 	}
 }
