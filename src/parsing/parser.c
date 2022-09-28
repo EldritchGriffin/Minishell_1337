@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 03:52:53 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 06:57:24 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 	else
 		return ;
 	join = ft_strjoin(str1, str2);
-	new_node = new_node_cmd(join, S_QUOTES, 0, *data);
+	free(str1);
+	free(str2);
+	new_node = new_node_cmd(join, WORD, 0, *data);
 	if ((!(*node)->prev && !(*node_next)->next) 
 		|| (!(*node)->prev && (*node_next)->next))
 	{

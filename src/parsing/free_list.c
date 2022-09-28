@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:20:19 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/23 15:45:51 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:43:10 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	free_exc(t_data *data)
 	free(tmp);
 }
 
-void	free_env(t_data *data)
+void	free_env(t_env *env)
 {
 	t_env	*tmp;
 	t_env	*current;
 
-	tmp = data->env;
+	tmp = env;
 	while (tmp)
 	{
 		current = tmp;

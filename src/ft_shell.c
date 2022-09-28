@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 10:16:57 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:11:04 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	}
 	else
 	{
+		print_exc(exc);
 		rederection_check(&exc, her_file);
 		if (!exc->str[0])
 			return ;
@@ -64,8 +65,8 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 			free (bin);
 		}
 	}
-	// free_cmd(data);
-	// free_exc(data);
+	free_cmd(data);
+	free_exc(data);
 }
 
 static	void	initalize_data(t_data **data)
@@ -83,6 +84,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 	tmp = &data->cmd;
 	if (build_token_list(line, data, &her_file))
 	{
+		free(line);
 		var_expnd(data);
 		while ((*tmp))
 		{

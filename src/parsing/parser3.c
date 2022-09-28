@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 21:39:48 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:19:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@ static int	exctab_len(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
+}
+char 	*ft_join_exc(char *str, char *cmd)
+{
+	char *tmp;
+	char *lrt;
+	
+	
+	lrt = ft_strjoin(str, cmd);
+	free(str);
+	tmp = lrt;
+	free(lrt);
+	lrt = ft_strjoin(tmp, ":");
+	return (lrt);
 }
 
 //FIXME problem with the assigned array, you will probably need to use a pointer instead;
@@ -44,6 +57,11 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 			if (!ft_strcmp((*exc)->str[i], RDS[j]))
 			{
 				check = 1;
+				if (!(*exc)->str[i + 1])
+				{
+					check = 0;
+					break ;
+				}
 				i++;
 				if (!ft_open(&(*exc)->out_file, &(*exc)->in_file, \
 				j, (*exc)->str[i]))
@@ -52,11 +70,10 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 			}
 		}
 		if (!check)
-		{
-			str = ft_strjoin(str, (*exc)->str[i]);
-			str = ft_strjoin(str, ":");
-		}
+			str = ft_join_exc(str, (*exc)->str[i]);
 	}
+	// if (*result)
+	// 	free_tab()
 	return (str);
 }
 
@@ -71,10 +88,8 @@ int	rederection_check(t_exc **exc, int her_file)
 	i = -1;
 	tmp = *exc;
 	str = get_redirection(&tmp, her_file, &result);
-	if (result) {
+	if (result)
 		(*exc)->str = ft_split(str, ':');
-
-	}
 	free(str);
 	return (result);
 }

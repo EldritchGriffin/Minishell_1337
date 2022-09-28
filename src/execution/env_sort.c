@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:09:16 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/25 21:55:39 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 05:24:02 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,5 @@ void	sorted_env(t_env *env, t_data *data)
 		ft_putendl_fd(str[i], data->exc->out_file);
 		i++;
 	}
-	free(str);
+	free_tab(str);
 }

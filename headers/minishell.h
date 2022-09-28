@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 09:05:57 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:11:26 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,21 @@ typedef struct s_pipe
 	int		**p_fd;
 }	t_pipe;
 
+typedef struct s_types
+{
+	int tmp_type;
+	int	old_type;
+}			t_types;
 typedef struct s_data
 {
 	t_cmd	*cmd;
 	t_env	*env;
 	t_exc	*exc;
 	t_pipe	*pps;
+	t_types *tokens;
+	int		x_st;
 	char	path[PATH_MAX];
-}				t_data;
+}			t_data;
 
 int		x_st;
 //-------------- enum strcut contains ---------------------------------------
@@ -138,7 +145,7 @@ char	*env_to_str(t_env *env, t_data *data);
 int		quote_check(int old_type, char	*line, int	*i, int	*words);
 t_cmd	*create_node(char *content, t_tokens type, t_data *data);
 void	ft_create_cmd(t_cmd *cmd);
-void	get_token(char *line, int *i, int words, t_data *data);
+int	get_token(char *line, int *i, int words, t_data *data);
 void	var_handler(char *line, int *i, int *words, int *type);
 bool	quote_handler(char *line, int *i, int *words, int *type);
 int		get_token_type(char line, bool *operator);
@@ -152,7 +159,8 @@ void	herdoc_handler(t_data *data, int *her_file);
 void	ft_case1(char **str, int *i);
 void	print_exc(t_exc *exc);
 char	**i_split(const char *s, char *c);
-void	mini_perror(int type);
+void	mini_perror(char *str);
+char 	*ft_join_exc(char *str, char *cmd);
 
 //--------------------------------------------------------------------------
 void	add_back_exc(t_exc **exc, t_exc *new_node);
@@ -214,6 +222,6 @@ void	exec_pipes(t_exc	*exc, t_data	*data, int her_file, char **envp);
 char	**free_tab(char **tab);
 void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
-void	free_env(t_data *data);
+void	free_env(t_env *env);
 
 #endif
