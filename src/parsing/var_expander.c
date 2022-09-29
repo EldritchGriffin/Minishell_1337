@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 10:52:29 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:06:41 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ static char	*prep_expnd(char  *var, t_env *env)
 void var_expnd(t_data *data)
 {
 	t_cmd	*tmp;
+	char	*str;
 
 	tmp = data->cmd;
 	while (tmp)
@@ -199,14 +200,17 @@ void var_expnd(t_data *data)
 			}
 			else
 			{
-				free(tmp->str);
+				str = tmp->str;
 				tmp->str = find_var(tmp->str, data->env);
+				free(str);
 				tmp->type = WORD;
 			}
 		}
 		if (tmp->type == EXPND_VB)
 		{
+			str = tmp->str;
 			tmp->str = prep_expnd(tmp->str, data->env);
+			free(str);
 			tmp->type = WORD;
 		}
 		tmp = tmp->next;

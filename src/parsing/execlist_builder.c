@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execlist_builder.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:51:07 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 11:11:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 01:12:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ void    fill_exclist(t_cmd  *cmd, t_data    *data)
         }
         else
         {
-            if(cmd->type != SPC)
+            if (cmd->type != SPC)
+            {
                 tmp->str[i++] = ft_strdup(cmd->str);
+            }
         }
         cmd = cmd->next;
     }

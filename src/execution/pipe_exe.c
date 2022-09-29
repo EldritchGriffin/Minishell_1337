@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 11:10:21 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 20:21:01 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	}
 	i = -1;
 	while (++i <= data->pps->p_c)
-		wait(&status);
+		waitpid(pids[i], &status, 0);
 	if (WIFEXITED(status)) 
         x_st = WEXITSTATUS(status);
 }

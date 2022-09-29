@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 11:10:43 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 19:47:57 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*get_ev(t_data *data, char *str)
 	while (tmp)
 	{
 		if (ft_strcmp(str, tmp->key) == 0)
-			return (tmp->value);
+			return (ft_strdup(tmp->value));
 	tmp = tmp->next;
 	}
 	return ("\0");
@@ -36,13 +36,15 @@ static void	ft_cat(char **bin, char *path_split, char *cmd)
 {
 	char *tmp;
 	
+	tmp = *bin;
 	*bin = ft_strjoin(*bin, path_split);
+	free(tmp);
 	tmp = *bin;
-	free(*bin);
-	*bin = ft_strjoin(tmp, "/");
+	*bin = ft_strjoin(*bin, "/");
+	free(tmp);
 	tmp = *bin;
-	free(*bin);
-	*bin = ft_strjoin(tmp, cmd);
+	*bin = ft_strjoin(*bin, cmd);
+	free(tmp);
 }
 
 static void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1)
@@ -55,7 +57,6 @@ char	*get_path(char **cmd, t_data *data)
 {
 	char	*path;
 	char	*bin;
-	char 	*str;
 	char	**path_split;
 	int		i;
 
@@ -75,7 +76,7 @@ char	*get_path(char **cmd, t_data *data)
 			return (NULL);
 		ft_cat(&bin, path_split[i], cmd[0]);
 		if (!access(bin, F_OK | X_OK | R_OK))
-			break ;
+			return(free_tab(path_split), bin) ;
 	  free(bin);
 	}
 	return (free_tab(path_split), cmd[0]);
