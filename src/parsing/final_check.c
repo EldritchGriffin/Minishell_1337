@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 05:39:17 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 02:39:07 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 06:24:36 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	check_operators_sec(t_data *data)
 			// 		&& ((tmp->next->next->next && tmp->next->next->next->opr) || !tmp->next)))
 			// 	return (unexpected_token(tmp->str[0]), 0);
 			if (!ft_cases1(tmp))
-				return (printf("im here\n"), unexpected_token(tmp->str[0]), 0);
+				return (unexpected_token(tmp->str[0]), 0);
 			if ((tmp->next && !tmp->next->opr && !tmp->next->next))
 				return (mini_perror("SPC"), 0);
 			else if (!operator_handler(tmp->str, tmp->type))

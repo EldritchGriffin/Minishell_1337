@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 23:24:12 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 03:26:56 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av, char	**envp)
 
 	(void)ac;
 	(void)av;
+	rl_catch_signals = 0;
 	data.pps = malloc(sizeof(t_pipe));
 	if(!data.pps)
 		return (mini_perror("Memory"), 0);
@@ -37,6 +38,7 @@ int	main(int ac, char **av, char	**envp)
 	data.env = env_list(envp);
 	while (1)
 	{
+		signals_handler();
 		line = ft_strtrim(readline("Guest@\033[0;35mMinishell$: \033[0;37m"), " ");
 		if (!line)
 			break ;
@@ -45,7 +47,7 @@ int	main(int ac, char **av, char	**envp)
 			add_history(line);
 			ft_shell(line, &data, data.env, envp);
 			initialize(&data, &line);
-			system("leaks Minishell");
+			// system("leaks Minishell");
 		}
 	}
 	ft_putstr_fd("\b\b  \b\bexit\n", 2);

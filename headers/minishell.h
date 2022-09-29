@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 11:11:26 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 03:31:51 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,11 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 //-------------Execve--------------------------------
 void	exec_cmd(t_exc *exc, char *bin, char **envp);
 char	*get_path(char **cmd, t_data *data);
+//-----------signals-----------------
+void	signals_handler(void);
+void	handler(int sig);
+void	ignore_signal(void);
+void	here_handler(int sig);
 //----------------pipes-------------------------------------------/
 int		check_pipes(t_exc	*exc);
 int		**create_pipes(int count);
