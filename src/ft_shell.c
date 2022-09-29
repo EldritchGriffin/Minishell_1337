@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 06:34:05 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:34:13 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 		{
 			bin = get_path(exc->str, data);
 			exec_cmd(exc, bin, envp);
-			free (bin);
 		}
+		if (bin)
+		 	free (bin);// ---it gives segufault when using ---> ./Minishell
 	}
 	free_cmd(data);
 	free_exc(data);

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:46:22 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 07:06:13 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:40:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,9 @@
 
 void	here_handler(int sig)
 {
-	if(sig == SIGINT)
-	{
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		exit(1);
-	}
-}
-
-void	handler(int sig)
-{
 	if (sig == SIGINT)
 	{
-		ft_putstr_fd("\b\b", 1);
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\b\b  \b\b\n", 1);
 		exit(1);
 	}
 }

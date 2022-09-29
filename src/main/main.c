@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 03:26:56 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:13:50 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ int	main(int ac, char **av, char	**envp)
 
 	(void)ac;
 	(void)av;
-	rl_catch_signals = 0;
 	data.pps = malloc(sizeof(t_pipe));
-	if(!data.pps)
+	if (!data.pps)
 		return (mini_perror("Memory"), 0);
 	data.tokens = malloc(sizeof(t_types));
-	if(!data.pps)
+	if (!data.pps)
 		return (mini_perror("Memory"), 0);
 	initialize(&data, &line);
 	data.env = env_list(envp);
 	while (1)
 	{
 		signals_handler();
+		rl_catch_signals = 0;
 		line = ft_strtrim(readline("Guest@\033[0;35mMinishell$: \033[0;37m"), " ");
 		if (!line)
 			break ;

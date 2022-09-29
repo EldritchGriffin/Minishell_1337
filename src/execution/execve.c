@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 22:28:11 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:46:34 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 			STDIN_FILENO, STDOUT_FILENO);
 	status = 0;
 	pid = fork();
+	if(pid)
+		ignore_signal();
 	if (pid == 0)
 	{
 		status = execve(bin, exc->str, envp);
@@ -104,6 +106,7 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 			exit(x_st);
 		}
 	}
+	signals_handler();
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status)) 
         x_st = WEXITSTATUS(status);

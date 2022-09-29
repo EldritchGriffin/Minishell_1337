@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 05:39:17 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 06:24:36 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:34:06 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,8 @@ int operator_handler(char *str, int type)
 		if ((ft_strcmp(">", str) < 0) && ft_strlen(str) != 1)
 			return (0);
 	}
-	else if (type == APPEND)
-	{
-		if ((ft_strcmp(">>", str) < 0) && ft_strlen(str) != 2)
+	else if(!operator_handler2(str, type))
 			return (0);
-	}
-	else if (type == HERDOC)
-	{
-		if ((ft_strcmp("<<", str) < 0) && ft_strlen(str) != 2)
-			return (0);
-	}
 	return (1);
 }
 
@@ -47,21 +39,11 @@ int	check_operatrs_first(t_data *data)
 	t_cmd	*tmp;
 
 	tmp = data->cmd;
-	if (tmp->opr && !tmp->next)
-		return (unexpected_token(tmp->str[0]), 0);
+	if ((tmp->opr && !tmp->next) || (tmp->opr && tmp->next->type == SPC && !tmp->next->next))
+		return (x_st = 258, mini_perror("SPC"), 0);
 	return (1);
 }
-static int	ft_cases1(t_cmd *tmp)
-{
-	if ((tmp->next && tmp->next->opr))
-		return (0);
-	else if ((tmp->next && !tmp->next->opr) && (tmp->next->next && tmp->next->next->opr))
-		return (0);
-	else if ((tmp->next && !tmp->next->opr) && (tmp->next->next && !tmp->next->next->opr) 
-			&& (tmp->next->next->next && tmp->next->next->next->opr))
-		return (0);
-	return (1);
-}
+
 int	check_operators_sec(t_data *data)
 {
 	int		i;
@@ -70,21 +52,17 @@ int	check_operators_sec(t_data *data)
 	i = 0;
 	tmp = data->cmd;
 	if (tmp->type == PIPE || (tmp->type == PIPE && tmp->next->type == WORD))
-		return (mini_perror("PIPE"), 0);
+		return (x_st = 258, mini_perror("PIPE"), 0);
 	while (tmp)
 	{
 		if (tmp->opr)
 		{
-			// if ((((tmp->next && tmp->next->opr) || (tmp->next && !tmp->next->opr) \
-			// 	|| ((tmp->next->next && !tmp->next->next->opr && !tmp->next->next->type != D_QUOTES) || (tmp->next->next && tmp->next->next->opr)))
-			// 		&& ((tmp->next->next->next && tmp->next->next->next->opr) || !tmp->next)))
-			// 	return (unexpected_token(tmp->str[0]), 0);
 			if (!ft_cases1(tmp))
-				return (unexpected_token(tmp->str[0]), 0);
+				return (x_st = 258, unexpected_token(tmp->str[0]), 0);
 			if ((tmp->next && !tmp->next->opr && !tmp->next->next))
-				return (mini_perror("SPC"), 0);
+				return (x_st = 258, mini_perror("SPC"), 0);
 			else if (!operator_handler(tmp->str, tmp->type))
-				return (unexpected_token(tmp->str[0]), 0);
+				return (x_st = 258, unexpected_token(tmp->str[0]), 0);
 		}
 		tmp = tmp->next;
 	}

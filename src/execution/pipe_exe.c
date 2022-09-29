@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 20:21:01 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:38:07 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 			close(tmp->out_file);
 		}
 		pids[i] = fork();
+		if(pids[i])
+			ignore_signal();
 		if (pids[i] == 0)
 		{
 			j = -1;
@@ -112,4 +114,5 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		waitpid(pids[i], &status, 0);
 	if (WIFEXITED(status)) 
         x_st = WEXITSTATUS(status);
+	signals_handler();
 }

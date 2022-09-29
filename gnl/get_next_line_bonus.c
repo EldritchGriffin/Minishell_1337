@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 15:58:22 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 23:02:44 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:02:40 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <string.h>
+#include "get_next_line_bonus.h"
 
 char	*dupstr(int *total, char *buf)
 {
