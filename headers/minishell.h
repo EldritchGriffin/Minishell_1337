@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 11:11:26 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 05:59:12 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ typedef struct s_data
 }			t_data;
 
 int		x_st;
-//-------------- enum strcut contains ---------------------------------------
 
+int		ft_cases1(t_cmd *tmp);
+int		operator_handler2(char *str, int type);
 int		here_doc(t_cmd *delemiter, t_data *data);
 int		ft_open(int *out_file, int *in_file, int j, char *str);
 int		ft_pwd(t_data *data);

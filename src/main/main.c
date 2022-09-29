@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 04:24:18 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 05:59:44 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	main(int ac, char **av, char	**envp)
 	(void)ac;
 	(void)av;
 	data.pps = malloc(sizeof(t_pipe));
-	if(!data.pps)
+	if (!data.pps)
 		return (mini_perror("Memory"), 0);
 	data.tokens = malloc(sizeof(t_types));
-	if(!data.pps)
+	if (!data.pps)
 		return (mini_perror("Memory"), 0);
 	initialize(&data, &line);
 	data.env = env_list(envp);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
+#    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/28 23:28:22 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/09/29 06:00:52 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_DIR    := obj
 TOOLS      := cmd_list exc_list
 ENV        := env_list 
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe
-PARSING    := final_check parser_utils  parser parser2 parser3  free_list syntax_errors tokenizer_utils tokenizer_utils2 tokenizer var_expander here_doc execlist_builder flag_str
+PARSING    := final_check final_check_utils parser_utils  parser parser2 parser3  free_list syntax_errors tokenizer_utils tokenizer_utils2 tokenizer var_expander here_doc execlist_builder flag_str
 src        := ft_shell
 SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 	  					$(addsuffix .c, $(addprefix src/execution/, $(EXEC))) \
@@ -42,7 +42,7 @@ SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := $(SRC:.c=.o)
 CC          := 	gcc
-GCCFLAGS    := -Wall -Wextra -Werror -lreadline  -g #-static-libsan -fsanitize=address
+GCCFLAGS    := -Wall -Wextra -Werror -lreadline -fmudflap   -g #-static-libsan -fsanitize=address
 HEADER      := $(HEADER_DIR)/minishell.h
 NAME        := Minishell
 RECOMPILING := echo "     $(YELLOW)Recompiling..........$(YELLOW)"

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 01:21:19 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 04:58:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ static void	recursion_call(t_cmd **node, t_cmd **node_next, t_cmd *new_node, t_d
 	join_unspaced(&new_node, &(new_node->next), data);
 }
 
+static int ft_check_cases(t_cmd *node, t_cmd *node_next)
+{
+	if ((!node->prev && !node_next->next) 
+		|| (!node->prev && node_next->next))
+			return(1);
+	else if(node->prev && node_next->next)
+		return (2);
+	else if (node->prev && !node_next->next)
+		return (3);
+	return(0);
+}
+
 void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 {
 	char	*str1;
@@ -51,21 +63,17 @@ void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 		return ;
 	join = ft_strjoin((*node)->str, (*node_next)->str);
 	new_node = new_node_cmd(join, WORD, 0, *data);
-	if ((!(*node)->prev && !(*node_next)->next) 
-		|| (!(*node)->prev && (*node_next)->next))
+	if (ft_check_cases((*node), (*node_next)) == 1)
 	{
 		if (!(*node)->prev && !(*node_next)->next)
-		{
-			(*data)->cmd = new_node;
-			return ;
-		}
+			return((*data)->cmd = new_node, (void)0);
 		replace_nodes(node, node_next, &new_node);
-		(*data)->cmd = new_node;  
+		(*data)->cmd = new_node;
 		join_unspaced(&new_node, &(new_node->next), data);
 	}
-	else if ((*node)->prev && (*node_next)->next)
+	else if (ft_check_cases((*node), (*node_next)) == 2)
 		recursion_call(node, node_next, new_node, data);
-	else if ((*node)->prev && !(*node_next)->next)
+	else if (ft_check_cases((*node), (*node_next)) == 3)
 		recursion_call(node, node_next, new_node, data);
    return ;
 }
