@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:58:59 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 05:35:55 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 23:26:31 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-char	*rmv_quotes(char	*str)
-{
-	char	*str1;
-
-	str1 = ft_strdup(str);
-	ft_strlcpy(str1, str + 1, (ft_strlen(str) - 1));
-	return (str1);
-}
 int check_identifier(char	*str)
 {
 	int i;

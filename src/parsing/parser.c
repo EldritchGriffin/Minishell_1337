@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 06:57:24 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 23:33:40 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ static void	replace_nodes(t_cmd **node, t_cmd **node_next, t_cmd **new_node)
 	if (tmp2->next)
 		tmp2->next->prev = (*new_node);
 	(*new_node)->next = tmp2->next;
+	free(tmp1->str);
 	free(tmp1);
+	free(tmp2->str);
 	free(tmp2);
 }
 
@@ -45,16 +47,9 @@ void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 
 	if (!*node || !*node_next || (*node_next)->type == SPC)
 		return ;
-	if (check_one(*node, *node_next))
-	{
-			str1 = trim_quote((*node)->str);
-			str2 = trim_quote((*node_next)->str);
-	}
-	else
+	if(!check_one(*node, *node_next))
 		return ;
-	join = ft_strjoin(str1, str2);
-	free(str1);
-	free(str2);
+	join = ft_strjoin((*node)->str, (*node_next)->str);
 	new_node = new_node_cmd(join, WORD, 0, *data);
 	if ((!(*node)->prev && !(*node_next)->next) 
 		|| (!(*node)->prev && (*node_next)->next))

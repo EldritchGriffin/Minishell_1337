@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:20:19 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 19:53:04 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:23:19 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	free_exc(t_data *data)
 		current = tmp;
 		tmp = tmp->next;
 		free_tab(current->str);
-		free(current->str);
 		free(current->flg);
 		free(current);
 	}

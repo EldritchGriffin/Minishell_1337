@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 20:18:21 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:22:01 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 		}
 	}
 	free_cmd(data);
-	// free_exc(data);
+	free_exc(data);
 }
 
 static	void	initalize_data(t_data **data)
