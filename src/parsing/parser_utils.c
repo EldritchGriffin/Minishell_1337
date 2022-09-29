@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 19:55:27 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 23:29:18 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ char	*trim_quote(char *str)
 	lstr = ft_strtrim(str, rtr);
 	if (!lstr)
 		return (NULL);
-	free(str);
 	return (lstr);
 }
 

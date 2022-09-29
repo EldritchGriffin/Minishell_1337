@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 05:35:49 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 23:27:54 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	t_space_skip(char **line, int *i)
 bool	rm_quotes(t_data **data)
 {
 	t_cmd	*cmd;
+	char	*tmp;
 
 	cmd = (*data)->cmd;
 	if (!cmd)
@@ -47,7 +48,10 @@ bool	rm_quotes(t_data **data)
 	{
 		if (cmd->type == S_QUOTES || cmd->type == D_QUOTES
 			|| cmd->type == EXPND_VB)
-			cmd->str = rmv_quotes(cmd->str);
+		{
+			tmp = cmd->str;
+			cmd->str = trim_quote(cmd->str);
+		}
 		cmd = cmd->next;
 	}
 	return (true);

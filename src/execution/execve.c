@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 19:47:57 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/28 22:28:11 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*get_ev(t_data *data, char *str)
 	while (tmp)
 	{
 		if (ft_strcmp(str, tmp->key) == 0)
-			return (ft_strdup(tmp->value));
+			return (tmp->value);
 	tmp = tmp->next;
 	}
 	return ("\0");
@@ -79,7 +79,7 @@ char	*get_path(char **cmd, t_data *data)
 			return(free_tab(path_split), bin) ;
 	  free(bin);
 	}
-	return (free_tab(path_split), cmd[0]);
+	return (free_tab(path_split), ft_strdup(cmd[0]));
 }
 
 void	exec_cmd(t_exc *exc, char *bin, char **envp)

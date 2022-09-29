@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 20:18:38 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 04:24:18 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int ac, char **av, char	**envp)
 	data.env = env_list(envp);
 	while (1)
 	{
-		line = readline("Guest@\033[0;35mMinishell$: \033[0;37m");
+		line = ft_strtrim(readline("Guest@\033[0;35mMinishell$: \033[0;37m"), " ");
 		if (!line)
 			break ;
 		if (line && line[0])

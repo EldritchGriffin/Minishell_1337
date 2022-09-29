@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:37:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2021/11/28 10:58:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/28 22:45:10 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	ft_find(char const *str, char c)
@@ -51,5 +52,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (start <= end)
 		str[i++] = s1[start++];
 	str[i] = '\0';
+	free((char *)s1);
 	return (str);
 }
