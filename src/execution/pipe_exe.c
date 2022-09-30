@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 23:02:15 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 06:36:32 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 			close(tmp->out_file);
 		}
 		pids[i] = fork();
+		if(pids[i])
+			ignore_signal();
 		if (pids[i] == 0)
 		{
 			j = -1;
@@ -114,4 +116,5 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		waitpid(pids[i], &status, 0);
 	if (WIFEXITED(status)) 
         x_st = WEXITSTATUS(status);
+	signals_handler();
 }

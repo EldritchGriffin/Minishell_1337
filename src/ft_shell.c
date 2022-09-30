@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 23:48:33 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 06:36:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 	t_cmd	**tmp;
 	int		her_file;
 
+	
 	her_file = 0;
 	tmp = &data->cmd;
 	if (build_token_list(line, data, &her_file))
@@ -96,9 +97,10 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 		}
 		// printf("adress set    =====%p\n====\n", data->cmd->next);
 		fill_exclist(data->cmd, data);
-		// free_cmd(data);
-		print_exc(data->exc);
+		//print_exc(data->exc);
+		// print_cmd(data->cmd);
 		data->pps->p_c = check_pipes(data->exc);
 		cmd_call(data->exc, data, envp, her_file);
 	}
+	// initalize_data(&data);
 }

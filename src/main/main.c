@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 03:03:36 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 06:37:52 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(int ac, char **av, char	**envp)
 	data.env = env_list(envp);
 	while (1)
 	{
+		signals_handler();
+		rl_catch_signals = 0;
 		line = ft_strtrim(readline("Guest@\033[0;35mMinishell$: \033[0;37m"), " ");
 		if (!line)
 			break ;
