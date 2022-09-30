@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:51:07 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 01:12:39 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:38:37 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ char    **prep_excstr(t_cmd *cmd)
     int     i;
 
     i = 0;
-    if(!cmd)
+    if (!cmd)
         return (NULL);
-    while(cmd)
+    while (cmd)
     {
-        if(cmd->type == PIPE)
+        if (cmd->type == PIPE)
             break;
-        if(cmd->type != SPC)
+        if (cmd->type != SPC)
             i++;
         cmd = cmd->next;
     }
@@ -46,7 +46,7 @@ void   prep_exclist(t_cmd *cmd, t_data    *data)
         add_back_exc(&data->exc, new_node_exc(NULL, data));
         return ;
     }
-    while(count)
+    while (count)
     {
         add_back_exc(&data->exc, new_node_exc(NULL, data));
         count--;
@@ -62,9 +62,9 @@ void    build_exclist(t_cmd  *cmd, t_data    *data)
     exc->str = prep_excstr(cmd);
     exc->flg = flag_str(cmd);
     exc = exc->next;
-    while(cmd)
+    while (cmd)
     {
-        if(cmd->type == PIPE)
+        if (cmd->type == PIPE)
         {
             exc->str = prep_excstr(cmd->next);
             exc->flg = flag_str(cmd->next);
@@ -72,7 +72,6 @@ void    build_exclist(t_cmd  *cmd, t_data    *data)
         }
         cmd = cmd->next;
     }
-    
 }
 
 void    fill_exclist(t_cmd  *cmd, t_data    *data)
@@ -83,9 +82,9 @@ void    fill_exclist(t_cmd  *cmd, t_data    *data)
     i = 0;
     build_exclist(cmd, data);
     tmp = data->exc;
-    while(cmd)
+    while (cmd)
     {
-        if(cmd->type == PIPE)
+        if (cmd->type == PIPE)
         {
             i = 0;
             tmp = tmp->next;
@@ -93,9 +92,7 @@ void    fill_exclist(t_cmd  *cmd, t_data    *data)
         else
         {
             if (cmd->type != SPC)
-            {
                 tmp->str[i++] = ft_strdup(cmd->str);
-            }
         }
         cmd = cmd->next;
     }

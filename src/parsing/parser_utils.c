@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 07:25:59 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:30:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_open(int *out_file, int *in_file, int j, char *str)
 	else if (j == 2)
 	{ 
 		if (access(str, F_OK | X_OK | R_OK))
-			return (printf("Minishell : %s: No such file or directory\n", str), 0);
+			return (printf("Minishell : %s: No such file or directory\n", str), 2);
 		return (*in_file = open(str, O_RDONLY), 1);
 	}
 	return (0);

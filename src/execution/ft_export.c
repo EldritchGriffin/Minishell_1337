@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 09:19:09 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 22:20:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static	char	*get_key(char	*str, bool	*mode)
 
 	i = 0;
 	*mode = false;
-	while(str[i] && str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
-	if(str[i] == '=' && str[i - 1] == '+')
+	if (str[i] == '=' && str[i - 1] == '+')
 		*mode = true;
-	if(*mode)
+	if (*mode)
 		key = ft_substr(str, 0, i - 1);
 	else
 		key = ft_substr(str, 0, i);
-	if(check_identifier(key))
+	if (check_identifier(key))
 	{
 		x_st = 1598;
 		printf("invalid identifier (%s)\n", key);
@@ -43,9 +43,9 @@ static	char	*get_value(char	*str)
 	char	*val;
 
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
-		if(str[i] == '=')
+		if (str[i] == '=')
 		{
 			val = ft_substr(str, i + 1, ft_strlen(str) - (i + 1));
 			return (val);
@@ -60,9 +60,9 @@ static void	append_env(t_data	*data, char	*key, char	*val)
 	char	*ptr;
 
 	tmp = data->env;
-	while(tmp)
+	while (tmp)
 	{
-		if(!ft_strcmp(key, tmp->key))
+		if (!ft_strcmp(key, tmp->key))
 		{
 			if(!tmp->value)
 				tmp->value = ft_strdup(val);
@@ -89,9 +89,9 @@ static void	do_export(t_data	*data, char	*key, char	*val, bool mode)
 		append_env(data, key, val);
 		return ;
 	}
-	while(tmp)
+	while (tmp)
 	{
-		if(!ft_strcmp(key, tmp->key))
+		if (!ft_strcmp(key, tmp->key))
 		{
 			if(!val)
 				return;
@@ -115,22 +115,22 @@ void	ft_export(t_exc	*cmd, t_data	*data)
 	bool	mode;
 
 	i = 1;
-	if(!cmd->str[i])
+	if (!cmd->str[i])
 		return (sorted_env(data->env, data), (void) 0);
-	while(cmd->str[i])
+	while (cmd->str[i])
 	{
 		key = get_key(cmd->str[i], &mode);
-		if(key)
+		if (key)
 		{
 			val = get_value(cmd->str[i]);
 			do_export(data, key, val, mode);
 			free(key);
-			if(val)
+			if (val)
 				free(val);
 		}
 		i++;
 	}
-	if(x_st == 1598)
+	if (x_st == 1598)
 		x_st = 1;
 	else
 		x_st = 0;

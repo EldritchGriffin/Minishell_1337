@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 05:59:12 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 22:51:45 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,10 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------
 void	exec_cmd(t_exc *exc, char *bin, char **envp);
-char	*get_path(char **cmd, t_data *data);
+char	*get_path(char **cmd, t_data *data, int *check);
+void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1);
+void	ft_cat(char **bin, char *path_split, char *cmd);
+void	ft_dup(int *in_save, int *out_save);
 //----------------pipes-------------------------------------------/
 int		check_pipes(t_exc	*exc);
 int		**create_pipes(int count);

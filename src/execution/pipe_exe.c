@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 20:21:01 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/29 23:02:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	int		*pids;
 	int		status;
 	int		i;
+	int		check;
 	int		j;
 
+	check = 0;
 	i = 0;
 	tmp = exc;
 	pids = malloc(sizeof(int) * (data->pps->p_c + 1));
@@ -90,7 +92,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 				close(tmp->out_file);
 			else
 				{
-					if(execve(get_path(tmp->str, data), tmp->str, envp) == -1)
+					if(execve(get_path(tmp->str, data, &check), tmp->str, envp) == -1)
 					{
 						x_st = 127;
 						printf  ("Minishell : %s: command not found\n", tmp->str[0]);

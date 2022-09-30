@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 05:25:28 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/29 23:48:33 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void print_exc(t_exc *exc)
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {
 	int		i;
+	int		check;
 	char	*bin;
 
 	i = 0;
+	check =2;
 	if (data->pps->p_c)
 	{
 
@@ -59,11 +61,12 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 			return ;
 		else
 		{
-			bin = get_path(exc->str, data);
+			bin = get_path(exc->str, data, &check);
 			exec_cmd(exc, bin, envp);
+			printf("adress binnn=====%p\n====\n", bin);
+		if (!check)
+		 	free (bin);
 		}
-		if (bin)
-		 	free (bin);// ---it gives segufault when using ---> ./Minishell
 	}
 	free_cmd(data);
 	free_exc(data);
@@ -91,7 +94,9 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
+		// printf("adress set    =====%p\n====\n", data->cmd->next);
 		fill_exclist(data->cmd, data);
+		// free_cmd(data);
 		print_exc(data->exc);
 		data->pps->p_c = check_pipes(data->exc);
 		cmd_call(data->exc, data, envp, her_file);
