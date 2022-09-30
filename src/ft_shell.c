@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 07:40:41 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 08:20:41 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void print_exc(t_exc *exc)
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {
 	int		i;
+	int		check;
 	char	*bin;
 
 	i = 0;
+	check =2;
 	if (data->pps->p_c)
 	{
 
@@ -59,11 +61,11 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 			return ;
 		else
 		{
-			bin = get_path(exc->str, data);
+			bin = get_path(exc->str, data, &check);
 			exec_cmd(exc, bin, envp);
-		}
-		if (bin)
+		if (!check)
 		 	free (bin);
+		}
 	}
 	free_cmd(data);
 	free_exc(data);
@@ -92,6 +94,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
+		// printf("adress set    =====%p\n====\n", data->cmd->next);
 		fill_exclist(data->cmd, data);
 		//print_exc(data->exc);
 		// print_cmd(data->cmd);

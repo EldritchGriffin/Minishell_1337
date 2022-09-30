@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 14:33:33 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 06:37:36 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,10 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
 //-------------Execve--------------------------------
 void	exec_cmd(t_exc *exc, char *bin, char **envp);
-char	*get_path(char **cmd, t_data *data);
+char	*get_path(char **cmd, t_data *data, int *check);
+void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1);
+void	ft_cat(char **bin, char *path_split, char *cmd);
+void	ft_dup(int *in_save, int *out_save);
 //-----------signals-----------------
 void	signals_handler(void);
 void	handler(int sig);

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 04:26:24 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 03:04:01 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	build_token_list(char *line, t_data *data, int *her_file)
 	}
 	if (!rm_quotes(&data))
 		return (free_cmd(data), 0);
+	print_cmd(data->cmd);
 	if (!check_operatrs_first(data))
 		return (free_cmd(data), 0);
 	herdoc_handler(data, her_file);

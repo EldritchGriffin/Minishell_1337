@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 23:13:50 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 06:37:52 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-//TODO main function will have all our structs assigned into t_data
 static void	initialize(t_data *data, char **line)
 {
 	data->cmd = NULL;
@@ -47,8 +46,8 @@ int	main(int ac, char **av, char	**envp)
 			add_history(line);
 			ft_shell(line, &data, data.env, envp);
 			initialize(&data, &line);
-			// system("leaks Minishell");
+			//system("leaks Minishell");
 		}
 	}
-	ft_putstr_fd("\b\b  \b\bexit\n", 2);
+	ft_putstr_fd("\b\b  \b\bexit\n", STDERR);
 }

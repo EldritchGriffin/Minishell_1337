@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 03:23:16 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 08:19:29 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,7 @@ static char	*get_ev(t_data *data, char *str)
 	return ("\0");
 }
 
-static void	ft_dup(int *in_save, int *out_save)
-{
-	*in_save = dup(STDIN_FILENO);
-	*out_save = dup(STDOUT_FILENO);
-}
-
-static void	ft_cat(char **bin, char *path_split, char *cmd)
-{
-	char *tmp;
-	
-	tmp = *bin;
-	*bin = ft_strjoin(*bin, path_split);
-	free(tmp);
-	tmp = *bin;
-	*bin = ft_strjoin(*bin, "/");
-	free(tmp);
-	tmp = *bin;
-	*bin = ft_strjoin(*bin, cmd);
-	free(tmp);
-}
-
-static void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1)
-{
-	dup2(*out_file, fd1);
-	dup2(*in_file, fd0);
-}
-
-char	*get_path(char **cmd, t_data *data)
+char	*get_path(char **cmd, t_data *data, int *check)
 {
 	char	*path;
 	char	*bin;
@@ -64,7 +37,7 @@ char	*get_path(char **cmd, t_data *data)
 	if (!*path)
 		return(cmd[0]);
 	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2 ) == 0))
-		return (cmd[0]);
+		return (free(path), *check = 1, cmd[0]);
 	path_split = ft_split(path, ':');
 	free (path);
 	i = -1;
@@ -76,10 +49,10 @@ char	*get_path(char **cmd, t_data *data)
 			return (NULL);
 		ft_cat(&bin, path_split[i], cmd[0]);
 		if (!access(bin, F_OK | X_OK | R_OK))
-			return(free_tab(path_split), bin) ;
+			return (free_tab(path_split), *check = 0, bin);
 	  free(bin);
 	}
-	return (free_tab(path_split), ft_strdup(cmd[0]));
+	return (free_tab(path_split), cmd[0]);
 }
 
 void	exec_cmd(t_exc *exc, char *bin, char **envp)

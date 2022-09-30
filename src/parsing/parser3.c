@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 01:28:35 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 08:18:08 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char 	*ft_join_exc(char *str, char *cmd)
 {
 	char *tmp;
 	char *lrt;
-	
-	
+
 	lrt = ft_strjoin(str, cmd);
 	free(str);
 	tmp = lrt;
@@ -43,6 +42,7 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 	int		j;
 	int		check;
 	char	*str;
+	char	*tmp;
 
 	check = 0;
 	i = -1;
@@ -64,6 +64,7 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 				i++;
 				if (!ft_open(&(*exc)->out_file, &(*exc)->in_file, \
 				j, (*exc)->str[i]))
+				if (her_file)
 					(*exc)->in_file = her_file;
 				*result = 1;
 			}

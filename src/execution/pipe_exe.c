@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 08:13:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 08:19:37 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	int		*pids;
 	int		status;
 	int		i;
+	int		check;
 	int		j;
 
+	check = 0;
 	i = 0;
 	tmp = exc;
 	pids = malloc(sizeof(int) * (data->pps->p_c + 1));
@@ -111,7 +113,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 				;
 			else
 				{
-					if(execve(get_path(tmp->str, data), tmp->str, envp) == -1)
+					if(execve(get_path(tmp->str, data, &check), tmp->str, envp) == -1)
 					{
 						x_st = 127;
 						printf  ("Minishell : %s: command not found\n", tmp->str[0]);
