@@ -6,7 +6,7 @@
 #    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/30 10:33:06 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/09/30 13:28:09 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ TOOLS      := cmd_list exc_list
 ENV        := env_list 
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe signals_handler pipe_utils
 PARSING    := final_check parser_utils  parser parser2 parser3  free_list syntax_errors tokenizer_utils \
-				final_check_utils tokenizer_utils2 tokenizer var_expander here_doc execlist_builder flag_str
+				final_check_utils tokenizer_utils2 tokenizer var_expander here_doc execlist_builder flag_str\
+					v_expander_utils v_expander_utils2
 src        := ft_shell
 SRC        := $(addsuffix .c, $(addprefix src/env/, $(ENV))) \
 	  					$(addsuffix .c, $(addprefix src/execution/, $(EXEC))) \

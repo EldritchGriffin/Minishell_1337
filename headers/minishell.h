@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 10:32:50 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 13:27:46 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,11 @@ typedef struct s_exc
 
 typedef struct s_expnd
 {
+	int		i;
+	int		j;
 	int		count;
-	t_cmd	*cmd;
+	char	*var;
+	int		*tab;
 	char	**spltd;
 }				t_expnd;
 
@@ -221,13 +224,13 @@ void	exc_list(char **str, t_data *data);
 t_exc	*new_node_exc(char **str, t_data *data);
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
 
-//-------------Execve--------------------------------
+//-------------Execve--------------------------------/
 void	exec_cmd(t_exc *exc, char *bin, char **envp);
 char	*get_path(char **cmd, t_data *data, int *check);
 void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1);
 void	ft_cat(char **bin, char *path_split, char *cmd);
 void	ft_dup(int *in_save, int *out_save);
-//-----------signals-----------------
+//-----------signals-----------------/
 void	signals_handler(void);
 void	handler(int sig);
 void	ignore_signal(void);
@@ -242,11 +245,11 @@ char	**free_tab(char **tab);
 void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
 void	free_env(t_env *env);
-// char	*prep_expnd(char	*var, t_env *env);
-// void	handle_builtin_vars(t_cmd	*tmp, t_data	*data);
-// char	*find_var(char *var, t_env *env);
-// int		word_counter(char	*var);
-// int		*char_counter(char *var, int count);
-// char	**fill_spltd(char *var, char **spltd, int count);
-
+//----------------Var_expander----------------------------------/
+int		*char_counter(char *var, int count);
+void	check_spltd(t_expnd	*expnd, int	*stat);
+void	char_check(char	*var, int	*i, int	*j);
+char	**fill_spltd(t_expnd	expnd);
+char	*find_var(char *var, t_env *env);
+char	*join_expnd(char **spltd, t_env *env, int count);
 #endif

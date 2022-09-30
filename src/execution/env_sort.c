@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:09:16 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 05:24:02 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 13:29:11 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	env_len(t_env *env)
 	return (i);
 }
 
+//FIXME TOO MUCH VARIABLES IN FUNC
 char	*env_to_str(t_env *env, t_data *data)
 {
 	t_env	*tmp;
