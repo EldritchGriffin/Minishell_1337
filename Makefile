@@ -6,7 +6,7 @@
 #    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/09/29 14:37:23 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/09/30 05:02:03 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(NAME) : create_dir  $(OBJ) $(main) $(HEADER) $(LIBFT) $(GNL)
 	@echo "\n"
 	@echo " $(YELLOW)Source files are compiled!\n$(YELLOW)"
 	@echo  "Building $(NAME) for" "Mandatory" "..."
-	@$(CC) $(GCCFLAGS) $(main) $(LIBFT) $(CPPFLAGS) $(GNL) $(OBJ) -o $(NAME) -lreadline $(LDFLAGS)
+	@$(CC) $(GCCFLAGS) $(main) $(LIBFT) $(CPPFLAGS) $(GNL) $(OBJ) -o $(NAME) -lreadline $(LDFLAGS) -g
 	@echo""
 	@sleep 0.1.5
 	@sleep 0.2

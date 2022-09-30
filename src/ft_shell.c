@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 14:34:13 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 07:40:41 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	else
 	{
 		rederection_check(&exc, her_file);
-		if (!exc->str[0])
+		if (!exc->str[0] || exc->in_file == -1)
 			return ;
 		if (!identify_builtin(data, exc))
 			return ;
@@ -63,7 +63,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 			exec_cmd(exc, bin, envp);
 		}
 		if (bin)
-		 	free (bin);// ---it gives segufault when using ---> ./Minishell
+		 	free (bin);
 	}
 	free_cmd(data);
 	free_exc(data);

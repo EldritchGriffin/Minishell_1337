@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 23:38:07 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 08:13:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,28 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	{
 		if (rederection_check(&tmp, her_file))
 		{
-			close(data->pps->p_fd[i][1]);
-			dup2(tmp->out_file, data->pps->p_fd[i][1]);
-			close(tmp->out_file);
+			if(tmp->in_file == -1)
+				return ;
+			if (tmp->in_file != 0)
+			{
+				if(i != 0)
+				{
+					dup2(tmp->in_file, data->pps->p_fd[i][0]);
+					close(tmp->in_file);
+				}
+				else
+				{
+					status = dup(STDIN_FILENO);
+					dup2(tmp->in_file, STDIN_FILENO);
+					close(tmp->in_file);
+				}
+
+			}
+			if (tmp->out_file != 1)
+			{
+				dup2(tmp->out_file, data->pps->p_fd[i][1]);
+				close(tmp->out_file);
+			}
 		}
 		pids[i] = fork();
 		if(pids[i])
@@ -89,7 +108,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 				close(data->pps->p_fd[i][1]);
 			}
 			if(!identify_builtin(data, tmp))
-				close(tmp->out_file);
+				;
 			else
 				{
 					if(execve(get_path(tmp->str, data), tmp->str, envp) == -1)
@@ -103,7 +122,9 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		tmp = tmp->next;
 		i++;
 	}
+	dup2(status, STDIN_FILENO);
 	i = -1;
+	tmp = data->exc;
 	while (++i < data->pps->p_c)
 	{
 		close(data->pps->p_fd[i][0]);
@@ -111,7 +132,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	}
 	i = -1;
 	while (++i <= data->pps->p_c)
-		waitpid(pids[i], &status, 0);
+		wait(&status);
 	if (WIFEXITED(status)) 
         x_st = WEXITSTATUS(status);
 	signals_handler();

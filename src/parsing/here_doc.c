@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 00:06:06 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:20:08 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	here_doc(t_cmd *delemiter, t_data *data)
 		{
 			ft_putstr_fd("> ", 1);
 			str = get_next_line(0);
-			str[ft_strlen(str)] = '\0';
-			printf("%s", str);
+			str[ft_strlen(str + 1)] = '\0';
+
 			if (!str)
 			{
 				exit(1) ;
@@ -66,11 +66,11 @@ int	here_doc(t_cmd *delemiter, t_data *data)
 			if (!ft_strcmp(delemiter->str, str))
 				break ;
 			ft_join(&str);
-			write(fd[1], str, ft_strlen(str + 1));
-			write(fd[1], "\n", 1);
+			write(fd[1], str, ft_strlen(str));
+			free(str);
 		}
 		close(fd[1]);
-		free(str);
+		close(fd[0]);
 		x_st = 0;
 		exit(x_st);
 	}

@@ -28,7 +28,7 @@ SRC = ft_putnbr_fd.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_atoi.c ft
 	  ft_strcat.c
 
 OBJ = $(SRC:.c=.o)
-GCC_FLAGS = -Wall -Wextra -Werror
+GCC_FLAGS = -Wall -Wextra -Werror -g
 CC = gcc
 HEADER = libft.h
 AR = ar rc

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 23:46:34 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 03:23:16 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 		ignore_signal();
 	if (pid == 0)
 	{
+		if(exc->in_file != 0)
+			close(exc->in_file);
+		if(exc->out_file != 1)
+			close(exc->out_file);
 		status = execve(bin, exc->str, envp);
 		if (status == -1)
 		{

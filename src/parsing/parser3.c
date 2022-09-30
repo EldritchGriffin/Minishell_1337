@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 20:03:02 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 01:28:35 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,9 @@ char 	*ft_join_exc(char *str, char *cmd)
 	return (lrt);
 }
 
-//FIXME problem with the assigned array, you will probably need to use a pointer instead;
 char	*get_redirection(t_exc **exc, int her_file, int *result)
 {
-	int		type[] = {APPEND, HERDOC, I_REDIRECTION, O_REDIRECTION};
+	int		type[5] = {APPEND, HERDOC, I_REDIRECTION, O_REDIRECTION};
 	int		i;
 	int		j;
 	int		check;
