@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 22:20:49 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:04:22 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	char	*get_key(char	*str, bool	*mode)
 {
-	int i;
+	int		i;
 	char	*key;
 
 	i = 0;
@@ -29,7 +29,7 @@ static	char	*get_key(char	*str, bool	*mode)
 		key = ft_substr(str, 0, i);
 	if (check_identifier(key))
 	{
-		x_st = 1598;
+		g_xst = 1598;
 		printf("invalid identifier (%s)\n", key);
 		free(key);
 		return (NULL);
@@ -39,7 +39,7 @@ static	char	*get_key(char	*str, bool	*mode)
 
 static	char	*get_value(char	*str)
 {
-	int	i;
+	int		i;
 	char	*val;
 
 	i = -1;
@@ -64,7 +64,7 @@ static void	append_env(t_data	*data, char	*key, char	*val)
 	{
 		if (!ft_strcmp(key, tmp->key))
 		{
-			if(!tmp->value)
+			if (!tmp->value)
 				tmp->value = ft_strdup(val);
 			else
 			{
@@ -84,7 +84,7 @@ static void	do_export(t_data	*data, char	*key, char	*val, bool mode)
 	t_env	*tmp;
 
 	tmp = data->env;
-	if(mode)
+	if (mode)
 	{
 		append_env(data, key, val);
 		return ;
@@ -93,15 +93,15 @@ static void	do_export(t_data	*data, char	*key, char	*val, bool mode)
 	{
 		if (!ft_strcmp(key, tmp->key))
 		{
-			if(!val)
-				return;
+			if (!val)
+				return ;
 			free(tmp->value);
 			tmp->value = ft_strdup(val);
 			return ;
 		}
 		tmp = tmp->next;
 	}
-	if(val)
+	if (val)
 		add_back_env(&data->env, new_node_env(ft_strdup(key), ft_strdup(val)));
 	else
 		add_back_env(&data->env, new_node_env(ft_strdup(key), NULL));
@@ -109,7 +109,7 @@ static void	do_export(t_data	*data, char	*key, char	*val, bool mode)
 
 void	ft_export(t_exc	*cmd, t_data	*data)
 {
-	int 	i;
+	int		i;
 	char	*key;
 	char	*val;
 	bool	mode;
@@ -130,8 +130,8 @@ void	ft_export(t_exc	*cmd, t_data	*data)
 		}
 		i++;
 	}
-	if (x_st == 1598)
-		x_st = 1;
+	if (g_xst == 1598)
+		g_xst = 1;
 	else
-		x_st = 0;
+		g_xst = 0;
 }

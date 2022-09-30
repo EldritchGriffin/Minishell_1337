@@ -6,12 +6,15 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 08:18:08 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 09:22:16 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-# define  static const char *RDS[5] = {">>", "<<", "<", ">", NULL};
+
+//TODO FIX THIS ASAP
+
+#define  static const char *RDS[5] = {">>", "<<", "<", ">", NULL};
 
 static int	exctab_len(char **tab)
 {
@@ -22,10 +25,11 @@ static int	exctab_len(char **tab)
 		i++;
 	return (i);
 }
-char 	*ft_join_exc(char *str, char *cmd)
+
+char	*ft_join_exc(char *str, char *cmd)
 {
-	char *tmp;
-	char *lrt;
+	char	*tmp;
+	char	*lrt;
 
 	lrt = ft_strjoin(str, cmd);
 	free(str);

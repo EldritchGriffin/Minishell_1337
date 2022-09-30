@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 18:40:34 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/08/26 02:18:27 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 08:59:24 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_tolower(char *c)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(c[i])
+	while (c[i])
 	{
 		if (c[i] >= 65 && c[i] <= 90)
 			c[i] += 32;

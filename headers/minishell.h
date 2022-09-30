@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 06:37:36 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 10:32:50 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,13 @@ typedef struct s_exc
 	struct s_exc	*next;
 }	t_exc;
 
+typedef struct s_expnd
+{
+	int		count;
+	t_cmd	*cmd;
+	char	**spltd;
+}				t_expnd;
+
 typedef struct s_pipe
 {
 	int		p_c;
@@ -92,7 +99,7 @@ typedef struct s_pipe
 
 typedef struct s_types
 {
-	int tmp_type;
+	int	tmp_type;
 	int	old_type;
 }			t_types;
 typedef struct s_data
@@ -101,12 +108,14 @@ typedef struct s_data
 	t_env	*env;
 	t_exc	*exc;
 	t_pipe	*pps;
-	t_types *tokens;
-	int		x_st;
+	t_types	*tokens;
+	char	**envp;
+	char	**avm;
+	int		g_xst;
 	char	path[PATH_MAX];
 }			t_data;
 
-int		x_st;
+int		g_xst;
 
 int		ft_cases1(t_cmd *tmp);
 int		operator_handler2(char *str, int type);
@@ -146,7 +155,7 @@ char	*env_to_str(t_env *env, t_data *data);
 int		quote_check(int old_type, char	*line, int	*i, int	*words);
 t_cmd	*create_node(char *content, t_tokens type, t_data *data);
 void	ft_create_cmd(t_cmd *cmd);
-int	get_token(char *line, int *i, int words, t_data *data);
+int		get_token(char *line, int *i, int words, t_data *data);
 void	var_handler(char *line, int *i, int *words, int *type);
 bool	quote_handler(char *line, int *i, int *words, int *type);
 int		get_token_type(char line, bool *operator);
@@ -161,7 +170,7 @@ void	ft_case1(char **str, int *i);
 void	print_exc(t_exc *exc);
 char	**i_split(const char *s, char *c);
 void	mini_perror(char *str);
-char 	*ft_join_exc(char *str, char *cmd);
+char	*ft_join_exc(char *str, char *cmd);
 
 //--------------------------------------------------------------------------
 void	add_back_exc(t_exc **exc, t_exc *new_node);
@@ -205,9 +214,9 @@ void	ft_unset(t_exc	*cmd, t_data *data);
 
 //---------exc_list---------------------------------------------------------/
 
-char    *flag_str(t_cmd *cmd);
-void    fill_exclist(t_cmd  *cmd, t_data    *data);
-char    **prep_excstr(t_cmd *cmd);
+char	*flag_str(t_cmd *cmd);
+void	fill_exclist(t_cmd *cmd, t_data *data);
+char	**prep_excstr(t_cmd *cmd);
 void	exc_list(char **str, t_data *data);
 t_exc	*new_node_exc(char **str, t_data *data);
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file);
@@ -224,6 +233,7 @@ void	handler(int sig);
 void	ignore_signal(void);
 void	here_handler(int sig);
 //----------------pipes-------------------------------------------/
+int		redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i);
 int		check_pipes(t_exc	*exc);
 int		**create_pipes(int count);
 void	exec_pipes(t_exc	*exc, t_data	*data, int her_file, char **envp);
@@ -232,5 +242,11 @@ char	**free_tab(char **tab);
 void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
 void	free_env(t_env *env);
+// char	*prep_expnd(char	*var, t_env *env);
+// void	handle_builtin_vars(t_cmd	*tmp, t_data	*data);
+// char	*find_var(char *var, t_env *env);
+// int		word_counter(char	*var);
+// int		*char_counter(char *var, int count);
+// char	**fill_spltd(char *var, char **spltd, int count);
 
 #endif

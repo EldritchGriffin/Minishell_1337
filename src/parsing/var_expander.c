@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/28 20:06:41 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 10:31:44 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void var_expnd(t_data *data)
 			else if(!ft_strcmp(tmp->str, "$?"))
 			{
 				free(tmp->str);
-				tmp->str = ft_itoa(x_st);
+				tmp->str = ft_itoa(g_xst);
 				tmp->type = WORD;
 			}
 			else

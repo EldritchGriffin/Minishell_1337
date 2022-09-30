@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 18:37:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 23:30:24 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 08:59:16 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (start <= end)
 		str[i++] = s1[start++];
 	str[i] = '\0';
-	free((char *)s1);
-	return (str);
+	return (free((char *)s1), str);
 }

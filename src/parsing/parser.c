@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:30 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 04:58:17 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:21:11 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	replace_nodes(t_cmd **node, t_cmd **node_next, t_cmd **new_node)
 
 	tmp1 = (*node);
 	tmp2 = (*node_next);
-
 	if (tmp1->prev)
 		tmp1->prev->next = (*new_node);
 	(*new_node)->prev = tmp1->prev;
@@ -32,22 +31,22 @@ static void	replace_nodes(t_cmd **node, t_cmd **node_next, t_cmd **new_node)
 	free(tmp2);
 }
 
-static void	recursion_call(t_cmd **node, t_cmd **node_next, t_cmd *new_node, t_data **data)
+static void	recursion_call(t_cmd **n, t_cmd **n_next, t_cmd *new_n, t_data **d)
 {
-	replace_nodes(node, node_next, &new_node);
-	join_unspaced(&new_node, &(new_node->next), data);
+	replace_nodes(n, n_next, &new_n);
+	join_unspaced(&new_n, &(new_n->next), d);
 }
 
-static int ft_check_cases(t_cmd *node, t_cmd *node_next)
+static int	ft_check_cases(t_cmd *node, t_cmd *node_next)
 {
-	if ((!node->prev && !node_next->next) 
+	if ((!node->prev && !node_next->next)
 		|| (!node->prev && node_next->next))
-			return(1);
-	else if(node->prev && node_next->next)
+		return (1);
+	else if (node->prev && node_next->next)
 		return (2);
 	else if (node->prev && !node_next->next)
 		return (3);
-	return(0);
+	return (0);
 }
 
 void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
@@ -59,14 +58,14 @@ void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 
 	if (!*node || !*node_next || (*node_next)->type == SPC)
 		return ;
-	if(!check_one(*node, *node_next))
+	if (!check_one(*node, *node_next))
 		return ;
 	join = ft_strjoin((*node)->str, (*node_next)->str);
 	new_node = new_node_cmd(join, WORD, 0, *data);
 	if (ft_check_cases((*node), (*node_next)) == 1)
 	{
 		if (!(*node)->prev && !(*node_next)->next)
-			return((*data)->cmd = new_node, (void)0);
+			return ((*data)->cmd = new_node, (void)0);
 		replace_nodes(node, node_next, &new_node);
 		(*data)->cmd = new_node;
 		join_unspaced(&new_node, &(new_node->next), data);
@@ -75,5 +74,5 @@ void	join_unspaced(t_cmd **node, t_cmd **node_next, t_data **data)
 		recursion_call(node, node_next, new_node, data);
 	else if (ft_check_cases((*node), (*node_next)) == 3)
 		recursion_call(node, node_next, new_node, data);
-   return ;
+	return ;
 }

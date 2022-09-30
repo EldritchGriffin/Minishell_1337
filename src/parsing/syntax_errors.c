@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:20 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 01:33:57 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:09:41 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	quotes_error(char c)
 
 void	unexpected_token(char c)
 {
-	printf  ("Minishell: syntax error near\
+	printf("Minishell: syntax error near\
 		 unexpexted token `%c\"\n", c);
 }
 
@@ -33,9 +33,9 @@ void	mini_perror(char *str)
 	if (!(ft_strcmp(str, "PIPE")))
 		ft_putstr_fd("Minishell: syntax error near\
 		unexpected token `|\"\n", STDERR);
-	else if(!(ft_strcmp(str, "Memory")))
-		ft_putstr_fd("Minishell: Memory error, Sorry \n" , STDERR);
-	else if(!(ft_strcmp(str, "SPC")))
+	else if (!(ft_strcmp(str, "Memory")))
+		ft_putstr_fd("Minishell: Memory error, Sorry \n", STDERR);
+	else if (!(ft_strcmp(str, "SPC")))
 		ft_putstr_fd("Minishell: syntax error near\
 		unexpected token `newline' `\"\n", STDERR);
 }

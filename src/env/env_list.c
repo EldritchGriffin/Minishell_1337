@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 05:20:18 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:49:25 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	print_env(t_env *env, t_data *data)
 		}
 		tmp = tmp->next;
 	}
-	x_st = 0;
+	g_xst = 0;
 }
 
-void	add_back_env(t_env **env, t_env    *new_node)
+void	add_back_env(t_env **env, t_env	*new_node)
 {
 	t_env	*tmp;
 
@@ -77,7 +77,7 @@ static char	**fill_extren_env(void)
 	env[1] = ft_strdup("PWD=/Users/zrabhi/Desktop/Minishell");
 	env[2] = ft_strdup("SHLVL=1");
 	env[3] = ft_strdup("_=/usr/bin/env");
-	env[4] = 0;	
+	env[4] = 0;
 	return (env);
 }
 

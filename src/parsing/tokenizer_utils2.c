@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 23:27:54 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 09:22:41 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	get_quote(char line)
 	return ('\'');
 }
 
-int	redirection_handler(char a , char b, int old_type, bool *operator)
+int	redirection_handler(char a, char b, int old_type, bool *operator)
 {
 	if (a == '>' && b == '>')
 		return ((*operator = true), APPEND);

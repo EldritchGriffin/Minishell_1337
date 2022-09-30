@@ -6,35 +6,35 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 08:20:41 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 09:48:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
 //Testing purposes again...
-void    print_cmd(t_cmd *cmd)
-{
-    while(cmd)
-    {
-        printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
-        cmd = cmd->next;
-    }
-}
+// void    print_cmd(t_cmd *cmd)
+// {
+// 	while(cmd)
+// 	{
+// 		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
+// 		cmd = cmd->next;
+// 	}
+// }
 
-void print_exc(t_exc *exc)
-{
-	int i;
+// void print_exc(t_exc *exc)
+// {
+// 	int i;
 
-	while (exc)
-	{
-		i = -1;
-		while(exc->str[++i])
-			printf  ("exc ========= is[%s]\n", exc->str[i]);
-		printf  ("MOVING  to the next\n");
-		exc = exc->next;
-	}	
-}
+// 	while (exc)
+// 	{
+// 		i = -1;
+// 		while(exc->str[++i])
+// 			printf  ("exc ========= is[%s]\n", exc->str[i]);
+// 		printf  ("MOVING  to the next\n");
+// 		exc = exc->next;
+// 	}	
+// }
 
 ///-----------this function jut for test------------------------------------
 
@@ -45,10 +45,9 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	char	*bin;
 
 	i = 0;
-	check =2;
+	check = 2;
 	if (data->pps->p_c)
 	{
-
 		exec_pipes(exc, data, her_file, envp);
 		return ;
 	}
@@ -63,8 +62,8 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 		{
 			bin = get_path(exc->str, data, &check);
 			exec_cmd(exc, bin, envp);
-		if (!check)
-		 	free (bin);
+			if (!check)
+				free(bin);
 		}
 	}
 	free_cmd(data);
@@ -82,7 +81,6 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 	t_cmd	**tmp;
 	int		her_file;
 
-	
 	her_file = 0;
 	tmp = &data->cmd;
 	if (build_token_list(line, data, &her_file))
@@ -94,12 +92,8 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
-		// printf("adress set    =====%p\n====\n", data->cmd->next);
 		fill_exclist(data->cmd, data);
-		//print_exc(data->exc);
-		// print_cmd(data->cmd);
 		data->pps->p_c = check_pipes(data->exc);
 		cmd_call(data->exc, data, envp, her_file);
 	}
-	// initalize_data(&data);
 }

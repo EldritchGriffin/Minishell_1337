@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 03:04:01 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:26:46 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	get_token(char *line, int *i, int words, t_data	*data)
 	data->tokens->old_type = redirection_handler(line[check], line[check + 1], \
 			data->tokens->old_type, &operator);
 	if (!check_old_type(line, i, &words, &data->tokens->old_type))
-		return(0);
+		return (0);
 	str = ft_substr(line, check, words);
 	ft_creat_list(data->tokens->old_type, data, operator, str);
 	if (operator == true && data->tokens->tmp_type != SPC)
@@ -113,13 +113,12 @@ int	build_token_list(char *line, t_data *data, int *her_file)
 	while (line[++i])
 	{
 		words = -1;
-		if(!get_token(line, &i, words, data))
+		if (!get_token(line, &i, words, data))
 			return (0);
 		i--;
 	}
 	if (!rm_quotes(&data))
 		return (free_cmd(data), 0);
-	print_cmd(data->cmd);
 	if (!check_operatrs_first(data))
 		return (free_cmd(data), 0);
 	herdoc_handler(data, her_file);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 23:36:50 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:21:20 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_count_pipes(t_data *data)
 {
-	int	pipe;
+	int		pipe;
 	t_cmd	*tmp;
 
 	tmp = data->cmd;

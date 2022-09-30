@@ -3,29 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   final_check_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 05:16:27 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/29 05:17:36 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/09/30 09:13:24 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-
 int	ft_cases1(t_cmd *tmp)
 {
 	if ((tmp->next && tmp->next->opr))
-		return (x_st = 258, 0);
-	else if ((tmp->next && !tmp->next->opr) && (tmp->next->next && tmp->next->next->opr))
-		return (x_st = 258, 0);
-	else if ((tmp->next && !tmp->next->opr) && (tmp->next->next && !tmp->next->next->opr) 
-			&& (tmp->next->next->next && tmp->next->next->next->opr))
-		return (x_st = 258, 0);
+		return (g_xst = 258, 0);
+	else if ((tmp->next && !tmp->next->opr)
+		&& (tmp->next->next && tmp->next->next->opr))
+		return (g_xst = 258, 0);
+	else if ((tmp->next && !tmp->next->opr)
+		&& (tmp->next->next && !tmp->next->next->opr)
+		&& (tmp->next->next->next && tmp->next->next->next->opr))
+		return (g_xst = 258, 0);
 	return (1);
 }
 
-int operator_handler2(char *str, int type)
+int	operator_handler2(char *str, int type)
 {
 	if (type == APPEND)
 	{

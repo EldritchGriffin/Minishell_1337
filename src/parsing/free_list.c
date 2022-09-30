@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:20:19 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/28 22:23:19 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/09/30 09:16:15 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	free_env(t_env *env)
 		current = tmp;
 		tmp = tmp->next;
 		free(current->key);
-		if(current->value)
+		if (current->value)
 			free(current->value);
 		free(current);
 	}
