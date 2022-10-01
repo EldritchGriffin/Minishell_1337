@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 17:59:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:03:58 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:18:22 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,4 @@ void	ft_echo(t_exc	*exc)
 		ft_putstr_fd("\n", exc->out_file);
 	g_xst = 0;
 }
+

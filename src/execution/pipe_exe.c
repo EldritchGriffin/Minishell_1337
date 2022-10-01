@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:08:19 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:19:38 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 		status = redirect_inpipes(tmp, status, data, i);
 		if (tmp->out_file != 1)
 		{
-			dup2(tmp->out_file, data->pps->p_fd[i][1]);
-			close(tmp->out_file);
+			if(i != data->pps->p_c)
+				dup2(tmp->out_file, data->pps->p_fd[i][1]);
 		}
 	}
 	return (status);
@@ -54,7 +54,7 @@ static void	handle_fds(t_data	*data, int i)
 	}
 }
 
-static void	restore_parent(int status, t_data	*data)
+static void	restore_parent(int status,int	*pids, t_data	*data)
 {
 	int		i;
 	t_exc	*tmp;
@@ -69,9 +69,16 @@ static void	restore_parent(int status, t_data	*data)
 	}
 	i = -1;
 	while (++i <= data->pps->p_c)
-		wait(&status);
-	if (WIFEXITED(status))
-		g_xst = WEXITSTATUS(status);
+	{
+		waitpid(pids[i], &status, 0);
+		if (WIFEXITED(status))
+			g_xst = WEXITSTATUS(status);
+		if(WIFSIGNALED(status))
+		{
+			ft_putstr_fd("\n", 1);
+			g_xst = 130;
+		}
+	}
 	signals_handler();
 }
 
@@ -90,7 +97,7 @@ static	void	pipe_exe(int	*pids, t_data	*data, t_exc	*tmp, int i)
 					tmp->str, data->envp) == -1)
 			{
 				g_xst = 127;
-				printf("Minishell : %s: command not found\n", tmp->str[0]);
+				perror("Minishell ");
 			}
 		}
 		exit(g_xst);
@@ -121,5 +128,6 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		tmp = tmp->next;
 		i++;
 	}
-	restore_parent(status, data);
+	restore_parent(status, pids, data);
 }
+

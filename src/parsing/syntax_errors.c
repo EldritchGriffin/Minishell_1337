@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:20 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:09:41 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:17:56 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	quotes_error(char c)
 
 void	unexpected_token(char c)
 {
-	printf("Minishell: syntax error near\
-		 unexpexted token `%c\"\n", c);
+	ft_putstr_fd("Minishell: syntax error ", 2);
 }
 
 void	mini_perror(char *str)
@@ -39,3 +38,4 @@ void	mini_perror(char *str)
 		ft_putstr_fd("Minishell: syntax error near\
 		unexpected token `newline' `\"\n", STDERR);
 }
+

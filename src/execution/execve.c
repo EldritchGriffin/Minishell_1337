@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 03:27:52 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/01 12:19:52 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_path(char **cmd, t_data *data, int *check)
 	path = ft_strdup(get_ev(data, "PATH"));
 	if (!*path)
 		return (cmd[0]);
-	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2) == 0) || ft_strncmp(cmd[0], "~/", 2) == 0)
+	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2) == 0))
 		return (free(path), *check = 1, cmd[0]);
 	path_split = ft_split(path, ':');
 	free (path);
@@ -69,7 +69,7 @@ void	exec(int pid, t_exc	*exc, char	*bin, char	**envp)
 		if (status == -1)
 		{
 			g_xst = 127;
-			printf("Minishell : %s: command not found\n", exc->str[0]);
+			perror("Minishell ");
 			exit(g_xst);
 		}
 	}
@@ -90,10 +90,17 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 	if (pid)
 		ignore_signal();
 	exec(pid, exc, bin, envp);
-	signals_handler();
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
+	{
 		g_xst = WEXITSTATUS(status);
+	}
+	if (WIFSIGNALED(status))
+	{
+		ft_putstr_fd("\n", 1);
+		g_xst = 130;
+	}
+	signals_handler();
 	if (exc->in_file != 0)
 		close(exc->in_file);
 	if (exc->out_file != 1)
@@ -101,3 +108,4 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 	dup2(in_save, STDIN);
 	dup2(out_save, STDOUT);
 }
+

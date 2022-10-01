@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:04:22 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:18:08 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static	char	*get_key(char	*str, bool	*mode)
 	if (check_identifier(key))
 	{
 		g_xst = 1598;
-		printf("invalid identifier (%s)\n", key);
+		ft_putstr_fd("invalid identifier\n", 2);
 		free(key);
 		return (NULL);
 	}
@@ -79,7 +79,7 @@ static void	append_env(t_data	*data, char	*key, char	*val)
 	add_back_env(&data->env, new_node_env(ft_strdup(key), ft_strdup(val)));
 }
 
-static void	do_export(t_data	*data, char	*key, char	*val, bool mode)
+void	do_export(t_data	*data, char	*key, char	*val, bool mode)
 {
 	t_env	*tmp;
 
@@ -135,3 +135,4 @@ void	ft_export(t_exc	*cmd, t_data	*data)
 	else
 		g_xst = 0;
 }
+

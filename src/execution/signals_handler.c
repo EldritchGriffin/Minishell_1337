@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 01:46:22 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 23:40:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:20:27 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,3 +52,4 @@ void	signals_handler(void)
 	sigaction(SIGINT, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 }
+

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:08:40 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:20:08 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,13 @@ int	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i)
 		if (i != 0)
 		{
 			dup2(tmp->in_file, data->pps->p_fd[i][0]);
-			close(tmp->in_file);
 		}
 		else
 		{
 			status = dup(STDIN_FILENO);
 			dup2(tmp->in_file, STDIN_FILENO);
-			close(tmp->in_file);
 		}
 	}
 	return (status);
 }
+

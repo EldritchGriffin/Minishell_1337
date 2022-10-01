@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:17:38 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:53:21 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ int	ft_open(int *out_file, int *in_file, int j, char *str)
 	else if (j == 2)
 	{
 		if (access(str, F_OK | R_OK))
-			return (printf("Minishell : %s: No such file or directory\n", str)
+			return (perror("access ")
 				, 0);
 		return (*in_file = open(str, O_RDONLY), 1);
 	}
 	return (0);
 }
+

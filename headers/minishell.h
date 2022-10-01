@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 08:45:27 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/01 12:57:17 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ int		ft_check(char *str);
 void	fill_export(char	*str, t_data	*data);
 int		exctab_len(char **tab);
 char	*get_strredir(int j);
+void	do_export(t_data	*data, char	*key, char	*val, bool mode);
 
 //----------------print fucntions------------------------------------------/
 
@@ -258,10 +259,10 @@ void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
 void	free_env(t_env *env);
 //----------------Var_expander----------------------------------/
-int		*char_counter(char *var, int count);
-void	check_spltd(t_expnd	*expnd, int	*stat);
-void	char_check(char	*var, int	*i, int	*j);
-char	**fill_spltd(t_expnd	expnd);
-char	*find_var(char *var, t_env *env);
-char	*join_expnd(char **spltd, t_env *env, int count);
+// int		*char_counter(char *var, int count);
+// void	check_spltd(t_expnd	*expnd, int	*stat);
+// void	char_check(char	*var, int	*i, int	*j);
+// char	**fill_spltd(t_expnd	expnd);
+// char	*find_var(char *var, t_env *env);
+// char	*join_expnd(char **spltd, t_env *env, int count);
 #endif

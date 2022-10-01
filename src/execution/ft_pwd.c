@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:00:46 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 04:02:27 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/01 12:18:44 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 int	ft_pwd(t_data *data)
 {
-	if (getcwd(data->path, PATH_MAX))
-	{
-		ft_putendl_fd(data->path, data->exc->out_file);
-		g_xst = 0;
-		return (1);
-	}
-	g_xst = 1;
+	getcwd(data->path, PATH_MAX);
+	ft_putendl_fd(data->path, data->exc->out_file);
+	g_xst = 0;
 	return (0);
 }
+

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:15:55 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:05:02 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:17:37 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_unset(t_exc	*cmd, t_data *data)
 		else
 		{
 			g_xst = 1598;
-			printf("invalid identifier (%s)\n", cmd->str[i]);
+			ft_putstr_fd("invalid identifier \n", 2);
 		}
 		i++;
 	}
@@ -82,3 +82,4 @@ void	ft_unset(t_exc	*cmd, t_data *data)
 	else
 		g_xst = 0;
 }
+

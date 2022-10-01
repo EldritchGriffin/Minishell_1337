@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:49:25 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 12:19:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_env	*env_list(char **envp)
 	int		i;
 	t_env	*env;
 
-	if (!envp[0])
+	if (!envp)
 		envp = fill_extren_env();
 	spltd = ft_split(envp[0], '=');
 	env = new_node_env(spltd[0], spltd[1]);
@@ -102,3 +102,4 @@ t_env	*env_list(char **envp)
 	}
 	return (env);
 }
+
