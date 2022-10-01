@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 16:00:42 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/29 23:02:43 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 08:17:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*ft_strdup(const char *s1)
 		str[i] = s1[i];
 		i++;
 	}
+	printf("im here\n");
+	printf("adressss======%p\n", s1);
 	str[i] = '\0';
 	return (str);
 }

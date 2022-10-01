@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/04 16:09:27 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 03:06:00 by zrabhi           ###   ########.fr       */
+/*   Created: 2022/10/01 08:43:57 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/10/01 08:44:42 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_cd(t_data	*data)
+char	*ft_join_exc(char *str, char *cmd)
 {
-	t_cmd	*tmp;
-	char	*str;
+	char	*tmp;
+	char	*lrt;
 
-	tmp = data->cmd;
-	if (!tmp->next)
-	{
-		str = get_ev(data, "HOME");
-		if(chdir(str) == -1)
-		{
-			perror(str);
-			return (g_xst = 1, (void)0);
-		}
-		free(str);
-		g_xst = 0;
-		return ;
-	}
-	if (tmp->next)
-		tmp = tmp->next;
-	if (chdir(tmp->next->str) == -1)
-	{
-		printf ("(%s) No such file or directory\n", tmp->next->str);
-		return (g_xst = 1, (void)0);
-	}
-	g_xst = 0;
+	lrt = ft_strjoin(str, cmd);
+	free(str);
+	tmp = lrt;
+	lrt = ft_strjoin(lrt, ":");
+	free(tmp);
+	return (lrt);
+}
+
+int	exctab_len(char **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+char	*get_strredir(int j)
+{
+	if (j == 0)
+		return (APPND);
+	else if (j == 1)
+		return (HRDC);
+	else if (j == 2)
+		return (I_REDI);
+	else if (j == 3)
+		return (O_REDI);
+	return (NULL);
 }

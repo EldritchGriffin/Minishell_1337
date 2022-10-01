@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:40:49 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 03:27:52 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-static char	*get_ev(t_data *data, char *str)
+char	*get_ev(t_data *data, char *str)
 {
 	t_env	*tmp;
 
@@ -36,7 +36,7 @@ char	*get_path(char **cmd, t_data *data, int *check)
 	path = ft_strdup(get_ev(data, "PATH"));
 	if (!*path)
 		return (cmd[0]);
-	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2) == 0))
+	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2) == 0) || ft_strncmp(cmd[0], "~/", 2) == 0)
 		return (free(path), *check = 1, cmd[0]);
 	path_split = ft_split(path, ':');
 	free (path);

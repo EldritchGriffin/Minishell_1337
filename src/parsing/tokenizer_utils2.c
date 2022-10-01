@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:22:41 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 08:37:56 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@ int	redirection_handler(char a, char b, int old_type, bool *operator)
 		return ((*operator = true), HERDOC);
 	else
 		return (old_type);
-}
-
-void	t_space_skip(char **line, int *i)
-{
-	while ((*line[*i] == ' ' || *line[*i] == '\t' || *line[*i] == '\r'
-			|| *line[*i] == '\v'))
-		(*i)++;
 }
 
 bool	rm_quotes(t_data **data)

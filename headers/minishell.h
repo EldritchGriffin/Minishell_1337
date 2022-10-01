@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 13:27:46 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 08:45:27 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 
 # define ERROR 1
 # define SUCCESS 0
+
+
+# define APPND ">>"
+# define I_REDI "<"
+# define O_REDI ">"
+# define HRDC "<<"
+
+
 //-----------------abstract syntax tree-------------------------------------
 
 //---------------------------structs----------------------------------------
@@ -104,6 +112,7 @@ typedef struct s_types
 {
 	int	tmp_type;
 	int	old_type;
+	bool operator;
 }			t_types;
 typedef struct s_data
 {
@@ -200,6 +209,8 @@ t_cmd	*new_node_cmd(char	*str, t_tokens type, bool operator, t_data *data);
 void	var_expnd(t_data	*data);
 int		ft_check(char *str);
 void	fill_export(char	*str, t_data	*data);
+int		exctab_len(char **tab);
+char	*get_strredir(int j);
 
 //----------------print fucntions------------------------------------------/
 
@@ -214,6 +225,7 @@ void	ft_cd(t_data	*data);
 void	ft_echo(t_exc	*exc);
 void	ft_export(t_exc	*cmd, t_data	*data);
 void	ft_unset(t_exc	*cmd, t_data *data);
+char	*get_ev(t_data *data, char *str);
 
 //---------exc_list---------------------------------------------------------/
 

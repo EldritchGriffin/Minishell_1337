@@ -3,72 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:22:16 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 08:44:59 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-//TODO FIX THIS ASAP
-
-#define  static const char *RDS[5] = {">>", "<<", "<", ">", NULL};
-
-static int	exctab_len(char **tab)
+static	int	check_redirfile(char *str, int *check, int *i)
 {
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
-}
-
-char	*ft_join_exc(char *str, char *cmd)
-{
-	char	*tmp;
-	char	*lrt;
-
-	lrt = ft_strjoin(str, cmd);
-	free(str);
-	tmp = lrt;
-	lrt = ft_strjoin(lrt, ":");
-	free(tmp);
-	return (lrt);
+	if (!str)
+		return (*check = 0, 0);
+	return ((*i)++, 1);
 }
 
 char	*get_redirection(t_exc **exc, int her_file, int *result)
 {
-	int		type[5] = {APPEND, HERDOC, I_REDIRECTION, O_REDIRECTION};
 	int		i;
 	int		j;
 	int		check;
 	char	*str;
-	char	*tmp;
 
-	check = 0;
 	i = -1;
 	str = ft_strdup("");
 	while ((*exc)->str[++i])
 	{
 		j = -1;
 		check = 0;
-		while (RDS[++j])
+		while (get_strredir(++j))
 		{
-			if (!ft_strcmp((*exc)->str[i], RDS[j]))
+			if (!ft_strcmp((*exc)->str[i], get_strredir(j)))
 			{
 				check = 1;
-				if (!(*exc)->str[i + 1])
-				{
-					check = 0;
+				if (!check_redirfile((*exc)->str[i + 1], &check, &i))
 					break ;
-				}
-				i++;
 				if (!ft_open(&(*exc)->out_file, &(*exc)->in_file, \
 				j, (*exc)->str[i]))
-				if (her_file)
+					if (her_file)
 					(*exc)->in_file = her_file;
 				*result = 1;
 			}
