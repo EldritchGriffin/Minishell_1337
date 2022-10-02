@@ -6,7 +6,7 @@
 #    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/10/02 15:32:42 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/10/02 16:28:12 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_DIR    := src
 OBJ_DIR    := obj
 TOOLS      := cmd_list exc_list
 ENV        := env_list 
-EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe signals_handler pipe_utils
+EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe signals_handler pipe_utils ft_exit
 PARSING    := final_check parser_utils  parser parser2 parser_utils2 parser3  free_list syntax_errors tokenizer_utils \
 				final_check_utils tokenizer_utils3 tokenizer_utils2 tokenizer var_expander here_doc here_doc_utils execlist_builder flag_str
 src        := ft_shell
