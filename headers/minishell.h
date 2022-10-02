@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 04:12:28 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 16:28:05 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,7 @@ void	ft_cd(t_data	*data);
 void	ft_echo(t_exc	*exc);
 void	ft_export(t_exc	*cmd, t_data	*data);
 void	ft_unset(t_exc	*cmd, t_data *data);
+void    ft_exit(t_exc   *cmd);
 char	*get_ev(t_data *data, char *str);
 
 //---------exc_list---------------------------------------------------------/

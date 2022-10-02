@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 16:13:04 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 19:20:57 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ void    print_cmd(t_cmd *cmd)
 	}
 }
 
-// void print_exc(t_exc *exc)
-// {
-// 	int i;
+void print_exc(t_exc *exc)
+{
+	int i;
 
-// 	while (exc)
-// 	{
-// 		i = -1;
-// 		while(exc->str[++i])
-// 			printf  ("exc ========= is[%s]\n", exc->str[i]);
-// 		printf  ("MOVING  to the next\n");
-// 		exc = exc->next;
-// 	}	
-// }
+	while (exc)
+	{
+		i = -1;
+		while(exc->str[++i])
+			printf  ("exc ========= is[%s]\n", exc->str[i]);
+		printf  ("MOVING  to the next\n");
+		exc = exc->next;
+	}	
+}
 
 ///-----------this function jut for test------------------------------------
 

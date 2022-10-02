@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 18:40:34 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 13:43:57 by aelyakou         ###   ########.fr       */
+/*   Created: 2022/10/02 16:16:17 by aelyakou          #+#    #+#             */
+/*   Updated: 2022/10/02 16:44:48 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../headers/minishell.h"
 
-char	*ft_tolower(char *c)
+void	ft_exit(t_exc	*cmd)
 {
 	int	i;
+	int	xst;
 
 	i = 0;
-	while (c[i])
+	if (cmd->str[1])
 	{
-		if (c[i] >= 65 && c[i] <= 90)
-			c[i] += 32;
+		if (cmd->str[2])
+			return (g_xst = 1, ft_putstr_fd("exit\ntoo many arguments\n",
+					STDERR));
+		while (cmd->str[1][i])
+		{
+			if (!ft_isdigit(cmd->str[1][i]))
+			{
+				ft_putstr_fd("Numeric argument required\n", STDERR);
+				exit (255);
+			}
+			else
+			{
+				xst = ft_atoi(cmd->str[1]);
+				exit((char)xst);
+			}
+		}
 		i++;
 	}
-	return (c);
+	exit(0);
 }

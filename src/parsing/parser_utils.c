@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 22:24:31 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 15:31:58 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int	ft_open(int *out_file, int *in_file, int j, char *str)
 	else if (j == 2)
 	{
 		if (access(str, F_OK | R_OK))
-			return (perror("access ")
-				, 0);
+			return (*in_file = -1, perror("access ")
+				, -1);
 		return (*in_file = open(str, O_RDONLY), 1);
 	}
 	return (0);

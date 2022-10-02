@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 22:19:36 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 19:29:29 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 
 	ft_putstr_fd("> ", 1);
 	str = get_next_line(0);
-	ft_join(&str);
+	if (str)
+		str[ft_strlen(str) - 1] = '\0';
 	if (!str)
-		exit(0);
-	if (delemiter->type != D_QUOTES || delemiter->type != S_QUOTES)
+		exit(1);
+	if (delemiter->type == WORD)
 	{
 		if (str && str[0] == '$')
 			str = check_expanding(str, data);

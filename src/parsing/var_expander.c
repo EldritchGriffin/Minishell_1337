@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 12:59:29 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 14:33:04 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ static char	*find_var(char *var, t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
-	str = ft_strdup(var);
+	str = malloc(ft_strlen(var));
 	ft_strlcpy(str, var + 1, ft_strlen(var));
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, str))
-			return (var = ft_strdup(tmp->value), var);
+			return (free(var), free(str) ,var = ft_strdup(tmp->value), var);
 		tmp = tmp->next;
 	}
+	free(var);
+	free(str);
 	var = ft_strdup("");
 	return (var);
 }
@@ -33,6 +35,7 @@ static char	*find_var(char *var, t_env *env)
 char	*join_expnd(char **spltd, t_env *env, int count)
 {
 	char	*str;
+	char	*tmp;
 
 	str = ft_strdup("");
 	count--;
@@ -40,7 +43,9 @@ char	*join_expnd(char **spltd, t_env *env, int count)
 	{
 		if (spltd[count][0] == '$')
 			spltd[count] = find_var(spltd[count], env);
+		tmp = str;
 		str = ft_strjoin(str, spltd[count]);
+		free(tmp);
 		count--;
 	}
 	return (str);
@@ -87,7 +92,7 @@ static char	**fill_spltd(char *var, char **spltd, int count)
 	return (spltd);
 }
 
-static int	*char_counter(char *var, int count)
+static int	*char_counter(char *var, int count, t_cmd *cmd)
 {
 	int		*tab;
 	int		i;
@@ -96,7 +101,7 @@ static int	*char_counter(char *var, int count)
 
 	i = -1;
 	j = 0;
-	tab = malloc(sizeof(int) * (count + 1));
+	tab = malloc(sizeof(int) * (count));
 	stat = 0;
 	while (var[++i])
 	{
@@ -120,7 +125,8 @@ static int	*char_counter(char *var, int count)
 			stat = 0;
 		j++;
 	}
-	return (tab[count] = j, tab);
+	
+	return ( tab);
 }
 
 static int	word_counter(char    *var)
@@ -154,20 +160,21 @@ static int	word_counter(char    *var)
 	return (count);
 }
 
-static char	*prep_expnd(char  *var, t_env *env)
+static char	*prep_expnd(char  *var, t_env *env, t_cmd *cmd)
 {
 	char	**spltd;
 	int		count;
 	int		*tab;
 
 	count = word_counter(var);
-	tab = char_counter(var, count - 1);
+	tab = char_counter(var, count - 1, cmd);
 	spltd = malloc(sizeof(char  *) * (count + 1));
 	spltd[count] = NULL;
 	count--;
 	while (count >= 0)
 	{
 		spltd[count] = malloc(sizeof(char) * (tab[count] + 1));
+		spltd[count][tab[count]] = 0;
 		count--;
 	}
 	spltd = fill_spltd(var, spltd, word_counter(var));
@@ -209,10 +216,11 @@ void var_expnd(t_data *data)
 		if (tmp->type == EXPND_VB)
 		{
 			str = tmp->str;
-			tmp->str = prep_expnd(tmp->str, data->env);
+			tmp->str = prep_expnd(tmp->str, data->env, data->cmd);
 			free(str);
 			tmp->type = D_QUOTES;
 		}
 		tmp = tmp->next;
+		// print_cmd(data->cmd);
 	}
 }

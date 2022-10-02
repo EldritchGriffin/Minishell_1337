@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 01:28:11 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 17:34:40 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	print_env(t_env *env, t_data *data)
 	{
 		if (tmp->value)
 		{
-			ft_putstr_fd(tmp->key, data->exc->in_file);
-			ft_putstr_fd("=", data->exc->in_file);
-			ft_putendl_fd(tmp->value, data->exc->in_file);
+			ft_putstr_fd(tmp->key, data->exc->out_file);
+			ft_putstr_fd("=", data->exc->out_file);
+			ft_putendl_fd(tmp->value, data->exc->out_file);
 		}
 		tmp = tmp->next;
 	}
@@ -87,7 +87,7 @@ t_env	*env_list(char **envp)
 	int		i;
 	t_env	*env;
 
-	if (!envp[0])
+	if (!*envp)
 		envp = fill_extren_env();
 	spltd = ft_split(envp[0], '=');
 	env = new_node_env(spltd[0], spltd[1]);

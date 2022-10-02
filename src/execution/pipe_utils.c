@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 04:14:26 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 15:33:45 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i)
 	{
 		if (i != 0)
 		{
-			dup2(tmp->in_file, data->pps->p_fd[i][0]);
+			dup2(tmp->in_file, data->pps->p_fd[i - 1][0]);
 		}
 		else
 		{
