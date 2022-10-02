@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 15:34:20 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 18:57:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	print_env(t_env *env, t_data *data)
 	tmp = env;
 	if (!tmp)
 	{
-		tmp = env_list(&str);
+		tmp = env_list(data->envp);
 	}
 	while (tmp)
 	{
 		if (tmp->value)
 		{
-			ft_putstr_fd(tmp->key, data->exc->in_file);
-			ft_putstr_fd("=", data->exc->in_file);
-			ft_putendl_fd(tmp->value, data->exc->in_file);
+			ft_putstr_fd(tmp->key, data->exc->out_file);
+			ft_putstr_fd("=", data->exc->out_file);
+			ft_putendl_fd(tmp->value, data->exc->out_file);
 		}
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 16:28:05 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:12:06 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ void	ft_cd(t_data	*data);
 void	ft_echo(t_exc	*exc);
 void	ft_export(t_exc	*cmd, t_data	*data);
 void	ft_unset(t_exc	*cmd, t_data *data);
-void    ft_exit(t_exc   *cmd);
+void	ft_exit(t_exc	*cmd);
 char	*get_ev(t_data *data, char *str);
 
 //---------exc_list---------------------------------------------------------/
@@ -260,6 +260,8 @@ int		redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i);
 int		check_pipes(t_exc	*exc);
 int		**create_pipes(int count);
 void	exec_pipes(t_exc	*exc, t_data	*data, int her_file, char **envp);
+int		save_output(int outfile);
+void	close_fds(t_data	*data);
 //----------------free_functions-------------------------------------------/
 char	**free_tab(char **tab);
 void	free_cmd(t_data *data);

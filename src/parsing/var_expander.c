@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 14:33:04 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:59:54 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*find_var(char *var, t_env *env)
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, str))
-			return (free(var), free(str) ,var = ft_strdup(tmp->value), var);
+			return (free(var), free(str), var = ft_strdup(tmp->value), var);
 		tmp = tmp->next;
 	}
 	free(var);
@@ -77,7 +77,7 @@ static char	**fill_spltd(char *var, char **spltd, int count)
 			}
 			spltd[count--][j] = '\0';
 			i--;
-			j = - 1;
+			j = -1;
 			stat = 1;
 		}
 		else
@@ -125,11 +125,10 @@ static int	*char_counter(char *var, int count, t_cmd *cmd)
 			stat = 0;
 		j++;
 	}
-	
-	return ( tab);
+	return (tab);
 }
 
-static int	word_counter(char    *var)
+static int	word_counter(char	*var)
 {
 	int		i;
 	int		count;
@@ -160,7 +159,7 @@ static int	word_counter(char    *var)
 	return (count);
 }
 
-static char	*prep_expnd(char  *var, t_env *env, t_cmd *cmd)
+static char	*prep_expnd(char	*var, t_env *env, t_cmd *cmd)
 {
 	char	**spltd;
 	int		count;
@@ -168,7 +167,7 @@ static char	*prep_expnd(char  *var, t_env *env, t_cmd *cmd)
 
 	count = word_counter(var);
 	tab = char_counter(var, count - 1, cmd);
-	spltd = malloc(sizeof(char  *) * (count + 1));
+	spltd = malloc(sizeof(char *) * (count + 1));
 	spltd[count] = NULL;
 	count--;
 	while (count >= 0)
@@ -181,7 +180,7 @@ static char	*prep_expnd(char  *var, t_env *env, t_cmd *cmd)
 	return (join_expnd(spltd, env, word_counter(var)));
 }
 
-void var_expnd(t_data *data)
+void	var_expnd(t_data *data)
 {
 	t_cmd	*tmp;
 	char	*str;
@@ -193,13 +192,13 @@ void var_expnd(t_data *data)
 			tmp = tmp->next;
 		if (tmp->type == VARIABLE)
 		{
-			if(!ft_strcmp(tmp->str, "$0"))
+			if (!ft_strcmp(tmp->str, "$0"))
 			{
 				free(tmp->str);
 				tmp->str = ft_strdup("Minishell");
 				tmp->type = WORD;
 			}
-			else if(!ft_strcmp(tmp->str, "$?"))
+			else if (!ft_strcmp(tmp->str, "$?"))
 			{
 				free(tmp->str);
 				tmp->str = ft_itoa(g_xst);
@@ -209,7 +208,6 @@ void var_expnd(t_data *data)
 			{
 				str = tmp->str;
 				tmp->str = find_var(tmp->str, data->env);
-				free(str);
 				tmp->type = WORD;
 			}
 		}
@@ -221,6 +219,5 @@ void var_expnd(t_data *data)
 			tmp->type = D_QUOTES;
 		}
 		tmp = tmp->next;
-		// print_cmd(data->cmd);
 	}
 }

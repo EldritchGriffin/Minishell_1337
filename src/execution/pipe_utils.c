@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 15:33:45 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:12:01 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,25 @@ int	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i)
 		}
 	}
 	return (status);
+}
+
+int	save_output(int outfile)
+{
+	int	stds;
+
+	stds = dup(STDOUT_FILENO);
+	dup2(outfile, STDOUT_FILENO);
+	return (stds);
+}
+
+void	close_fds(t_data	*data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->pps->p_c)
+	{
+		close(data->pps->p_fd[i][0]);
+		close(data->pps->p_fd[i][1]);
+	}
 }
