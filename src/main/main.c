@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 12:18:32 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 16:02:42 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	main(int ac, char **av, char	**envp)
 		rl_catch_signals = 0;
 		line = ft_strtrim(readline("Guest@Minishell$: "), " ");
 		if (!line)
+		{
 			break ;
+		}
 		if (line && line[0])
 		{
 			add_history(line);

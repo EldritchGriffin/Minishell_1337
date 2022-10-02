@@ -6,35 +6,42 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:48:42 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:29:38 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-//Testing purposes again...
-// void    print_cmd(t_cmd *cmd)
-// {
-// 	while(cmd)
-// 	{
-// 		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
-// 		cmd = cmd->next;
-// 	}
-// }
+// Testing purposes again...
+void    print_cmd(t_cmd *cmd)
+{
+	static int num;
 
-// void print_exc(t_exc *exc)
-// {
-// 	int i;
+	printf("%d\n", ++num);
+	while(cmd->next)
+	{
+		cmd = cmd->next;
+	}
+	while (cmd)
+	{
+		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
+		cmd = cmd->prev;
+	}
+}
 
-// 	while (exc)
-// 	{
-// 		i = -1;
-// 		while(exc->str[++i])
-// 			printf  ("exc ========= is[%s]\n", exc->str[i]);
-// 		printf  ("MOVING  to the next\n");
-// 		exc = exc->next;
-// 	}	
-// }
+void print_exc(t_exc *exc)
+{
+	int i;
+
+	while (exc)
+	{
+		i = -1;
+		while(exc->str[++i])
+			printf  ("exc ========= is[%s]\n", exc->str[i]);
+		printf  ("MOVING  to the next\n");
+		exc = exc->next;
+	}	
+}
 
 ///-----------this function jut for test------------------------------------
 
@@ -86,13 +93,16 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 	if (build_token_list(line, data, &her_file))
 	{
 		free(line);
+		
 		var_expnd(data);
 		while ((*tmp))
 		{
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
+		print_cmd(data->cmd);
 		fill_exclist(data->cmd, data);
+		print_exc(data->exc);
 		data->pps->p_c = check_pipes(data->exc);
 		cmd_call(data->exc, data, envp, her_file);
 	}

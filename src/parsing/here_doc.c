@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:47:22 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:01:17 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 
 	ft_putstr_fd("> ", 1);
 	str = get_next_line(0);
-	str[ft_strlen(str + 1)] = '\0';
+	str[ft_strlen(str) - 1] = '\0';
+	// printf("%s\n", str);
 	if (!str)
 	{
 		exit(1);
