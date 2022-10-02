@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_sort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:09:16 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 13:29:11 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 05:10:05 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,44 +39,52 @@ static int	env_len(t_env *env)
 	return (i);
 }
 
-//FIXME TOO MUCH VARIABLES IN FUNC
+static void	initalize_data(int *i, int *j, int *k, int check)
+{
+	if (!check)
+	{
+		*i = 0;
+		*j = 0;
+		*k = 0;
+	}
+	if (check)
+	{
+		*j = 0;
+		*k = 0;
+	}
+}
+
 char	*env_to_str(t_env *env, t_data *data)
 {
 	t_env	*tmp;
 	char	*str;
-	int		size;
-	int		i;
-	int		j;
+	t_vb	vb;
 	int		k;
 
 	tmp = env;
-	i = 0;
-	j = 0;
-	k = 0;
-	size = env_len(env);
-	str = malloc(sizeof(char) * (size + 1));
+	initalize_data(&vb.i, &vb.j, &k, 0);
+	str = malloc(sizeof(char) * (env_len(env) + 1));
 	if (!str)
 		return (NULL);
 	while (tmp)
 	{
-		j = 0;
-		k = 0;
-		while (tmp->key[j])
-			str[i++] = tmp->key[j++];
+		initalize_data(&vb.i, &vb.j, &k, 1);
+		while (tmp->key[vb.j])
+			str[vb.i++] = tmp->key[vb.j++];
 		if (tmp->value)
 		{
-			str[i++] = '=';
-			str[i++] = '"';
+			str[vb.i++] = '=';
+			str[vb.i++] = '"';
 		}
 		while (tmp->value && tmp->value[k])
-			str[i++] = tmp->value[k++];
+			str[vb.i++] = tmp->value[k++];
 		if (tmp->value)
-			str[i++] = '"';
+			str[vb.i++] = '"';
 		if (tmp->next != NULL)
-			str[i++] = '\n';
+			str[vb.i++] = '\n';
 		tmp = tmp->next;
 	}
-	str[i] = '\0';
+	str[vb.i] = '\0';
 	return (str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:20 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 22:25:15 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 16:44:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	quotes_error(char c)
 
 void	unexpected_token(char c)
 {
-	ft_putstr_fd("Minishell: syntax error ", 2);
+	ft_putstr_fd("Minishell: syntax error \n", 2);
 }
 
 void	mini_perror(char *str)

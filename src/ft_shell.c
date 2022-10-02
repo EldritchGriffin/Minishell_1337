@@ -6,21 +6,21 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 00:23:15 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 16:13:04 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
 //Testing purposes again...
-// void    print_cmd(t_cmd *cmd)
-// {
-// 	while(cmd)
-// 	{
-// 		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
-// 		cmd = cmd->next;
-// 	}
-// }
+void    print_cmd(t_cmd *cmd)
+{
+	while(cmd)
+	{
+		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
+		cmd = cmd->next;
+	}
+}
 
 // void print_exc(t_exc *exc)
 // {
