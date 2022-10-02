@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 12:19:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 01:28:11 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_env	*env_list(char **envp)
 	int		i;
 	t_env	*env;
 
-	if (!envp)
+	if (!envp[0])
 		envp = fill_extren_env();
 	spltd = ft_split(envp[0], '=');
 	env = new_node_env(spltd[0], spltd[1]);
@@ -102,4 +102,3 @@ t_env	*env_list(char **envp)
 	}
 	return (env);
 }
-

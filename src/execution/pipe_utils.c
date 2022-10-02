@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 12:20:08 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 04:14:26 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ int	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i)
 	}
 	return (status);
 }
-

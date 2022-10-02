@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:47:22 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:19:36 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,15 @@ static char	*check_expanding(char *str, t_data *data)
 	return (str);
 }
 
-static void	ft_join(char **str)
-{
-	char	*tmp;
-
-	tmp = *str;
-	*str = ft_strjoin(*str, "\n");
-	free(tmp);
-}
-
 int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 {
 	char	*str;
 
 	ft_putstr_fd("> ", 1);
 	str = get_next_line(0);
-	str[ft_strlen(str + 1)] = '\0';
+	ft_join(&str);
 	if (!str)
-	{
-		exit(1);
-	}
+		exit(0);
 	if (delemiter->type != D_QUOTES || delemiter->type != S_QUOTES)
 	{
 		if (str && str[0] == '$')

@@ -6,23 +6,11 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 08:51:10 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 00:31:14 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-static bool	check_old_type(char *line, int *i, int *words, int *old_type)
-{
-	if (*old_type == S_QUOTES || *old_type == D_QUOTES)
-	{
-		if (!quote_handler(line, i, words, old_type))
-			return (false);
-	}
-	else if (*old_type == VARIABLE)
-		var_handler(line, i, words, old_type);
-	return (true);
-}
 
 bool	ft_break(int a, int b)
 {
@@ -52,18 +40,24 @@ static int	ft_creat_list(int old_type, t_data *data, int operator, char *line)
 	return (true);
 }
 
+static void	initalize_tokens(t_data **data, char *line, int *i, int *check)
+{
+	(*data)->tokens->operator = false;
+	(*data)->tokens->tmp_type = get_token_type(line[*i], \
+	&(*data)->tokens->operator);
+	(*data)->tokens->old_type = (*data)->tokens->tmp_type;
+	*check = (*i);
+}
+
 int	get_token(char *line, int *i, int words, t_data	*data)
 {
 	int		check;
 	char	*str;
 
-	data->tokens->operator = false;
-	data->tokens->tmp_type = get_token_type(line[*i], &data->tokens->operator);
-	data->tokens->old_type = data->tokens->tmp_type;
-	check = (*i);
+	initalize_tokens(&data, line, i, &check);
 	while (1)
 	{
-		data->tokens->tmp_type = get_token_type(line[*i],\
+		data->tokens->tmp_type = get_token_type(line[*i], \
 		&data->tokens->operator);
 		words++;
 		if (ft_break(data->tokens->old_type, data->tokens->tmp_type) \

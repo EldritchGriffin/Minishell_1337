@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 12:19:38 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 04:14:51 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 		status = redirect_inpipes(tmp, status, data, i);
 		if (tmp->out_file != 1)
 		{
-			if(i != data->pps->p_c)
+			if (i != data->pps->p_c)
 				dup2(tmp->out_file, data->pps->p_fd[i][1]);
 		}
 	}
@@ -54,7 +54,7 @@ static void	handle_fds(t_data	*data, int i)
 	}
 }
 
-static void	restore_parent(int status,int	*pids, t_data	*data)
+static void	restore_parent(int status, int	*pids, t_data	*data)
 {
 	int		i;
 	t_exc	*tmp;
@@ -73,7 +73,7 @@ static void	restore_parent(int status,int	*pids, t_data	*data)
 		waitpid(pids[i], &status, 0);
 		if (WIFEXITED(status))
 			g_xst = WEXITSTATUS(status);
-		if(WIFSIGNALED(status))
+		if (WIFSIGNALED(status))
 		{
 			ft_putstr_fd("\n", 1);
 			g_xst = 130;
@@ -130,4 +130,3 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	}
 	restore_parent(status, pids, data);
 }
-

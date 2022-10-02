@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 12:57:17 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 04:12:28 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@
 # define ERROR 1
 # define SUCCESS 0
 
-
 # define APPND ">>"
 # define I_REDI "<"
 # define O_REDI ">"
 # define HRDC "<<"
-
 
 //-----------------abstract syntax tree-------------------------------------
 
@@ -110,9 +108,9 @@ typedef struct s_pipe
 
 typedef struct s_types
 {
-	int	tmp_type;
-	int	old_type;
-	bool operator;
+	int		tmp_type;
+	int		old_type;
+	bool	operator;
 }			t_types;
 typedef struct s_data
 {
@@ -125,7 +123,13 @@ typedef struct s_data
 	char	**avm;
 	int		g_xst;
 	char	path[PATH_MAX];
-}			t_data;
+}	t_data;
+typedef struct s_vb
+{
+	int		i;
+	int		j;
+	int		check;
+}	t_vb;
 
 int		g_xst;
 
@@ -183,7 +187,8 @@ void	print_exc(t_exc *exc);
 char	**i_split(const char *s, char *c);
 void	mini_perror(char *str);
 char	*ft_join_exc(char *str, char *cmd);
-
+void	ft_join1(char **str);
+void	ft_join(char **str);
 //--------------------------------------------------------------------------
 void	add_back_exc(t_exc **exc, t_exc *new_node);
 int		ft_count_pipes(t_data *data);
@@ -199,6 +204,7 @@ int		is_words(char c, char *str, t_tokens *token);
 int		ft_only_words(char *str, char *line, t_tokens *token);
 void	cmd_list(char *str, t_tokens token, bool operator, t_data *data);
 int		build_token_list(char *line, t_data *data, int *her_file);
+bool	check_old_type(char *line, int *i, int *words, int *old_type);
 int		first_check(char *line, char *str);
 t_env	*env_list(char	**envp);
 void	print_env(t_env *env, t_data *data);
