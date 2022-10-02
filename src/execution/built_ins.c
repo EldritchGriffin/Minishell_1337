@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 13:45:15 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:33:18 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ int	identify_builtin(t_data *data, t_exc	*cmd)
 		return (exit(0), 0);
 	return (1);
 }
-

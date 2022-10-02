@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 15:00:20 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:31:58 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,3 @@ int	ft_open(int *out_file, int *in_file, int j, char *str)
 	}
 	return (0);
 }
-

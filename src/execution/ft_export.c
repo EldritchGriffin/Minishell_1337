@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:06 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/01 12:18:08 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 04:15:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,3 @@ void	ft_export(t_exc	*cmd, t_data	*data)
 	else
 		g_xst = 0;
 }
-

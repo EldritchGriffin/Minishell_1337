@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 09:10:33 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:33:40 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	*redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 		stds[0] = redirect_inpipes(tmp, status, data, i);
 		if (tmp->out_file != 1)
 		{
-			if(i != data->pps->p_c)
+			if (i != data->pps->p_c)
 				dup2(tmp->out_file, data->pps->p_fd[i][1]);
 			else
 				stds[1] = save_output(tmp->out_file);
@@ -156,4 +156,3 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	}
 	restore_parent(std, status, pids, data);
 }
-

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 15:29:38 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 15:35:30 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			join_unspaced(tmp, &((*tmp)->next), &data);
 			tmp = &(*tmp)->next;
 		}
-		print_cmd(data->cmd);
 		fill_exclist(data->cmd, data);
-		print_exc(data->exc);
 		data->pps->p_c = check_pipes(data->exc);
 		cmd_call(data->exc, data, envp, her_file);
 	}

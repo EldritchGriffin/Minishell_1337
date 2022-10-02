@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:20 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 12:17:56 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/01 22:25:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ void	mini_perror(char *str)
 		ft_putstr_fd("Minishell: syntax error near\
 		unexpected token `newline' `\"\n", STDERR);
 }
-

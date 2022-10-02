@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 08:38:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/01 08:40:23 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 00:28:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ int	get_token_type(char line, bool *operator)
 	else if (line == ' ' || line == '\t')
 		return (SPC);
 	return (WORD);
+}
+
+bool	check_old_type(char *line, int *i, int *words, int *old_type)
+{
+	if (*old_type == S_QUOTES || *old_type == D_QUOTES)
+	{
+		if (!quote_handler(line, i, words, old_type))
+			return (false);
+	}
+	else if (*old_type == VARIABLE)
+		var_handler(line, i, words, old_type);
+	return (true);
 }
 
 int	build_token_list(char *line, t_data *data, int *her_file)
