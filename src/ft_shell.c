@@ -6,26 +6,19 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 16:37:53 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 18:28:33 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
 
-// Testing purposes again...
+//Testing purposes again...
 void    print_cmd(t_cmd *cmd)
 {
-	static int num;
-
-	printf("%d\n", ++num);
-	while(cmd->next)
-	{
-		cmd = cmd->next;
-	}
-	while (cmd)
+	while(cmd)
 	{
 		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
-		cmd = cmd->prev;
+		cmd = cmd->next;
 	}
 }
 
@@ -60,10 +53,9 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	}
 	else
 	{
-		rederection_check(&exc, her_file);
-		if (!exc->str[0] || exc->in_file == -1)
-			return ;
-		if (!identify_builtin(data, exc))
+		i = rederection_check(&exc, her_file);
+		if (!exc->str[0] || exc->in_file == -1 || i == 2
+			|| !identify_builtin(data, exc))
 			return ;
 		else
 		{
@@ -93,7 +85,6 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 	if (build_token_list(line, data, &her_file))
 	{
 		free(line);
-		
 		var_expnd(data);
 		while ((*tmp))
 		{
@@ -101,8 +92,9 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			tmp = &(*tmp)->next;
 		}
 		fill_exclist(data->cmd, data);
-		print_exc(data->exc);
+		// print_exc(data->exc);
 		data->pps->p_c = check_pipes(data->exc);
-		//cmd_call(data->exc, data, envp, her_file);
+		cmd_call(data->exc, data, envp, her_file);
+		// print_exc(data->exc);
 	}
 }

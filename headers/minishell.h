@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 20:42:58 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:44:44 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	join_unspaced(t_cmd **node,	t_cmd **node_next, t_data **data);
 
 bool	check_one(t_cmd *node, t_cmd *node_next);
 void	sorted_env(t_env *env, t_data *data);
-
+int	check_return(int i, char *str, int *in_file, int her_file);
 //--------------------------------syntax_error_functions-------------------
 
 t_cmd	*get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
@@ -181,7 +181,7 @@ int		operator_handler(char *str, int type);
 void	ft_space_skip(char **line, int *i);
 bool	env_check(char *str, t_data *data);
 bool	rm_quotes(t_data **data);
-void	herdoc_handler(t_data *data, int *her_file);
+void	herdoc_handler(t_data *data, int *her_file, int status);
 void	ft_case1(char **str, int *i);
 void	print_exc(t_exc *exc);
 char	**i_split(const char *s, char *c);
@@ -218,7 +218,8 @@ void	fill_export(char	*str, t_data	*data);
 int		exctab_len(char **tab);
 char	*get_strredir(int j);
 void	do_export(t_data	*data, char	*key, char	*val, bool mode);
-
+void	sort_env(char **tab, int tab_len);
+size_t	envtab_len(char **env);
 //----------------print fucntions------------------------------------------/
 
 void	print_lst(t_cmd **cmd);

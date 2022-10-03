@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 14:51:07 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:11:01 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:03:33 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	prep_exclist(t_cmd	*cmd, t_data	*data)
 	int		count;
 	t_exc	*node;
 
-	count = ft_count_pipes(data);
+	count = ft_count_pipes(data) + 1;
 	if (!count)
 	{
 		add_back_exc(&data->exc, new_node_exc(NULL, data));

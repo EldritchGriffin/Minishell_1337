@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:41:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 15:31:58 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 03:32:56 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,14 @@ char	*trim_quote(char *str)
 int	ft_open(int *out_file, int *in_file, int j, char *str)
 {
 	if (j == 0)
-		return (*out_file = open(str, O_RDWR | O_APPEND | O_CREAT, 0777), 1);
+		return (*out_file = open(str, O_RDWR | O_APPEND | O_CREAT, 0777));
 	else if (j == 3)
-		return (*out_file = open(str, O_CREAT | O_TRUNC | O_RDWR, 0644), 1);
+		return (*out_file = open(str, O_CREAT | O_TRUNC | O_RDWR, 0644));
 	else if (j == 2)
 	{
 		if (access(str, F_OK | R_OK))
-			return (*in_file = -1, perror("access ")
-				, -1);
-		return (*in_file = open(str, O_RDONLY), 1);
+			return (perror("access "), *in_file = -1);
+		return (*in_file = open(str, O_RDONLY));
 	}
 	return (0);
 }

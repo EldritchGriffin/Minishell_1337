@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/03 15:58:14 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:57:10 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 {
 	int			status;
-
 	if (rederection_check(&tmp, her_file))
 	{
 		if (tmp->in_file == -1)
@@ -124,6 +123,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	while (i <= data->pps->p_c && tmp)
 	{
 		restore_parent(std, 0, pids, data);
+		herdoc_handler(data, &her_file, i);
 		status = redirect_pipes(tmp, her_file, i, data);
 		if (status == -1)
 			return ;

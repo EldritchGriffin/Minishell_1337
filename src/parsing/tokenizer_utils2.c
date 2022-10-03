@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 19:31:28 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:54:32 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,28 @@ bool	rm_quotes(t_data **data)
 	return (true);
 }
 
-void	herdoc_handler(t_data *data, int *her_file)
+void	herdoc_handler(t_data *data, int *her_file, int status)
 {
-	t_cmd	*hdc;
-
-	hdc = data->cmd;
+	static t_cmd	*hdc;
+	static int 		stat;
+	if(status == 0)
+		hdc = data->cmd;
 	while (hdc)
 	{
+		if(hdc->type == PIPE)
+		{
+			hdc = hdc->next;
+			stat = 1;
+			break ;
+		}
 		if (hdc->type == HERDOC)
 		{
 			if (!hdc->next->opr && hdc->next->type == SPC
 				&& (hdc->next->next->type == WORD
 					|| hdc->next->next->type == D_QUOTES
-					|| hdc->next->next->type == S_QUOTES || hdc->next->next->type == VARIABLE
-					|| hdc->next->next->type == EXPND_VB))
+					|| hdc->next->next->type == S_QUOTES
+					|| hdc->next->next->type == VARIABLE
+					||hdc->next->next->type == EXPND_VB))
 				*her_file = here_doc(hdc->next->next, data);
 		}
 		hdc = hdc->next;

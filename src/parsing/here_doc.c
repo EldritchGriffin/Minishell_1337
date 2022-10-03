@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 15:47:28 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 16:39:49 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*check_expanding(char *str, t_data *data)
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, str + 1))
-			return (str = ft_strdup(tmp->value));
+			return (str = ft_strdup(tmp->value), str);
 		tmp = tmp->next;
 	}
 	return (str);
@@ -29,17 +29,18 @@ static char	*check_expanding(char *str, t_data *data)
 int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 {
 	char	*str;
+	int		i;
 
 	ft_putstr_fd("> ", 1);
 	str = get_next_line(0);
 	if (str)
 		str[ft_strlen(str) - 1] = '\0';
 	if (!str)
-		exit(0);
+		exit(1);
 	if (delemiter->type == WORD)
 	{
-		if (str && str[0] == '$')
-			str = check_expanding(str, data);
+		if (str && str[0])
+				str = check_expanding(str, data);
 	}
 	if (!ft_strcmp(delemiter->str, str))
 		return (-1);

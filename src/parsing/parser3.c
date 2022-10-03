@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 04:11:44 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 05:49:01 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	ft_check_vb(int check, char **str, char *cmd)
 char	*get_redirection(t_exc **exc, int her_file, int *result)
 {
 	t_vb	vb;
+	int		i;
 	char	*str;
 
 	initilazie_data(&vb.i, &vb.j, &str, 0);
@@ -53,10 +54,11 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 				vb.check = 1;
 				if (!check_redirfile((*exc)->str[vb.i + 1], &vb.check, &vb.i))
 					break ;
-				if (!ft_open(&(*exc)->out_file, &(*exc)->in_file, \
-				vb.j, (*exc)->str[vb.i]))
-					if (her_file)
-					(*exc)->in_file = her_file;
+				i = ft_open(&(*exc)->out_file, &(*exc)->in_file, \
+				vb.j, (*exc)->str[vb.i]);
+				if (!check_return(i, (*exc)->str[vb.i], \
+				&(*exc)->in_file, her_file))
+					return (NULL);
 				*result = 1;
 			}
 		}

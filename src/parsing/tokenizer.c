@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 00:31:14 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 16:44:03 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,21 @@ bool	ft_break(int a, int b)
 static int	ft_creat_list(int old_type, t_data *data, int operator, char *line)
 {
 	if (old_type == SPC)
-		return (cmd_list(ft_strdup(" "), old_type, 0, data), true);
+	{
+		cmd_list(ft_strdup(" "), old_type, 0, data);
+		if (data->tokens->operator == true && data->tokens->tmp_type != SPC)
+			cmd_list(ft_strdup(" "), SPC, 0, data);
+		return (true);
+	}
 	if (old_type == WORD)
-		return (cmd_list(line, old_type, 0, data), true);
+	{
+		cmd_list(line, data->tokens->old_type, 0, data);
+		if (data->tokens->operator == true && data->tokens->tmp_type != WORD)
+			cmd_list(ft_strdup(" "), SPC, 0, data);
+		return (true);
+	}
 	else
-		return (cmd_list(line, old_type, operator, data), true);
+		return (cmd_list(line, data->tokens->old_type, operator, data), true);
 	return (true);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_check_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 05:16:27 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:13:24 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:42:59 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_cases1(t_cmd *tmp)
 		return (g_xst = 258, 0);
 	else if ((tmp->next && !tmp->next->opr)
 		&& (tmp->next->next && !tmp->next->next->opr)
-		&& (tmp->next->next->next && tmp->next->next->next->opr))
+		&& (tmp->next->next->next && tmp->next->next->next->opr)
+		&& !tmp->next->next->next->next)// its woking needs lil opmization
 		return (g_xst = 258, 0);
 	return (1);
 }

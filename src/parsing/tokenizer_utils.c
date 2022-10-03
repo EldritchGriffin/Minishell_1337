@@ -6,24 +6,11 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/24 04:58:56 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/02 16:45:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-int	first_check(char *line, char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (line[0] == str[i])
-			return (unexpected_token(str[i]), 1);
-	}
-	return (0);
-}
 
 bool	quote_handler(char *line, int *i, int *words, int *type)
 {
