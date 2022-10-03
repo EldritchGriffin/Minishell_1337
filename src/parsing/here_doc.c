@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 19:24:50 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:47:28 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 		str[ft_strlen(str) - 1] = '\0';
 	if (!str)
 		exit(0);
-	if (delemiter->type != D_QUOTES || delemiter->type != S_QUOTES)
+	if (delemiter->type == WORD)
 	{
 		if (str && str[0] == '$')
 			str = check_expanding(str, data);
@@ -49,8 +49,9 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 	return (0);
 }
 
-void	here_fork(int pid, t_cmd	*delemiter, t_data	*data, int fd[])
+int	here_fork(int pid, t_cmd	*delemiter, t_data	*data, int fd[])
 {
+	int status;
 	if (pid == 0)
 	{
 		signal(SIGINT, &here_handler);
@@ -64,6 +65,8 @@ void	here_fork(int pid, t_cmd	*delemiter, t_data	*data, int fd[])
 		g_xst = 0;
 		exit(g_xst);
 	}
+	wait(&status);
+	return (status);
 }
 
 int	here_doc(t_cmd *delemiter, t_data *data)
@@ -77,8 +80,7 @@ int	here_doc(t_cmd *delemiter, t_data *data)
 	pid = fork();
 	if (pid)
 		ignore_signal();
-	here_fork(pid, delemiter, data, fd);
-	wait(&status);
+	status = here_fork(pid, delemiter, data, fd);
 	close(fd[1]);
 	signals_handler();
 	if (WIFEXITED(status))

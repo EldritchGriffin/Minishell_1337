@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 17:12:06 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 20:42:58 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,11 +256,11 @@ void	handler(int sig);
 void	ignore_signal(void);
 void	here_handler(int sig);
 //----------------pipes-------------------------------------------/
-int		redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i);
+void	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i);
 int		check_pipes(t_exc	*exc);
 int		**create_pipes(int count);
 void	exec_pipes(t_exc	*exc, t_data	*data, int her_file, char **envp);
-int		save_output(int outfile);
+int		*save_stds(void);
 void	close_fds(t_data	*data);
 //----------------free_functions-------------------------------------------/
 char	**free_tab(char **tab);

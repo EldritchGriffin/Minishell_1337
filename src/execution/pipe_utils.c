@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 17:12:01 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:57:51 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,26 @@ int	**create_pipes(int count)
 	return (pipes);
 }
 
-int	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i)
+void	redirect_inpipes(t_exc	*tmp, int status, t_data	*data, int i)
 {
 	if (tmp->in_file != 0)
 	{
 		if (i != 0)
-		{
 			dup2(tmp->in_file, data->pps->p_fd[i - 1][0]);
-		}
 		else
-		{
-			status = dup(STDIN_FILENO);
 			dup2(tmp->in_file, STDIN_FILENO);
-		}
 	}
-	return (status);
+	return ;
 }
 
-int	save_output(int outfile)
+int	*save_stds(void)
 {
-	int	stds;
+	int	*stds;
 
-	stds = dup(STDOUT_FILENO);
-	dup2(outfile, STDOUT_FILENO);
+		stds = malloc(sizeof(int) * 2);
+		stds[0] = dup(STDIN_FILENO);
+		stds[1] = dup(STDOUT_FILENO);
+
 	return (stds);
 }
 

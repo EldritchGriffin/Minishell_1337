@@ -6,34 +6,30 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 17:11:43 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:58:14 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	*redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
+int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 {
-	int	status;
-	int	*stds;
+	int			status;
 
-	status = 0;
-	stds = malloc(sizeof(int) * 2);
-	stds[1] = 1;
 	if (rederection_check(&tmp, her_file))
 	{
 		if (tmp->in_file == -1)
-			return (stds[0] = -1, stds);
-		stds[0] = redirect_inpipes(tmp, status, data, i);
+			return (-1);
+		redirect_inpipes(tmp, status, data, i);
 		if (tmp->out_file != 1)
 		{
 			if (i != data->pps->p_c)
 				dup2(tmp->out_file, data->pps->p_fd[i][1]);
 			else
-				stds[1] = save_output(tmp->out_file);
+				dup2(tmp->out_file, STDOUT_FILENO);
 		}
 	}
-	return (stds);
+	return (0);
 }
 
 static void	handle_fds(t_data	*data, int i)
@@ -122,14 +118,14 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	status = 1;
 	tmp = exc;
 	pids = malloc(sizeof(int) * (data->pps->p_c + 1));
+	std = save_stds();
 	if (data->pps->p_c)
 		data->pps->p_fd = create_pipes(data->pps->p_c);
 	while (i <= data->pps->p_c && tmp)
 	{
-		if (i != 0)
-			restore_parent(std, 0, pids, data);
-		std = redirect_pipes(tmp, her_file, i, data);
-		if (std[0] == -1)
+		restore_parent(std, 0, pids, data);
+		status = redirect_pipes(tmp, her_file, i, data);
+		if (status == -1)
 			return ;
 		pids[i] = fork();
 		if (pids[i])
@@ -138,5 +134,6 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		tmp = tmp->next;
 		i++;
 	}
-	restore_parent(std, status, pids, data);
+	restore_parent(std, 1, pids, data);
+	free(std);
 }
