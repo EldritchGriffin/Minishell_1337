@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 04:06:41 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 05:19:42 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 05:49:01 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ static void	ft_check_vb(int check, char **str, char *cmd)
 		*str = ft_join_exc(*str, cmd);
 }
 
-static int	check_return(int i, char *str, int *in_file, int her_file)
-{
-	if (i == -1)
-		return (perror(str), 0);
-	if (i == 0)
-		*in_file = her_file;
-	return (1);
-}
-
 char	*get_redirection(t_exc **exc, int her_file, int *result)
 {
 	t_vb	vb;
@@ -65,7 +56,8 @@ char	*get_redirection(t_exc **exc, int her_file, int *result)
 					break ;
 				i = ft_open(&(*exc)->out_file, &(*exc)->in_file, \
 				vb.j, (*exc)->str[vb.i]);
-				if (!check_return(i, (*exc)->str[vb.i], &(*exc)->in_file, her_file))
+				if (!check_return(i, (*exc)->str[vb.i], \
+				&(*exc)->in_file, her_file))
 					return (NULL);
 				*result = 1;
 			}

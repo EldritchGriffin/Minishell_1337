@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 09:21:20 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 05:48:38 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,13 @@ char	**free_tab(char **tab)
 	}
 	free(tab);
 	return (NULL);
+}
+
+int	check_return(int i, char *str, int *in_file, int her_file)
+{
+	if (i == -1)
+		return (perror(str), 0);
+	if (i == 0)
+		*in_file = her_file;
+	return (1);
 }

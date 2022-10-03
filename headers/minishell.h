@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 02:05:01 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 05:48:53 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void	join_unspaced(t_cmd **node,	t_cmd **node_next, t_data **data);
 
 bool	check_one(t_cmd *node, t_cmd *node_next);
 void	sorted_env(t_env *env, t_data *data);
-
+int	check_return(int i, char *str, int *in_file, int her_file);
 //--------------------------------syntax_error_functions-------------------
 
 t_cmd	*get_list(t_cmd *node, char *str, t_tokens type, t_data *data);
