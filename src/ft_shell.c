@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 19:20:57 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 05:28:40 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	}
 	else
 	{
-		rederection_check(&exc, her_file);
-		if (!exc->str[0] || exc->in_file == -1)
-			return ;
-		if (!identify_builtin(data, exc))
+		i = rederection_check(&exc, her_file);
+		if (!exc->str[0] || exc->in_file == -1 || i == 2
+			|| !identify_builtin(data, exc))
 			return ;
 		else
 		{

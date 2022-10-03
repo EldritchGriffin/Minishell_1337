@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 18:45:12 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 05:43:13 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ static int	ft_creat_list(int old_type, t_data *data, int operator, char *line)
 	if (old_type == WORD)
 	{
 		cmd_list(line, data->tokens->old_type, 0, data);
-		if (data->tokens->operator == true && data->tokens->tmp_type != SPC)
+		printf("im here\n");
+		if (data->tokens->operator == true && data->tokens->tmp_type != WORD)
 			cmd_list(ft_strdup(" "), SPC, 0, data);
 		return (true);
 	}

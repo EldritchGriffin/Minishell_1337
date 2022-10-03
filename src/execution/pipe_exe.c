@@ -6,20 +6,11 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 15:33:40 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:11:43 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-int	save_output(int	outfile)
-{
-	int stds;
-
-	stds = dup(STDOUT_FILENO);
-	dup2(outfile, STDOUT_FILENO);
-	return (stds);
-}
 
 int	*redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 {
@@ -72,28 +63,21 @@ static void	handle_fds(t_data	*data, int i)
 static void	restore_parent(int	*stds, int status, int	*pids, t_data	*data)
 {
 	int		i;
-	t_exc	*tmp;
 
 	dup2(stds[0], STDIN_FILENO);
 	dup2(stds[1], STDOUT_FILENO);
-	if(status == 1)
+	if (status == 1)
 	{
 		i = -1;
-		tmp = data->exc;
-		while (++i < data->pps->p_c)
-		{
-			close(data->pps->p_fd[i][0]);
-			close(data->pps->p_fd[i][1]);
-		}
-		i = -1;
+		close_fds(data);
 		while (++i <= data->pps->p_c)
 		{
 			waitpid(pids[i], &status, 0);
 			if (WIFEXITED(status))
 				g_xst = WEXITSTATUS(status);
-			if(WIFSIGNALED(status))
+			if (WIFSIGNALED(status))
 			{
-				if(WTERMSIG(status) == SIGINT)
+				if (WTERMSIG(status) == SIGINT)
 				{
 					ft_putstr_fd("\n", 1);
 					g_xst = 130;
@@ -142,7 +126,7 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		data->pps->p_fd = create_pipes(data->pps->p_c);
 	while (i <= data->pps->p_c && tmp)
 	{
-		if(i != 0)
+		if (i != 0)
 			restore_parent(std, 0, pids, data);
 		std = redirect_pipes(tmp, her_file, i, data);
 		if (std[0] == -1)

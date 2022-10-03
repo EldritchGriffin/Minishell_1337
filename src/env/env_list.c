@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 17:34:40 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/03 02:02:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_env(t_env *env, t_data *data)
 	tmp = env;
 	if (!tmp)
 	{
-		tmp = env_list(&str);
+		tmp = env_list(data->envp);
 	}
 	while (tmp)
 	{
@@ -33,37 +33,6 @@ void	print_env(t_env *env, t_data *data)
 		tmp = tmp->next;
 	}
 	g_xst = 0;
-}
-
-void	add_back_env(t_env **env, t_env	*new_node)
-{
-	t_env	*tmp;
-
-	if (!env || !new_node)
-		return ;
-	if (!*env)
-	{
-		*env = new_node;
-		return ;
-	}
-	tmp = *env;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new_node;
-	return ;
-}
-
-t_env	*new_node_env(char *key, char *value)
-{
-	t_env	*new_node;
-
-	new_node = malloc(sizeof(t_env));
-	if (!new_node)
-		return (NULL);
-	new_node->key = key;
-	new_node->value = value;
-	new_node->next = NULL;
-	return (new_node);
 }
 
 static char	**fill_extren_env(void)
@@ -101,4 +70,30 @@ t_env	*env_list(char **envp)
 		i++;
 	}
 	return (env);
+}
+
+void	sort_env(char **tab, int tab_len)
+{
+	char	*tmp;
+	int		i;
+	int		sort;
+
+	sort = 0;
+	while (tab && sort == 0)
+	{
+		i = 0;
+		sort = 1;
+		while (i < tab_len - 1)
+		{
+			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+			{
+				tmp = tab[i];
+				tab[i] = tab[i + 1];
+				tab[i + 1] = tmp;
+				sort = 0;
+			}
+			i++;
+		}
+		tab_len--;
+	}
 }
