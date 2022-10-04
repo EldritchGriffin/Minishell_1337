@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flag_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 04:11:54 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/09/30 09:16:10 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 16:47:43 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*flag_str(t_cmd *cmd)
 
 	i = count_char(cmd);
 	str = malloc(sizeof(char) * i + 1);
+	if (!str)
+		return (NULL);
 	str[i] = '\0';
 	i = 0;
 	while (cmd)

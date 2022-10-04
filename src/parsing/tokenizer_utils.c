@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:06 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 16:45:49 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:38:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	quote_handler(char *line, int *i, int *words, int *type)
 			return (true);
 		}
 	}
-	return (quotes_error(quote), false);
+	return (g_xst = 258, quotes_error(quote), false);
 }
 
 bool	env_check(char *str, t_data *data)

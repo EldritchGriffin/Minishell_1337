@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 13:12:33 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:56:25 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ int		ft_pwd(t_data *data);
 char	**parse_args1(t_data *data);
 int		ft_check_tokens(t_cmd *cmd);
 int		ft_check_toekns2(t_data *data);
+void	initalize_childs(t_data *data);
+void	initialize(t_data *data, char **line);
 
 //---------------- test_functions --------------------------------------------
 
@@ -269,6 +271,7 @@ char	**free_tab(char **tab);
 void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
 void	free_env(t_env *env);
+void	free_all(t_data *data);
 //----------------Var_expander----------------------------------/
 // int		*char_counter(char *var, int count);
 // void	check_spltd(t_expnd	*expnd, int	*stat);

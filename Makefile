@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/10/04 13:17:49 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/10/04 16:56:39 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBFT      := $(LIBFT_DIR)/libft.a
 GNL 	   := $(GNL_DIR)/get_next_line.a
 SRC_DIR    := src
 OBJ_DIR    := obj
-TOOLS      := cmd_list exc_list
+TOOLS      := cmd_list exc_list main_utils
 ENV        := env_list env_utils
 EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe signals_handler pipe_utils ft_exit
 PARSING    := final_check parser_utils  parser parser2 parser_utils2 parser3  free_list syntax_errors tokenizer_utils \

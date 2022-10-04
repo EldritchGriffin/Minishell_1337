@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 09:48:05 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:49:13 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	redirection_handler(char a, char b, int old_type, bool *operator)
 bool	rm_quotes(t_data **data)
 {
 	t_cmd	*cmd;
-	char	*tmp;
 
 	cmd = (*data)->cmd;
 	if (!cmd)
@@ -41,10 +40,7 @@ bool	rm_quotes(t_data **data)
 	{
 		if (cmd->type == S_QUOTES || cmd->type == D_QUOTES
 			|| cmd->type == EXPND_VB)
-		{
-			tmp = cmd->str;
 			cmd->str = trim_quote(cmd->str);
-		}
 		cmd = cmd->next;
 	}
 	return (true);

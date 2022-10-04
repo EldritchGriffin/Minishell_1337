@@ -6,30 +6,12 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 13:21:08 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:04:05 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-
-static void	initialize(t_data *data, char **line)
-{
-	// data->pps = malloc(sizeof(t_pipe));
-	// if (!data->pps)
-	// 	return (mini_perror("Memory"), (void)0);
-	// data->tokens = malloc(sizeof(t_types));
-	// if (!data->pps)
-	// 	return ((void)0);
-	// data->pps->p_c = 0;
-	// data->pps->p_fd = 0;
-	// data->tokens->tmp_type = 0;
-	// data->tokens->old_type = 0;
-	// data->tokens->operator = false;
-	data->cmd = NULL;
-	data->exc = NULL;
-	*line = NULL;
-}
 
 void	updt_shlvl(t_data	*data)
 {
@@ -60,14 +42,6 @@ void	updt_shlvl(t_data	*data)
 		free_tab(spltd);
 }
 
-static void	free_all(t_data *data)
-{
-	free(data->pps);
-	free_env(data->env);
-	free(data->tokens);
-	ft_putstr_fd("\b\b  \b\bexit\n", STDERR);
-}
-
 int	main(int ac, char **av, char **envp)
 {
 	t_data	data;
@@ -76,12 +50,7 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	data.avm = av;
 	data.envp = envp;
-	data.pps = malloc(sizeof(t_pipe));
-	if (!data.pps)
-		return (mini_perror("Memory"), 0);
-	data.tokens = malloc(sizeof(t_types));
-	if (!data.pps)
-		return (mini_perror("Memory"), 0);
+	initalize_childs(&data);
 	initialize(&data, &line);
 	updt_shlvl(&data);
 	data.env = env_list(envp);
@@ -97,7 +66,6 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			ft_shell(line, &data, data.env, envp);
 			initialize(&data, &line);
-			system("leaks Minishell");
 		}
 	}
 	free_all(&data);

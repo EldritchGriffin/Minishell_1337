@@ -6,13 +6,13 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/04 13:15:13 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:45:07 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
+int	redirect_pipes(t_exc *tmp, int her_file, int i, t_data *data)
 {
 	int			status;
 
@@ -32,7 +32,7 @@ int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 	return (0);
 }
 
-static void	handle_fds(t_data	*data, int i)
+static void	handle_fds(t_data *data, int i)
 {
 	int	j;
 
@@ -84,7 +84,7 @@ static void	restore_parent(int	*stds, int status, int	*pids, t_data	*data)
 	}
 }
 
-static	void	pipe_exe(int	*pids, t_data	*data, t_exc	*tmp, int i)
+static	void	pipe_exe(int *pids, t_data	*data, t_exc *tmp, int i)
 {
 	int	status;
 
