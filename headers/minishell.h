@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 22:44:44 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:12:33 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,10 @@ typedef struct s_vb
 	int		i;
 	int		j;
 	int		check;
+	int		k;
 }	t_vb;
 
-int		g_xst;
+int	g_xst;
 
 int		ft_cases1(t_cmd *tmp);
 int		operator_handler2(char *str, int type);
@@ -151,7 +152,7 @@ void	join_unspaced(t_cmd **node,	t_cmd **node_next, t_data **data);
 
 bool	check_one(t_cmd *node, t_cmd *node_next);
 void	sorted_env(t_env *env, t_data *data);
-int	check_return(int i, char *str, int *in_file, int her_file);
+int		check_return(int i, char *str, int *in_file, int her_file);
 //--------------------------------syntax_error_functions-------------------
 
 t_cmd	*get_list(t_cmd *node, char *str, t_tokens type, t_data *data);

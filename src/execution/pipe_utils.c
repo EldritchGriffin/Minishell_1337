@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/03 15:57:51 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:14:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ int	*save_stds(void)
 {
 	int	*stds;
 
-		stds = malloc(sizeof(int) * 2);
-		stds[0] = dup(STDIN_FILENO);
-		stds[1] = dup(STDOUT_FILENO);
-
+	stds = malloc(sizeof(int) * 2);
+	stds[0] = dup(STDIN_FILENO);
+	stds[1] = dup(STDOUT_FILENO);
 	return (stds);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 22:41:35 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 19:34:01 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 08:11:22 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	identify_builtin(t_data *data, t_exc	*cmd)
 	if (!ft_strcmp(ft_tolower(cmd->str[0]), "env"))
 	{
 		if (cmd->str[1])
-			return (ft_putstr_fd("env with arguments\n", STDERR), 0);
+			return (ft_putstr_fd("env with No arguments\n", STDERR), 0);
 		return (print_env(data->env, data), 0);
 	}
 	if (!ft_strcmp(cmd->str[0], "exit"))

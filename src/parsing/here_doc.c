@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 16:39:49 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 07:58:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 
 int	here_fork(int pid, t_cmd	*delemiter, t_data	*data, int fd[])
 {
-	int status;
+	int		status;
+
 	if (pid == 0)
 	{
 		signal(SIGINT, &here_handler);

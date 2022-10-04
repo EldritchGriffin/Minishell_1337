@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 04:16:00 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:16:31 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_path(char **cmd, t_data *data, int *check)
 
 	path = ft_strdup(get_ev(data, "PATH"));
 	if (!*path)
-		return (cmd[0]);
+		return (free(path), cmd[0]);
 	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2) == 0))
 		return (free(path), *check = 1, cmd[0]);
 	path_split = ft_split(path, ':');

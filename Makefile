@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
+#    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/10/03 21:50:25 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/10/04 13:17:49 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,8 @@ create_dir :
 	@mkdir -p $(FILE)
 clean :
 	@echo "$(YELLOW)Removing Objects file ....    $(GREEN)$(shell basename $(OBJ))$(GREEN)"
+	@$(MAKE) -C $(LIBFT_DIR)/ clean
+	@$(MAKE) -C $(GNL_DIR)/ clean
 	@rm -rf $(OBJ)
 	@echo "     $(YELLOW)Successfully Removed$(YELLOW)"
 

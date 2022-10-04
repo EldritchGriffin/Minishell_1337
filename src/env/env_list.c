@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/03 02:02:39 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 12:51:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	print_env(t_env *env, t_data *data)
 static char	**fill_extren_env(void)
 {	
 	char	**env;
+	char	*tmp;
 
 	env = malloc(sizeof(char *) * 5);
 	if (!env)
@@ -53,22 +54,26 @@ static char	**fill_extren_env(void)
 t_env	*env_list(char **envp)
 {
 	char	**spltd;
+	char	**tmp;
 	int		i;
 	t_env	*env;
 
-	if (!*envp)
-		envp = fill_extren_env();
-	spltd = ft_split(envp[0], '=');
+	tmp = envp;
+	if (!tmp[0])
+		tmp = fill_extren_env();
+	spltd = ft_split(tmp[0], '=');
 	env = new_node_env(spltd[0], spltd[1]);
 	free(spltd);
 	i = 1;
-	while (envp[i])
+	while (tmp[i])
 	{
-		spltd = ft_split(envp[i], '=');
+		spltd = ft_split(tmp[i], '=');
 		add_back_env(&env, new_node_env(spltd[0], spltd[1]));
 		free(spltd);
 		i++;
 	}
+	if (!envp[0])
+		free_tab(tmp);
 	return (env);
 }
 
