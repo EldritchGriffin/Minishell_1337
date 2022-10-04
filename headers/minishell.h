@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 13:12:33 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:29:06 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,10 +270,11 @@ void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
 void	free_env(t_env *env);
 //----------------Var_expander----------------------------------/
-// int		*char_counter(char *var, int count);
-// void	check_spltd(t_expnd	*expnd, int	*stat);
-// void	char_check(char	*var, int	*i, int	*j);
-// char	**fill_spltd(t_expnd	expnd);
-// char	*find_var(char *var, t_env *env);
-// char	*join_expnd(char **spltd, t_env *env, int count);
+char	*find_var(char *var, t_env *env);
+char	*join_expnd(char **spltd, t_env *env, int count);
+char	*prep_expnd(char	*var, t_env *env, t_cmd *cmd);
+char	**fill_spltd(char *var, char **spltd, int count);
+int		*char_counter(char *var, int count, t_cmd *cmd);
+int		word_counter(char	*var);
+void	check_variables(t_cmd	*tmp, t_data	*data);
 #endif
