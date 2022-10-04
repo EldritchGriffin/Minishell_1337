@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 16:39:49 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/03 23:09:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 		str[ft_strlen(str) - 1] = '\0';
 	if (!str)
 		exit(1);
-	if (delemiter->type == WORD)
+	if (delemiter->type == WORD || delemiter->type == VARIABLE)
 	{
 		if (str && str[0])
 				str = check_expanding(str, data);
