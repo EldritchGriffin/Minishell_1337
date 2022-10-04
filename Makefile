@@ -6,7 +6,7 @@
 #    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/10/04 00:44:26 by aelyakou         ###   ########.fr        #
+#    Updated: 2022/10/04 13:58:26 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,8 @@ create_dir :
 	@mkdir -p $(FILE)
 clean :
 	@echo "$(YELLOW)Removing Objects file ....    $(GREEN)$(shell basename $(OBJ))$(GREEN)"
+	@$(MAKE) -C $(LIBFT_DIR)/ clean
+	@$(MAKE) -C $(GNL_DIR)/ clean
 	@rm -rf $(OBJ)
 	@echo "     $(YELLOW)Successfully Removed$(YELLOW)"
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 22:54:32 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:48:05 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ bool	rm_quotes(t_data **data)
 void	herdoc_handler(t_data *data, int *her_file, int status)
 {
 	static t_cmd	*hdc;
-	static int 		stat;
-	if(status == 0)
+	static int		stat;
+
+	if (status == 0)
 		hdc = data->cmd;
 	while (hdc)
 	{
-		if(hdc->type == PIPE)
+		if (hdc->type == PIPE)
 		{
 			hdc = hdc->next;
 			stat = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 08:38:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 22:56:49 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:07:58 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	build_token_list(char *line, t_data *data, int *her_file)
 	if (!check_operatrs_first(data))
 		return (free_cmd(data), 0);
 	status = ft_count_pipes(data);
-	if(!status)
+	if (!status)
 		herdoc_handler(data, her_file , 0);
 	if (!check_operators_sec(data))
 		return (free_cmd(data), 0);

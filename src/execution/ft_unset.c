@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:15:55 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 04:15:04 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 14:05:57 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_unset(t_exc	*cmd, t_data *data)
 	t_env	*node;
 
 	i = 1;
+	if(!data->env)
+		return (g_xst = 0, (void)0);
 	while (cmd->str[i])
 	{
 		if (!check_identifier(cmd->str[i]))

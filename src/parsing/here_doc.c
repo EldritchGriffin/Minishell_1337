@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 23:09:00 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:58:32 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 
 int	here_fork(int pid, t_cmd	*delemiter, t_data	*data, int fd[])
 {
-	int status;
+	int		status;
+
 	if (pid == 0)
 	{
 		signal(SIGINT, &here_handler);

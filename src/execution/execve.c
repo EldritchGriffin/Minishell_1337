@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/02 04:16:00 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 14:29:00 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_path(char **cmd, t_data *data, int *check)
 
 	path = ft_strdup(get_ev(data, "PATH"));
 	if (!*path)
-		return (cmd[0]);
+		return (free(path), cmd[0]);
 	if ((cmd[0][0] == '/' || ft_strncmp(cmd[0], "./", 2) == 0))
 		return (free(path), *check = 1, cmd[0]);
 	path_split = ft_split(path, ':');
@@ -89,6 +89,11 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 	pid = fork();
 	if (pid)
 		ignore_signal();
+	if(pid == -1)
+		{
+			 perror("fork"); 
+			 g_xst = 1;
+		}
 	exec(pid, exc, bin, envp);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

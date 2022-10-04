@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 18:28:33 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:04:33 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,14 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 	i = 0;
 	check = 2;
 	if (data->pps->p_c)
-	{
-		exec_pipes(exc, data, her_file, envp);
-		return ;
-	}
+		return (exec_pipes(exc, data, her_file, envp), \
+			free_cmd(data), free_exc(data), (void)0);
 	else
 	{
 		i = rederection_check(&exc, her_file);
 		if (!exc->str[0] || exc->in_file == -1 || i == 2
 			|| !identify_builtin(data, exc))
-			return ;
+			return (free_cmd(data), free_exc(data), (void)0);
 		else
 		{
 			bin = get_path(exc->str, data, &check);
@@ -65,8 +63,7 @@ void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 				free(bin);
 		}
 	}
-	free_cmd(data);
-	free_exc(data);
+	return (free_cmd(data), free_exc(data), (void)0);
 }
 
 static	void	initalize_data(t_data **data)
@@ -92,9 +89,7 @@ void	ft_shell(char *line, t_data *data, t_env *env, char **envp)
 			tmp = &(*tmp)->next;
 		}
 		fill_exclist(data->cmd, data);
-		// print_exc(data->exc);
 		data->pps->p_c = check_pipes(data->exc);
 		cmd_call(data->exc, data, envp, her_file);
-		// print_exc(data->exc);
 	}
 }

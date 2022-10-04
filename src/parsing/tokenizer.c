@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:14 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/03 16:44:03 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:49:45 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	get_token(char *line, int *i, int words, t_data	*data)
 	if (!check_old_type(line, i, &words, &data->tokens->old_type))
 		return (0);
 	str = ft_substr(line, check, words);
+	ft_creat_list(data->tokens->old_type, data, data->tokens->operator, str);
 	if (str[0] == ' ')
 		free(str);
-	ft_creat_list(data->tokens->old_type, data, data->tokens->operator, str);
 	if (data->tokens->operator == true && data->tokens->tmp_type != SPC)
 		cmd_list(ft_strdup(" "), SPC, 0, data);
 	return (1);

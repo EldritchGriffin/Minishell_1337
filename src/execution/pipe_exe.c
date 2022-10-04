@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/03 22:57:10 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 14:31:54 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	redirect_pipes(t_exc	*tmp, int her_file, int i, t_data	*data)
 {
 	int			status;
+
 	if (rederection_check(&tmp, her_file))
 	{
 		if (tmp->in_file == -1)
@@ -90,8 +91,7 @@ static	void	pipe_exe(int	*pids, t_data	*data, t_exc	*tmp, int i)
 	if (pids[i] == 0)
 	{
 		handle_fds(data, i);
-		if (!identify_builtin(data, tmp))
-			;
+		if (!identify_builtin(data, tmp));
 		else
 		{
 			if (execve(get_path(tmp->str, data, &status),
@@ -128,6 +128,13 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		if (status == -1)
 			return ;
 		pids[i] = fork();
+		if(pids[i] == -1)
+		{
+			 perror("fork"); 
+			 restore_parent(std, 1, pids, data);
+			 g_xst = 1;
+			 return ;
+		}
 		if (pids[i])
 			ignore_signal();
 		pipe_exe(pids, data, tmp, i);
