@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 13:16:31 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 18:18:45 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	*get_ev(t_data *data, char *str)
 	tmp = data->env;
 	while (tmp)
 	{
-		if (ft_strcmp(str, tmp->key) == 0)
+		if (!ft_strcmp(tmp->key, str))
 			return (tmp->value);
-	tmp = tmp->next;
+		tmp = tmp->next;
 	}
 	return ("\0");
 }
@@ -89,6 +89,11 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 	pid = fork();
 	if (pid)
 		ignore_signal();
+	if (pid == -1)
+	{
+		perror("fork");
+		g_xst = 1;
+	}
 	exec(pid, exc, bin, envp);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))

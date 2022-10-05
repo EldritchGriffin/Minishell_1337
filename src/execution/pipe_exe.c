@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/04 16:45:07 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:25:32 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ static	void	pipe_exe(int *pids, t_data	*data, t_exc *tmp, int i)
 	if (pids[i] == 0)
 	{
 		handle_fds(data, i);
-		if (!identify_builtin(data, tmp))
-			;
+		if (!identify_builtin(data, tmp));
 		else
 		{
 			if (execve(get_path(tmp->str, data, &status),
@@ -129,6 +128,13 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 		if (status == -1)
 			return ;
 		pids[i] = fork();
+		if (pids[i] == -1)
+		{
+			perror("fork");
+			restore_parent(std, 1, pids, data);
+			g_xst = 1;
+			return ;
+		}
 		if (pids[i])
 			ignore_signal();
 		pipe_exe(pids, data, tmp, i);
@@ -137,4 +143,6 @@ void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 	}
 	restore_parent(std, 1, pids, data);
 	free(std);
+	free(pids);
+	free_pids(data->pps->p_fd, data);
 }

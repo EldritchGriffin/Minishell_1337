@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:15:55 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 04:15:04 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 17:06:29 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_unset(t_exc	*cmd, t_data *data)
 	t_env	*node;
 
 	i = 1;
+	if (!data->env)
+		return (g_xst = 0, (void)0);
 	while (cmd->str[i])
 	{
 		if (!check_identifier(cmd->str[i]))

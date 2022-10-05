@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 16:54:15 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 17:00:54 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 18:27:03 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	initalize_childs(t_data *data)
 
 void	initialize(t_data *data, char **line)
 {
-    data->cmd = NULL;
+	data->cmd = NULL;
 	data->exc = NULL;
 	*line = NULL;
 }

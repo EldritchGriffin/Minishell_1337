@@ -6,12 +6,11 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 17:04:05 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:28:46 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
 
 void	updt_shlvl(t_data	*data)
 {

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:20:19 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 16:54:44 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:25:13 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ void	free_env(t_env *env)
 			free(current->value);
 		free(current);
 	}
+}
+
+void	free_pids(int **tab, t_data *data)
+{
+	int		i;
+
+	i = 0;
+	while (i <= data->pps->p_c)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+
 }
 
 void	free_all(t_data *data)

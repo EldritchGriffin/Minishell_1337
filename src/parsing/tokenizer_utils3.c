@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/01 08:38:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 12:07:58 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 18:04:06 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	build_token_list(char *line, t_data *data, int *her_file)
 		return (free_cmd(data), 0);
 	status = ft_count_pipes(data);
 	if (!status)
-		herdoc_handler(data, her_file , 0);
+		herdoc_handler(data, her_file, 0);
 	if (!check_operators_sec(data))
 		return (free_cmd(data), 0);
 	return (1);

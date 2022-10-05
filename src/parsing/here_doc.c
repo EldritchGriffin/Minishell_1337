@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 07:58:49 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:58:32 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 		str[ft_strlen(str) - 1] = '\0';
 	if (!str)
 		exit(1);
-	if (delemiter->type == WORD)
+	if (delemiter->type == WORD || delemiter->type == VARIABLE)
 	{
 		if (str && str[0])
 				str = check_expanding(str, data);

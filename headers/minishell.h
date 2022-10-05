@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 16:56:25 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:25:26 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,7 @@ void	free_cmd(t_data *data);
 void	free_exc(t_data *data);
 void	free_env(t_env *env);
 void	free_all(t_data *data);
+void	free_pids(int **tab, t_data *data);
 //----------------Var_expander----------------------------------/
 // int		*char_counter(char *var, int count);
 // void	check_spltd(t_expnd	*expnd, int	*stat);

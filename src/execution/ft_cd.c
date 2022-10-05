@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:09:27 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 04:15:32 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 00:47:49 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	cd_only(t_cmd	*tmp, t_data	*data)
 void	ft_cd(t_data	*data)
 {
 	t_cmd	*tmp;
+	char	*str;
 
 	tmp = data->cmd;
 	if (!cd_only(tmp, data))
@@ -44,14 +45,17 @@ void	ft_cd(t_data	*data)
 	{
 		if (tmp->next)
 			tmp = tmp->next;
-		do_export(data, "OLDPWD", getcwd(NULL, PATH_MAX), false);
+		str = getcwd(NULL, PATH_MAX);
+		do_export(data, "OLDPWD", str, false);
+		free(str);
 		if (chdir(tmp->next->str) == -1)
-		{
-			perror("cd ");
-			return (g_xst = 1, (void)0);
-		}
+			return (perror("cd "), g_xst = 1, (void)0);
 		else
-			do_export(data, "PWD", getcwd(NULL, PATH_MAX), false);
+		{
+			str = getcwd(NULL, PATH_MAX);
+			do_export(data, "PWD", str, false);
+			free(str);
+		}
 		g_xst = 0;
 	}
 }

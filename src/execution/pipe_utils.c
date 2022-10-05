@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 08:52:51 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/04 16:43:41 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:22:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	**create_pipes(int count)
 
 	i = -1;
 	pipes = malloc(sizeof(int *) * count);
+	if (!pipes)
+		return (0);
 	while (++i < count)
 	{
 		pipes[i] = malloc(sizeof(int) * 2);

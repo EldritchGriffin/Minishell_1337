@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 02:44:03 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/04 12:51:54 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/04 14:10:39 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	print_env(t_env *env, t_data *data)
 	char	*str;
 
 	tmp = env;
+	do_export(data, "_", "/usr/bin/env", false);
 	if (!tmp)
 	{
-		tmp = env_list(data->envp);
+		return ;
 	}
+	tmp = env;
 	while (tmp)
 	{
 		if (tmp->value)

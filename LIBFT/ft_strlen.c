@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 16:17:13 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/09/30 08:58:46 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 00:47:25 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!str || !*str)
 		return (0);
 	while (str[i])
 		i++;

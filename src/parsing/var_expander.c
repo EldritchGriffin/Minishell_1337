@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/02 17:59:54 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/04 17:06:10 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static char	*find_var(char *var, t_env *env)
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, str))
+		{
+			if (!tmp->value)
+				return (var = ft_strdup(""));
 			return (free(var), free(str), var = ft_strdup(tmp->value), var);
+		}
 		tmp = tmp->next;
 	}
 	free(var);
