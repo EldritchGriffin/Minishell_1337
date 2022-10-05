@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_exe.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 03:13:13 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/05 15:24:40 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 22:20:36 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	redirect_pipes(t_exc *tmp, int her_file, int i, t_data *data)
 	return (0);
 }
 
-static void	handle_fds(t_data *data, int i)
+void	handle_fds(t_data *data, int i)
 {
 	int	j;
 
@@ -56,7 +56,7 @@ static void	handle_fds(t_data *data, int i)
 	}
 }
 
-static void	restore_parent(int	*stds, int status, int	*pids, t_data	*data)
+void	restore_parent(int	*stds, int status, int	*pids, t_data	*data)
 {
 	int		i;
 
@@ -84,14 +84,15 @@ static void	restore_parent(int	*stds, int status, int	*pids, t_data	*data)
 	}
 }
 
-static	void	pipe_exe(int *pids, t_data	*data, t_exc *tmp, int i)
+void	pipe_exe(int *pids, t_data	*data, t_exc *tmp, int i)
 {
 	int	status;
 
 	if (pids[i] == 0)
 	{
 		handle_fds(data, i);
-		if (!identify_builtin(data, tmp));
+		if (!identify_builtin(data, tmp))
+			;
 		else
 		{
 			if (execve(get_path(tmp->str, data, &status),
@@ -107,42 +108,23 @@ static	void	pipe_exe(int *pids, t_data	*data, t_exc *tmp, int i)
 
 void	exec_pipes(t_exc *exc, t_data *data, int her_file, char **envp)
 {
-	t_exc	*tmp;
-	int		*pids;
-	int		status;
-	int		*std;
-	int		i;
+	t_vars	pipe;
 
-	i = 0;
-	status = 1;
-	tmp = exc;
-	pids = malloc(sizeof(int) * (data->pps->p_c + 1));
-	std = save_stds();
+	pipe.i = 0;
+	pipe.status = 1;
+	pipe.tmp = exc;
+	pipe.pids = malloc(sizeof(int) * (data->pps->p_c + 1));
+	pipe.std = save_stds();
 	if (data->pps->p_c)
 		data->pps->p_fd = create_pipes(data->pps->p_c);
-	while (i <= data->pps->p_c && tmp)
+	while (pipe.i <= data->pps->p_c && pipe.tmp)
 	{
-		restore_parent(std, 0, pids, data);
-		herdoc_handler(data, &her_file, i);
-		status = redirect_pipes(tmp, her_file, i, data);
-		if (status == -1)
-			return ;
-		pids[i] = fork();
-		if (pids[i] == -1)
-		{
-			perror("fork");
-			restore_parent(std, 1, pids, data);
-			g_xst = 1;
-			return ;
-		}
-		if (pids[i])
-			ignore_signal();
-		pipe_exe(pids, data, tmp, i);
-		tmp = tmp->next;
-		i++;
+		handle_loop(pipe, her_file, data);
+		pipe.tmp = pipe.tmp->next;
+		pipe.i++;
 	}
-	restore_parent(std, 1, pids, data);
-	free(std);
-	free(pids);
+	restore_parent(pipe.std, 1, pipe.pids, data);
+	free(pipe.std);
+	free(pipe.pids);
 	free_pids(data->pps->p_fd, data);
 }

@@ -6,7 +6,7 @@
 /*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 21:21:52 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/05 22:21:47 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_vex
 	int	i;
 	int	j;
 	int	s;
-}	t_vex;
+}				t_vex;
 
 typedef struct s_cmd
 {
@@ -96,6 +96,15 @@ typedef struct s_exc
 	int				out_file;
 	struct s_exc	*next;
 }	t_exc;
+
+typedef struct s_vars
+{
+	t_exc	*tmp;
+	int		*pids;
+	int		status;
+	int		*std;
+	int		i;
+}				t_vars;
 
 typedef struct s_expnd
 {
@@ -261,6 +270,8 @@ char	*get_path(char **cmd, t_data *data, int *check);
 void	ft_dup2(int *in_file, int *out_file, int fd0, int fd1);
 void	ft_cat(char **bin, char *path_split, char *cmd);
 void	ft_dup(int *in_save, int *out_save);
+char	*get_ev(t_data *data, char *str);
+char	*get_path(char **cmd, t_data *data, int *check);
 //-----------signals-----------------/
 void	signals_handler(void);
 void	handler(int sig);
@@ -273,6 +284,11 @@ int		**create_pipes(int count);
 void	exec_pipes(t_exc	*exc, t_data	*data, int her_file, char **envp);
 int		*save_stds(void);
 void	close_fds(t_data	*data);
+void	handle_loop(t_vars	pipe, int her_file, t_data	*data);
+void	pipe_exe(int *pids, t_data	*data, t_exc *tmp, int i);
+void	restore_parent(int	*stds, int status, int	*pids, t_data	*data);
+void	handle_fds(t_data *data, int i);
+int		redirect_pipes(t_exc *tmp, int her_file, int i, t_data *data);
 //----------------free_functions-------------------------------------------/
 char	**free_tab(char **tab);
 void	free_cmd(t_data *data);

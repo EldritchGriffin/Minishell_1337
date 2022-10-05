@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
+#    By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/10/05 17:25:42 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/10/05 22:18:59 by aelyakou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_DIR    := src
 OBJ_DIR    := obj
 TOOLS      := cmd_list exc_list main_utils
 ENV        := env_list env_utils
-EXEC       := built_ins env_sort exec_utils execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe signals_handler pipe_utils ft_exit
+EXEC       := built_ins env_sort utils_exec execve ft_cd ft_echo ft_export ft_pwd ft_unset pipe_exe signals_handler pipe_utils pipe_utils2 ft_exit ve_utils
 PARSING    := final_check parser_utils  parser parser2 parser_utils2 parser3  free_list syntax_errors tokenizer_utils \
 				final_check_utils tokenizer_utils3 tokenizer_utils2 tokenizer var_expander var_expander2 here_doc here_doc_utils execlist_builder flag_str
 src        := ft_shell

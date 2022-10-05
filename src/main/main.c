@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 17:24:24 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 22:36:30 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ void	updt_shlvl(t_data	*data)
 		if (!ft_strncmp(data->envp[i], "SHLVL", 5))
 		{
 			spltd = ft_split(data->envp[i], '=');
-			free(spltd[1]);
 			lvl = ft_atoi(spltd[1]);
 			lvl++;
 			tmp = spltd[0];
 			spltd[0] = ft_strjoin(spltd[0], "=");
 			free(tmp);
+			tmp = spltd[1];
 			spltd[1] = ft_itoa(lvl);
+			free(tmp);
 			tmp = ft_strjoin(spltd[0], spltd[1]);
 			data->envp[i] = tmp;
+			free_tab(spltd);
 		}
 	}
-	if (spltd && spltd[0])
-		free_tab(spltd);
 }
 
 int	main(int ac, char **av, char **envp)
