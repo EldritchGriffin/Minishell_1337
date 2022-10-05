@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:22:12 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 01:31:41 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:21:52 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ typedef enum s_tokens{
 	CMD,
 	SOL,
 }	t_tokens;
+
+typedef struct s_vex
+{
+	int	i;
+	int	j;
+	int	s;
+}	t_vex;
 
 typedef struct s_cmd
 {
@@ -281,4 +288,5 @@ char	**fill_spltd(char *var, char **spltd, int count);
 int		*char_counter(char *var, int count, t_cmd *cmd);
 int		word_counter(char	*var);
 void	check_variables(t_cmd	*tmp, t_data	*data);
+void	fill_vp(char	*var,	t_vex	*vex,	char	***spltd, int *count);
 #endif

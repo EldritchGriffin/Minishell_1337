@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/05 15:27:57 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:21:09 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-typedef struct s_vex
+void	increment_two(int *a, int *b, int mode)
 {
-	int	i;
-	int	j;
-	int	s;
-}	t_vex;
-
-void	increment_two(int *a, int *b)
-{
-	(*a)++;
-	(*b)++;
+	if (!mode)
+	{
+		(*a)++;
+		(*b)++;
+	}
 }
 
 char	**fill_spltd(char *var, char **spltd, int count)
@@ -32,7 +28,6 @@ char	**fill_spltd(char *var, char **spltd, int count)
 	vex.i = -1;
 	vex.j = 0;
 	vex.s = 0;
-	count--;
 	while (var[++vex.i])
 	{
 		if (var[vex.i] == '$')
@@ -42,25 +37,14 @@ char	**fill_spltd(char *var, char **spltd, int count)
 			spltd[count][0] = '$';
 			vex.i++;
 			vex.j = 1;
-			while (ft_isalnum(var[vex.i]) || var[vex.i] == '_')
-			{
-				spltd[count][vex.j] = var[vex.i++];
-				vex.j++;
-			}
-			spltd[count--][vex.j] = '\0';
-			vex.i--;
-			vex.j = -1;
-			vex.s = 1;
+			fill_vp(var, &vex, &spltd, &count);
 		}
 		else
 		{
 			vex.s = 0;
-			spltd[count][vex.j] = var[vex.i];
+			spltd[count][vex.j++] = var[vex.i];
 		}
-		vex.j++;
 	}
-	if (!var[vex.i] && !vex.s)
-		spltd[count][vex.j] = '\0';
 	return (spltd);
 }
 
@@ -77,20 +61,18 @@ int	*char_counter(char *var, int count, t_cmd *cmd)
 	{
 		if (var[vex.i] == '$')
 		{
-			if (vex.i && !vex.s)
+			if (vex.i++ && !vex.s)
 				tab[count--] = vex.j;
-			vex.i++;
 			vex.j = 1;
 			while (ft_isalnum(var[vex.i]) || var[vex.i] == '_')
-				increment_two(&vex.i, &vex.j);
+				increment_two(&vex.i, &vex.j, 0);
 			tab[count--] = vex.j;
 			vex.i--;
 			vex.j = -1;
 			vex.s = 1;
 		}
-		else
+		else if (++vex.j || 1)
 			vex.s = 0;
-		vex.j++;
 	}
 	return (tab);
 }
@@ -106,11 +88,8 @@ int	word_counter(char	*var)
 	count = 0;
 	while (var[++i])
 	{
-		if (stat == 1 && var[i] != '$')
-		{
+		if (stat == 1 && var[i] != '$' && ++count)
 			stat = 0;
-			count++;
-		}
 		if (var[i] == '$')
 		{
 			count++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
+/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 17:08:11 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/05 15:46:47 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:21:02 by aelyakou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,11 @@ char	*prep_expnd(char	*var, t_env *env, t_cmd *cmd)
 	count--;
 	while (count >= 0)
 	{
-		printf("tab[count] ============ %d", tab[count]);
-		spltd[count] = malloc(sizeof(char) * (tab[count] + 1));
-		spltd[count][tab[count]] = 0;
+		spltd[count] = ft_calloc(sizeof(char), (tab[count] + 1));
+		spltd[count][tab[count]] = '\0';
 		count--;
 	}
-	spltd = fill_spltd(var, spltd, word_counter(var));
+	spltd = fill_spltd(var, spltd, word_counter(var) - 1);
 	return (join_expnd(spltd, env, word_counter(var)));
 }
 
@@ -96,4 +95,14 @@ void	check_variables(t_cmd	*tmp, t_data	*data)
 		tmp->str = find_var(tmp->str, data->env);
 		tmp->type = WORD;
 	}
+}
+
+void	fill_vp(char	*var,	t_vex	*vex,	char	***spltd, int *count)
+{
+	while (ft_isalnum(var[(*vex).i]) || var[(*vex).i] == '_')
+			(*spltd)[(*count)][(*vex).j++] = var[(*vex).i++];
+		(*spltd)[(*count)--][(*vex).j] = '\0';
+		(*vex).i--;
+		(*vex).j = 0;
+		(*vex).s = 1;
 }
