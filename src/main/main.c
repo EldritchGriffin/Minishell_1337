@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:36 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 01:28:46 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 02:20:56 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int	main(int ac, char **av, char **envp)
 			add_history(line);
 			ft_shell(line, &data, data.env, envp);
 			initialize(&data, &line);
+			// system("leaks Minishell");
 		}
 	}
+	free(data.pps);
 	free_all(&data);
 }

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 01:22:37 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:50:00 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,6 @@ void print_exc(t_exc *exc)
 	}	
 }
 
-///-----------this function jut for test------------------------------------
-static void free_pids(int **tab, t_data *data)
-{
-	int		i;
-
-	i = 0;
-	// printf("data =====%d", data->pps->p_c);
-	while (i <= data->pps->p_c)
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-
-}
 
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {

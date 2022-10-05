@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 23:20:19 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 01:25:13 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 01:48:48 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,19 @@ void	free_pids(int **tab, t_data *data)
 	int		i;
 
 	i = 0;
-	while (i <= data->pps->p_c)
+	if (tab[0])
 	{
-		free(tab[i]);
-		i++;
+		while (i < data->pps->p_c)
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-	free(tab);
-
 }
 
 void	free_all(t_data *data)
 {
-	free(data->pps);
 	free_env(data->env);
 	free(data->tokens);
 	ft_putstr_fd("\b\b  \b\bexit\n", STDERR);
