@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:53:57 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 16:49:13 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 14:32:39 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	herdoc_handler(t_data *data, int *her_file, int status)
 			stat = 1;
 			break ;
 		}
-		if (hdc->type == HERDOC)
+		if (hdc->type == HERDOC && hdc->next)
 		{
-			if (!hdc->next->opr && hdc->next->type == SPC
+			if (!hdc->next->opr && hdc->next->type == SPC && hdc->next->next
 				&& (hdc->next->next->type == WORD
 					|| hdc->next->next->type == D_QUOTES
 					|| hdc->next->next->type == S_QUOTES

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 15:53:22 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 18:18:45 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 18:12:14 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,22 @@ char	*get_path(char **cmd, t_data *data, int *check)
 		free(bin);
 	}
 	return (free_tab(path_split), cmd[0]);
+}
+
+static void	ft_closefiles(int *in_file, int *out_file)
+{
+	if (*in_file != 0)
+		close(*in_file);
+	if (*out_file != 1)
+		close(*out_file);
+}
+
+static void	ft_return_fd(int *in_save, int *out_save, int stdin , int stdout)
+{
+	dup2(*in_save, stdin);
+	close(*in_save);
+	dup2(*out_save, stdout);
+	close(*out_save);
 }
 
 void	exec(int pid, t_exc	*exc, char	*bin, char	**envp)
@@ -106,10 +122,6 @@ void	exec_cmd(t_exc *exc, char *bin, char **envp)
 		g_xst = 130;
 	}
 	signals_handler();
-	if (exc->in_file != 0)
-		close(exc->in_file);
-	if (exc->out_file != 1)
-		close(exc->out_file);
-	dup2(in_save, STDIN);
-	dup2(out_save, STDOUT);
+	ft_closefiles(&exc->in_file, &exc->out_file);
+	ft_return_fd(&in_save, &out_save, STDIN, STDOUT);
 }

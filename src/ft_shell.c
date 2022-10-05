@@ -6,36 +6,11 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:54:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/05 01:50:00 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:49:53 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minishell.h"
-
-//Testing purposes again...
-void    print_cmd(t_cmd *cmd)
-{
-	while(cmd)
-	{
-		printf  ("string is [%s] ------ token value is [%d] ------ operator id [%d]\n",cmd->str, cmd->type, cmd->opr);
-		cmd = cmd->next;
-	}
-}
-
-void print_exc(t_exc *exc)
-{
-	int i;
-
-	while (exc)
-	{
-		i = -1;
-		while(exc->str[++i])
-			printf  ("exc ========= is[%s]\n", exc->str[i]);
-		printf  ("MOVING  to the next\n");
-		exc = exc->next;
-	}	
-}
-
 
 void	cmd_call(t_exc *exc, t_data *data, char **envp, int her_file)
 {

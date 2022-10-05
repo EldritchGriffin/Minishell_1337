@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 17:08:11 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/04 18:05:32 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/05 15:46:47 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*find_var(char *var, t_env *env)
 	{
 		if (!ft_strcmp(tmp->key, str))
 		{
-			if(!tmp->value)
+			if (!tmp->value)
 				return (var = ft_strdup(""));
 			return (free(var), free(str), var = ft_strdup(tmp->value), var);
 		}
@@ -68,7 +68,7 @@ char	*prep_expnd(char	*var, t_env *env, t_cmd *cmd)
 	count--;
 	while (count >= 0)
 	{
-		printf("tab[count] ============ %d", tab[count] );
+		printf("tab[count] ============ %d", tab[count]);
 		spltd[count] = malloc(sizeof(char) * (tab[count] + 1));
 		spltd[count][tab[count]] = 0;
 		count--;

@@ -6,7 +6,7 @@
 #    By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/08 04:58:41 by zrabhi            #+#    #+#              #
-#    Updated: 2022/10/05 01:56:59 by zrabhi           ###   ########.fr        #
+#    Updated: 2022/10/05 17:25:42 by zrabhi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ main        := 	$(SRC_DIR)/main/main.c
 OBJ	        := $(SRC:.c=.o)
 CC          := 	gcc
 GCCFLAGS    := -Wall -Wextra -Werror -g 
+# -static-libsan -fsanitize=address
 HEADER      := $(HEADER_DIR)/minishell.h
 NAME        := Minishell
 RECOMPILING := echo "     $(YELLOW)Recompiling..........$(YELLOW)"

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 16:12:19 by aelyakou          #+#    #+#             */
-/*   Updated: 2022/10/05 01:31:17 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:27:57 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ typedef struct s_vex
 {
 	int	i;
 	int	j;
-	int s;
-}				t_vex;
-
+	int	s;
+}	t_vex;
 
 void	increment_two(int *a, int *b)
 {

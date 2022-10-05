@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelyakou <aelyakou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 11:23:54 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 13:58:32 by aelyakou         ###   ########.fr       */
+/*   Updated: 2022/10/05 14:24:17 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	here_do(t_cmd	*delemiter, t_data	*data, int fd[])
 	if (str)
 		str[ft_strlen(str) - 1] = '\0';
 	if (!str)
-		exit(1);
+		return (-1);
 	if (delemiter->type == WORD || delemiter->type == VARIABLE)
 	{
 		if (str && str[0])

@@ -6,7 +6,7 @@
 /*   By: zrabhi <zrabhi@student.1337.ma >           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 00:28:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/10/04 16:00:22 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:53:24 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	**free_tab(char **tab)
 
 int	check_return(int i, char *str, int *in_file, int her_file)
 {
+	if (*in_file == -1)
+		return (0);
 	if (i == -1)
 		return (perror(str), 0);
 	if (i == 0)
